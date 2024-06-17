@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Variable API
+  description: This is the Variable API
+  version: 1.0.0
+
+servers:
+  - url: https://local.variable.global/api
+
+paths:
+  /auth/token:
+    post:
+      summary: Get a token
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            description: Basic auth
+            example: Basic dXNlcjpwYXNz
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+              properties:
+                grant_type:
+                  type: string
+                  description: The grant type
+                  example: client_credentials
+      responses:
+        '200':
+          description: A token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization'
+  /v1/activity:
+    get:
+      summary: Get all activities
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            description: Bearer token
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        - in: header
+          name: Variable-Company
+          required: true
+          schema:
+            type: string
+            description: The company UUID
+            example: 3c90c3cc-0d44-4b50-8888-8dd25736052a
+        - in: query
+          name: sd
+          schema:
+            type: string
+            description: Date
+            example: 2021-01-01
+        - in: query
+          name: ed
+          schema:
+            type: string
+            description: Date
+            example: 2021-12-31
+      responses:
+        200:
+          description: A list of activities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  queryString:
+                    type: string
+                    description: The query string used to filter the activities
+                    example: sd=2021-01-01T00:00:00Z&ed=2021-12-31T23:59:59Z
+                  startDate:
+                    type: string
+                    description: ISO 8601 date
+                    example: 2021-01-01T00:00:00Z
+                  endDate:
+                    type: string
+                    description: ISO 8601 date
+                    example: 2021-12-31T23:59:59Z
+                  CO2e:
+                    type: string
+                    description: The total CO2e of all categorized activities
+                    example: '1234.5678'
+                  uncategorizedCO2e:
+                    type: string
+                    description: The total CO2e of all activities not categorized to a GHG Scope
+                    example: '1.2345678'
+                  CO2eUnit:
+                    type: string
+                    description: The unit of CO2e
+                    example: kg
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+
+components:
+  schemas:
+    Authorization:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+        scope:
+          type: string
+    Activity:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        description:
+          type: string
+        quantity:
+          type: number
+        CO2e:
+          type: string
+          example: '1234.5678'
+        UpstreamCO2e:
+          type: string
+          example: '1234.5678'
+        DownstreamCO2e:
+          type: string
+          example: '1234.5678'
+        startDate:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-01T00:00:00Z
+        endDate:
+          type: string
+          description: ISO 8601 date
+          example: 2021-12-31T23:59:59Z
+        product:
+          $ref: '#/components/schemas/Product'
+        scope:
+          $ref: '#/components/schemas/Scope'
+        taxonomy:
+          $ref: '#/components/schemas/Taxonomy'
+        org:
+          $ref: '#/components/schemas/Org'
+    Product:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Product Name'
+    Scope:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Scope 2'
+    Taxonomy:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Energy: Electricity'
+    Org:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Org Unit'
