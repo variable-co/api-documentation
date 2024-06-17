@@ -79,10 +79,13 @@ paths:
                 properties:
                   count:
                     type: integer
+                    example: 1500
                   page:
                     type: integer
+                    example: 1
                   pageSize:
                     type: integer
+                    example: 100
                   queryString:
                     type: string
                     description: The query string used to filter the activities
@@ -97,11 +100,11 @@ paths:
                     example: 2021-12-31T23:59:59Z
                   CO2e:
                     type: string
-                    description: The total CO2e of all categorized activities
+                    description: The total CO2e of all activities categorized to a GHG Scope
                     example: '1234.5678'
                   uncategorizedCO2e:
                     type: string
-                    description: The total CO2e of all activities not categorized to a GHG Scope
+                    description: The total CO2e of all activities *not* categorized to a GHG Scope
                     example: '1.2345678'
                   CO2eUnit:
                     type: string
@@ -135,6 +138,7 @@ components:
           type: string
         quantity:
           type: number
+          example: 150
         CO2e:
           type: string
           example: '1234.5678'

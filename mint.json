@@ -23,37 +23,18 @@
   ],
   "topbarCtaButton": {
     "name": "App",
-    "url": "https://app.variable.global"
+    "url": "https://app.variable.co"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": [
-        "introduction"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
-        "api-reference/welcome",
-        "api-reference/authentication"
+        "api-reference/welcome"
       ]
     },
     {
-      "group": "Authentication",
-      "pages": [
-        "api-reference/auth/token/post"
-      ]
-    },
-    {
-      "group": "Activities",
+      "group": "Activity",
       "pages": [
         "api-reference/v1/activity/get"
       ]
