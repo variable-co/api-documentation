@@ -58,13 +58,22 @@ paths:
             description: The company UUID
             example: 3c90c3cc-0d44-4b50-8888-8dd25736052a
         - in: query
+          name: date
+          example: 2021-01-01, 2021-12, 2021
+          description: 'Date to query (e.g. 2021-01-01, 2021-12, 2021)'
+          schema:
+              type: string
+              example: 2021-01
+        - in: query
           name: sd
+          description: Start date
           schema:
             type: string
             description: Date
             example: 2021-01-01
         - in: query
           name: ed
+          description: End date
           schema:
             type: string
             description: Date
