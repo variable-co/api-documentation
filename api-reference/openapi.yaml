@@ -61,6 +61,8 @@ paths:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: A list of activities
@@ -71,6 +73,12 @@ paths:
                   - $ref: '#/components/schemas/ActivityResponse'
                   - type: object
                     properties:
+                      page:
+                        type: integer
+                        example: 1
+                      pageSize:
+                        type: integer
+                        example: 100
                       data:
                         type: array
                         items:
@@ -90,7 +98,7 @@ components:
       flows:
         clientCredentials:
           tokenUrl: /auth/token
-          scopes: {}
+          scopes: { }
   parameters:
     variable-company:
       name: Variable-Company
@@ -99,7 +107,7 @@ components:
       required: true
       schema:
         type: string
-        example: 3c90c3cc-0d44-4b50-8888-8dd25736052a
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     date:
       name: date
       in: query
@@ -115,8 +123,7 @@ components:
       required: true
       schema:
         type: string
-        description: Date
-        example: 2021-01-01
+        example: '2021-01-01'
     endDate:
       name: ed
       in: query
@@ -124,8 +131,23 @@ components:
       required: true
       schema:
         type: string
-        description: Date
-        example: 2021-12-31
+        example: '2021-01-31'
+    limit:
+      name: limit
+      in: query
+      description: Limit the number of results
+      required: false
+      schema:
+        type: integer
+        example: 100
+    page:
+      name: page
+      in: query
+      description: The page number
+      required: false
+      schema:
+        type: integer
+        example: 1
   schemas:
     Authorization:
       type: object
@@ -144,12 +166,6 @@ components:
         count:
           type: integer
           example: 1500
-        page:
-          type: integer
-          example: 1
-        pageSize:
-          type: integer
-          example: 100
         queryString:
           type: string
           description: The query string used to filter the activities
@@ -161,7 +177,7 @@ components:
         endDate:
           type: string
           description: ISO 8601 date
-          example: 2021-12-31T23:59:59Z
+          example: 2021-01-31T23:59:59Z
         CO2e:
           type: string
           description: The total CO2e of all activities categorized to a GHG Scope
@@ -201,7 +217,7 @@ components:
         endDate:
           type: string
           description: ISO 8601 date
-          example: 2021-12-31T23:59:59Z
+          example: 2021-01-31T23:59:59Z
         product:
           $ref: '#/components/schemas/Product'
         scope:
