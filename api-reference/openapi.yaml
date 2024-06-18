@@ -153,7 +153,7 @@ components:
         queryString:
           type: string
           description: The query string used to filter the activities
-          example: sd=2021-01-01T00:00:00Z&ed=2021-12-31T23:59:59Z
+          example: date=2021-01
         startDate:
           type: string
           description: ISO 8601 date
