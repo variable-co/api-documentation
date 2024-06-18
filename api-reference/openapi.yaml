@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://dev.variable.global/api
+  - url: https://app.variable.global/api
 
 paths:
   /auth/token:
