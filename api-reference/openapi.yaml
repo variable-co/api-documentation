@@ -36,83 +36,45 @@ paths:
                 $ref: '#/components/schemas/Authorization'
   /v1/activity:
     get:
-      summary: Get all activities
+      summary: Get high level activity data
       security:
         - bearerAuth: [ ]
       parameters:
-        - in: header
-          name: Variable-Company
-          required: true
-          schema:
-            type: string
-            description: The company UUID
-            example: 3c90c3cc-0d44-4b50-8888-8dd25736052a
-        - in: query
-          name: date
-          example: 2021-01-01, 2021-12, 2021
-          description: 'Date to query (e.g. 2021-01-01, 2021-12, 2021)'
-          schema:
-            type: string
-            example: 2021-01
-        - in: query
-          name: sd
-          description: Start date
-          schema:
-            type: string
-            description: Date
-            example: 2021-01-01
-        - in: query
-          name: ed
-          description: End date
-          schema:
-            type: string
-            description: Date
-            example: 2021-12-31
+        - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
       responses:
         '200':
           description: A list of activities
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 1500
-                  page:
-                    type: integer
-                    example: 1
-                  pageSize:
-                    type: integer
-                    example: 100
-                  queryString:
-                    type: string
-                    description: The query string used to filter the activities
-                    example: sd=2021-01-01T00:00:00Z&ed=2021-12-31T23:59:59Z
-                  startDate:
-                    type: string
-                    description: ISO 8601 date
-                    example: 2021-01-01T00:00:00Z
-                  endDate:
-                    type: string
-                    description: ISO 8601 date
-                    example: 2021-12-31T23:59:59Z
-                  CO2e:
-                    type: string
-                    description: The total CO2e of all activities categorized to a GHG Scope
-                    example: '1234.5678'
-                  uncategorizedCO2e:
-                    type: string
-                    description: The total CO2e of all activities *not* categorized to a GHG Scope
-                    example: '1.2345678'
-                  CO2eUnit:
-                    type: string
-                    description: The unit of CO2e
-                    example: kg
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Activity'
+                $ref: '#/components/schemas/ActivityResponse'
+  /v1/activity/data:
+    get:
+      summary: Get high level activity data with a list of activities
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+      responses:
+        '200':
+          description: A list of activities
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ActivityResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Activity'
 
 components:
   securitySchemes:
@@ -129,6 +91,41 @@ components:
         clientCredentials:
           tokenUrl: /auth/token
           scopes: {}
+  parameters:
+    variable-company:
+      name: Variable-Company
+      in: header
+      description: The company UUID
+      required: true
+      schema:
+        type: string
+        example: 3c90c3cc-0d44-4b50-8888-8dd25736052a
+    date:
+      name: date
+      in: query
+      description: 'Date to query (e.g. 2021-01-01, 2021-12, 2021)'
+      required: true
+      schema:
+        type: string
+        example: 2021-01
+    startDate:
+      name: sd
+      in: query
+      description: Start date
+      required: true
+      schema:
+        type: string
+        description: Date
+        example: 2021-01-01
+    endDate:
+      name: ed
+      in: query
+      description: End date
+      required: true
+      schema:
+        type: string
+        description: Date
+        example: 2021-12-31
   schemas:
     Authorization:
       type: object
@@ -141,6 +138,42 @@ components:
           type: string
         scope:
           type: string
+    ActivityResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1500
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 100
+        queryString:
+          type: string
+          description: The query string used to filter the activities
+          example: sd=2021-01-01T00:00:00Z&ed=2021-12-31T23:59:59Z
+        startDate:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-01T00:00:00Z
+        endDate:
+          type: string
+          description: ISO 8601 date
+          example: 2021-12-31T23:59:59Z
+        CO2e:
+          type: string
+          description: The total CO2e of all activities categorized to a GHG Scope
+          example: '1234.5678'
+        uncategorizedCO2e:
+          type: string
+          description: The total CO2e of all activities *not* categorized to a GHG Scope
+          example: '1.2345678'
+        CO2eUnit:
+          type: string
+          description: The unit of CO2e
+          example: kg
     Activity:
       type: object
       properties:

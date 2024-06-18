@@ -22,7 +22,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "App",
+    "name": "Sign in",
     "url": "https://app.variable.co"
   },
   "anchors": [],
@@ -42,7 +42,8 @@
     {
       "group": "Activity",
       "pages": [
-        "api-reference/v1/activity/get"
+        "api-reference/v1/activity/get",
+        "api-reference/v1/activity/data/get"
       ]
     }
   ],
