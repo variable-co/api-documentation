@@ -2,24 +2,24 @@
 title: 'Welcome'
 ---
 
-We are exposing a limited number of read-only APIs at the moment. Click on the endpoints on the left to view the OpenAPI specification file.
+A set of read-only endpoints to access your Variable data.
 
-## Authentication
+<Accordion title="Authentication">
+    You'll need to send your access token with each request. To obtain an access token, you'll need to send your base64 encoded username/password to the `/auth/token` endpoint. For example:
 
-You'll need to send your access token with each request. To obtain an access token, you'll need to send your base64 encoded username/password to the `/auth/token` endpoint. For example:
+    ```bash
+    curl -x POST \
+         -H "Authorization: Basic <username:password|base64>" \
+         -H "Content-Type: application/x-www-form-urlencoded" \
+         -d "grant_type=client_credentials" \
+         /auth/token
+    ```
 
-```bash
-curl -x POST \
-     -H "Authorization: Basic <username:password|base64>" \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=client_credentials" \
-     /auth/token
-```
+    Send the access token in the `Authorization` header. For example:
 
-Send the access token in the `Authorization` header. For example:
-
-```bash
-curl -H "Authorization: Bearer <accessToken>" \
-     -H "Variable-Company: <company_uuid>" \
-     /v1/activity
-```
+    ```bash
+    curl -H "Authorization: Bearer <access_token>" \
+         -H "Variable-Company: <company_uuid>" \
+         /v1/activity
+    ```
+</Accordion>
