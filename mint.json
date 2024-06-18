@@ -34,6 +34,12 @@
       ]
     },
     {
+      "group": "Auth Token",
+      "pages": [
+        "api-reference/auth/token/post"
+      ]
+    },
+    {
       "group": "Activity",
       "pages": [
         "api-reference/v1/activity/get"
