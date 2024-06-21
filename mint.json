@@ -26,6 +26,11 @@
     "url": "https://app.variable.co"
   },
   "anchors": [],
+  "api": {
+    "playground": {
+      "mode": "simple"
+    }
+  },
   "navigation": [
     {
       "group": "API Documentation",
