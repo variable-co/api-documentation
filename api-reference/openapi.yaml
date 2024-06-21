@@ -52,7 +52,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ActivityResponse'
         '401':
-          description: Unauthorized
+          description: ExpiredToken
           content:
             application/json:
               schema:
@@ -90,7 +90,7 @@ paths:
                         items:
                           $ref: '#/components/schemas/Activity'
         '401':
-          description: Unauthorized
+          description: ExpiredToken
           content:
             application/json:
               schema:
