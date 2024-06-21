@@ -51,6 +51,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActivityResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/activity/data:
     get:
       summary: Get high level activity data with a list of activities
@@ -83,6 +89,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Activity'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
 
 components:
   securitySchemes:
@@ -103,7 +115,7 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: The company UUID
+      description: The company UUID. You can get this from the [company settings](https://app.variable.co/company) page in the app.
       required: true
       schema:
         type: string
@@ -112,7 +124,7 @@ components:
       name: date
       in: query
       description: 'Date to query (e.g. 2021-01-01, 2021-12, 2021)'
-      required: true
+      required: false
       schema:
         type: string
         example: 2021-01
@@ -120,7 +132,7 @@ components:
       name: sd
       in: query
       description: Start date
-      required: true
+      required: false
       schema:
         type: string
         example: '2021-01-01'
@@ -128,7 +140,7 @@ components:
       name: ed
       in: query
       description: End date
-      required: true
+      required: false
       schema:
         type: string
         example: '2021-01-31'
@@ -160,6 +172,18 @@ components:
           type: string
         scope:
           type: string
+    UnauthorizedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Unauthorized'
+    ExpiredTokenResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'token expired'
     ActivityResponse:
       type: object
       properties:
@@ -180,15 +204,15 @@ components:
           example: 2021-01-31T23:59:59Z
         CO2e:
           type: string
-          description: The total CO2e of all activities categorized to a GHG Scope
+          description: The total CO2e of all activities categorized to a GHG Scope, in `CO2eUnit`
           example: '1234.5678'
         uncategorizedCO2e:
           type: string
-          description: The total CO2e of all activities *not* categorized to a GHG Scope
+          description: The total CO2e of all activities *not* categorized to a GHG Scope, in `CO2eUnit`
           example: '1.2345678'
         CO2eUnit:
           type: string
-          description: The unit of CO2e
+          description: The unit of CO2e. For example "kg"
           example: kg
     Activity:
       type: object

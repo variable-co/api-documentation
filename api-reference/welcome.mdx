@@ -5,23 +5,25 @@ title: 'Welcome'
 A set of read-only endpoints to access your Variable data.
 
 <Accordion title="Authentication">
-    You'll need to send your access token with each request. To obtain an access token, you'll need to send your base64 encoded username/password to the `/auth/token` endpoint. For example:
+    You'll need to send an access token with each request. To obtain an access token, send your base64
+    encoded username/password to the `/auth/token` endpoint:
 
-    ```bash
-    curl -x POST \
-         -H "Authorization: Basic <username:password|base64>" \
-         -H "Content-Type: application/x-www-form-urlencoded" \
-         -d "grant_type=client_credentials" \
-         /auth/token
-    ```
+```bash
+curl -x POST \
+     -H "Authorization: Basic <username:password|base64>" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=client_credentials" \
+     /auth/token
+```
 
     Send the access token in the `Authorization` header. For example:
 
-    ```bash
-    curl -H "Authorization: Bearer <access_token>" \
-         -H "Variable-Company: <company_uuid>" \
-         /v1/activity
-    ```
+```bash
+curl -H "Authorization: Bearer <access_token>" \
+     -H "Variable-Company: <company_uuid>" \
+     /v1/activity
+```
 </Accordion>
 
-Try it out directly in the docs or in [Postman](https://www.postman.com/jimmybyrum/workspace/variable-api/collection/8239021-99a3c7bf-e833-4804-ad0a-302a8a28dc43?action=share&creator=8239021)
+<Note>Try out the API in
+    [Postman](https://www.postman.com/jimmybyrum/workspace/variable-api/collection/8239021-99a3c7bf-e833-4804-ad0a-302a8a28dc43?action=share&creator=8239021)</Note>
