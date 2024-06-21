@@ -44,6 +44,9 @@ paths:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/org'
+        - $ref: '#/components/parameters/scope'
+        - $ref: '#/components/parameters/taxonomy'
       responses:
         '200':
           description: A list of activities
@@ -67,6 +70,9 @@ paths:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/org'
+        - $ref: '#/components/parameters/scope'
+        - $ref: '#/components/parameters/taxonomy'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/page'
       responses:
@@ -89,6 +95,72 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Activity'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/scope:
+    get:
+      summary: Get a list of scopes
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of scopes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scope'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/taxonomy:
+    get:
+      summary: Get a list of taxonomies
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of taxonomies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Taxonomy'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/org:
+    get:
+      summary: Get a list of orgs
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of orgs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Org'
         '401':
           description: ExpiredToken
           content:
@@ -144,6 +216,30 @@ components:
       schema:
         type: string
         example: '2021-01-31'
+    org:
+      name: org
+      in: query
+      description: The org UUID
+      required: false
+      schema:
+          type: string
+          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+    scope:
+      name: scope
+      in: query
+      description: The scope UUID
+      required: false
+      schema:
+          type: string
+          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+    taxonomy:
+      name: taxonomy
+      in: query
+      description: The taxonomy UUID
+      required: false
+      schema:
+          type: string
+          example: aa17223a-471c-4eb7-9ff5-7800fd023960
     limit:
       name: limit
       in: query
