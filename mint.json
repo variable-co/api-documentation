@@ -50,6 +50,24 @@
         "api-reference/v1/activity/get",
         "api-reference/v1/activity/data/get"
       ]
+    },
+    {
+      "group": "Org",
+      "pages": [
+        "api-reference/v1/org/get"
+      ]
+    },
+    {
+      "group": "Scope",
+      "pages": [
+        "api-reference/v1/scope/get"
+      ]
+    },
+    {
+      "group": "Taxonomy",
+      "pages": [
+        "api-reference/v1/taxonomy/get"
+      ]
     }
   ],
   "footerSocials": {
