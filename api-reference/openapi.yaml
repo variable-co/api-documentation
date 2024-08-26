@@ -123,6 +123,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+      summary: Create a material
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewProduct'
+      responses:
+        '200':
+          description: A material
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/material/:uuid:
     get:
       summary: Get a material by UUID
@@ -130,6 +154,30 @@ paths:
           - bearerAuth: [ ]
       parameters:
           - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A material
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    put:
+      summary: Edit a material
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewProduct'
       responses:
         '200':
           description: A material
@@ -165,6 +213,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+      summary: Create a product
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewProduct'
+      responses:
+        '200':
+          description: A product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product/:uuid:
     get:
       summary: Get a product by UUID
@@ -185,48 +257,118 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
-#  /v1/product/:uuid/model/:uuid?:
-#    get:
-#      summary: Get a product model (latest if uuid is omitted, or a specific version)
-#      security:
-#          - bearerAuth: [ ]
-#      parameters:
-#          - $ref: '#/components/parameters/variable-company'
-#      responses:
-#        '200':
-#          description: A product model
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/Model'
-#        '401':
-#          description: ExpiredToken
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/ExpiredTokenResponse'
-#  /v1/product/:uuid/model/:uuid?/inputs:
-#    get:
-#      summary: Get model inputs
-#      security:
-#          - bearerAuth: [ ]
-#      parameters:
-#          - $ref: '#/components/parameters/variable-company'
-#      responses:
-#        '200':
-#          description: A product model
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  $ref: '#/components/schemas/Input'
-#        '401':
-#          description: ExpiredToken
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/ExpiredTokenResponse'
+    put:
+      summary: Edit a product
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: A product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/model/:uuid/input:
+    get:
+      summary: Get model inputs
+      security:
+          - bearerAuth: [ ]
+      parameters:
+          - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of model inputs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Input'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+        summary: Create a model input
+        security:
+            - bearerAuth: [ ]
+        requestBody:
+            required: true
+            content:
+              application/json:
+                  schema:
+                    allOf:
+                      - $ref: '#/components/schemas/NewInput'
+        responses:
+            '200':
+              description: An input
+              content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Input'
+            '401':
+              description: ExpiredToken
+              content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/model/:uuid/input/:uuid:
+    put:
+      summary: Edit an input
+      security:
+          - bearerAuth: [ ]
+      requestBody:
+          required: true
+          content:
+            application/json:
+                schema:
+                  allOf:
+                    - $ref: '#/components/schemas/Input'
+      responses:
+          '200':
+            description: An input
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Input'
+          '401':
+            description: ExpiredToken
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a model input
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/scope:
     get:
       summary: Get a list of scopes
@@ -406,6 +548,12 @@ components:
         message:
           type: string
           example: 'token expired'
+    SuccessResponse:
+      type: object
+      properties:
+          message:
+            type: string
+            example: 'Success'
     ActivityResponse:
       type: object
       properties:
@@ -580,17 +728,13 @@ components:
                       type: string
                       example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
-    Product:
+    NewProduct:
       allOf:
-        - $ref: '#/components/schemas/BaseNode'
         - type: object
           properties:
             name:
               type: string
               example: 'Product Name'
-            productImage:
-              type: string
-              example: 'https://app.variable.global/uploads/image.jpg'
             description:
               type: string
               example: 'A descriptive description'
@@ -600,8 +744,6 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
-            footprints:
-              $ref: '#/components/schemas/Footprints'
             taxonomy:
               allOf:
                 - $ref: '#/components/schemas/IDAndName'
@@ -609,10 +751,6 @@ components:
                     name:
                       type: string
                       example: 'Material'
-            qualitySummary:
-              $ref: '#/components/schemas/QualitySummary'
-            qualityRating:
-              $ref: '#/components/schemas/QualityRating'
             geoLocation:
               allOf:
                 - $ref: '#/components/schemas/IDAndName'
@@ -627,6 +765,22 @@ components:
                     name:
                       type: string
                       example: 'Pittsburgh Office'
+        - $ref: '#/components/schemas/StartEndDate'
+    Product:
+      allOf:
+        - $ref: '#/components/schemas/IDAndName'
+        - $ref: '#/components/schemas/NewProduct'
+        - type: object
+          properties:
+            productImage:
+              type: string
+              example: 'https://app.variable.global/uploads/image.jpg'
+            footprints:
+              $ref: '#/components/schemas/Footprints'
+            qualitySummary:
+              $ref: '#/components/schemas/QualitySummary'
+            qualityRating:
+              $ref: '#/components/schemas/QualityRating'
         - $ref: '#/components/schemas/StartEndDate'
     Material:
       allOf:
@@ -650,31 +804,34 @@ components:
               type: array
               items:
                   $ref: '#/components/schemas/Input'
+    NewInput:
+      properties:
+        quantity:
+          type: number
+          example: 150
+        unit:
+          type: string
+          example: 'kg'
+        order:
+          type: number
+          example: 1
+        material:
+          allOf:
+            - $ref: '#/components/schemas/IDAndName'
+            - properties:
+                name:
+                  type: string
+                  example: 'Material name'
+        lifecycleStage:
+          $ref: '#/components/schemas/LifecycleStage'
     Input:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
-        - type: object
-          properties:
-            quantity:
-              type: number
-              example: 150
-            unit:
-              type: string
-              example: 'kg'
+        - $ref: '#/components/schemas/NewInput'
+        - properties:
             CO2e:
               type: string
               example: '1234.5678'
-            order:
-              type: number
-              example: 1
-            product:
-              $ref: '#/components/schemas/Product'
-            material:
-              $ref: '#/components/schemas/Product'
-#            block:
-#              $ref: '#/components/schemas/Block'
-            lifecycleStage:
-              $ref: '#/components/schemas/LifecycleStage'
     Block:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
@@ -689,7 +846,7 @@ components:
       properties:
         code:
           type: string
-          format: A1
+          example: A1
         name:
           type: string
           example: 'Materials'

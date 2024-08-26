@@ -48,14 +48,27 @@
       "group": "Product",
       "pages": [
         "api-reference/v1/product/list/get",
-        "api-reference/v1/product/get"
+        "api-reference/v1/product/get",
+        "api-reference/v1/product/post",
+        "api-reference/v1/product/put"
       ]
     },
     {
       "group": "Material",
       "pages": [
         "api-reference/v1/material/list/get",
-        "api-reference/v1/material/get"
+        "api-reference/v1/material/get",
+        "api-reference/v1/material/post",
+        "api-reference/v1/material/put"
+      ]
+    },
+    {
+      "group": "Model",
+      "pages": [
+        "api-reference/v1/model/inputs/get",
+        "api-reference/v1/model/inputs/post",
+        "api-reference/v1/model/inputs/put",
+        "api-reference/v1/model/inputs/delete"
       ]
     },
     {
