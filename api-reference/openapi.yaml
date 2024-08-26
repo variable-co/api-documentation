@@ -132,6 +132,8 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - name
               allOf:
                 - $ref: '#/components/schemas/NewProduct'
       responses:
@@ -176,8 +178,10 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - uuid
               allOf:
-                - $ref: '#/components/schemas/NewProduct'
+                - $ref: '#/components/schemas/Product'
       responses:
         '200':
           description: A material
@@ -239,6 +243,8 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - name
               allOf:
                 - $ref: '#/components/schemas/NewProduct'
       responses:
@@ -283,6 +289,8 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - uuid
               allOf:
                 - $ref: '#/components/schemas/Product'
       responses:
@@ -354,6 +362,8 @@ paths:
           content:
             application/json:
                 schema:
+                  required:
+                    - uuid
                   allOf:
                     - $ref: '#/components/schemas/Input'
       responses:
