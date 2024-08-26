@@ -4,5 +4,9 @@ openapi: 'GET /v1/product/:uuid'
 description: 'Get a product by UUID'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `product:read`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'product:read'} />

@@ -4,5 +4,9 @@ openapi: 'POST /v1/product'
 description: 'Create a product'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `product:create`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'product:create'} />

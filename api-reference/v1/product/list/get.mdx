@@ -4,5 +4,9 @@ openapi: 'GET /v1/product'
 description: 'Get a list of products'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `product:read`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'product:read'} />

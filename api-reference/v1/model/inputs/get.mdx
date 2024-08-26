@@ -4,5 +4,9 @@ openapi: 'GET /v1/model/:uuid/input'
 description: 'Get a list of model inputs'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `model:read`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'model:read'} />

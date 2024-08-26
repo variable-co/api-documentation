@@ -4,5 +4,9 @@ openapi: 'PUT /v1/product/:uuid'
 description: 'Edit a product'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `product:edit`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'product:edit'} />

@@ -59,7 +59,8 @@
         "api-reference/v1/material/list/get",
         "api-reference/v1/material/get",
         "api-reference/v1/material/post",
-        "api-reference/v1/material/put"
+        "api-reference/v1/material/put",
+        "api-reference/v1/material/delete"
       ]
     },
     {

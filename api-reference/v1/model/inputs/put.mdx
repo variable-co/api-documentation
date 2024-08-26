@@ -4,5 +4,9 @@ openapi: 'PUT /v1/model/:uuid/input/:uuid'
 description: 'Edit model input'
 ---
 
-<Note>This endpoint is in Preview</Note>
-<Note>Requires permission: `model:edit`</Note>
+import Preview from '/snippets/preview.mdx';
+import Permission from '/snippets/permission.mdx';
+
+<Preview />
+
+<Permission permission={'model:edit'} />

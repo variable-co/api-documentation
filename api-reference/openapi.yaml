@@ -191,6 +191,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a material
+      security:
+          - bearerAuth: [ ]
+      responses:
+          '200':
+            description: Success
+            content:
+                application/json:
+                 schema:
+                    $ref: '#/components/schemas/SuccessResponse'
+          '401':
+            description: ExpiredToken
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product:
     get:
       summary: Get a list of products
