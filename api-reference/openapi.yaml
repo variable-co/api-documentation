@@ -101,6 +101,132 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/material:
+    get:
+      summary: Get a list of materials
+      security:
+          - bearerAuth: [ ]
+      parameters:
+          - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/material/:uuid:
+    get:
+      summary: Get a material by UUID
+      security:
+          - bearerAuth: [ ]
+      parameters:
+          - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A material
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/product:
+    get:
+      summary: Get a list of products
+      security:
+          - bearerAuth: [ ]
+      parameters:
+          - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/product/:uuid:
+    get:
+      summary: Get a product by UUID
+      security:
+          - bearerAuth: [ ]
+      parameters:
+          - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+#  /v1/product/:uuid/model/:uuid?:
+#    get:
+#      summary: Get a product model (latest if uuid is omitted, or a specific version)
+#      security:
+#          - bearerAuth: [ ]
+#      parameters:
+#          - $ref: '#/components/parameters/variable-company'
+#      responses:
+#        '200':
+#          description: A product model
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/Model'
+#        '401':
+#          description: ExpiredToken
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/ExpiredTokenResponse'
+#  /v1/product/:uuid/model/:uuid?/inputs:
+#    get:
+#      summary: Get model inputs
+#      security:
+#          - bearerAuth: [ ]
+#      parameters:
+#          - $ref: '#/components/parameters/variable-company'
+#      responses:
+#        '200':
+#          description: A product model
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  $ref: '#/components/schemas/Input'
+#        '401':
+#          description: ExpiredToken
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/scope:
     get:
       summary: Get a list of scopes
@@ -310,43 +436,7 @@ components:
           type: string
           description: The unit of CO2e. For example "kg"
           example: kg
-    Activity:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: UUID
-        description:
-          type: string
-        quantity:
-          type: number
-          example: 150
-        CO2e:
-          type: string
-          example: '1234.5678'
-        UpstreamCO2e:
-          type: string
-          example: '1234.5678'
-        DownstreamCO2e:
-          type: string
-          example: '1234.5678'
-        startDate:
-          type: string
-          description: ISO 8601 date
-          example: 2021-01-01T00:00:00Z
-        endDate:
-          type: string
-          description: ISO 8601 date
-          example: 2021-01-31T23:59:59Z
-        product:
-          $ref: '#/components/schemas/Product'
-        scope:
-          $ref: '#/components/schemas/Scope'
-        taxonomy:
-          $ref: '#/components/schemas/Taxonomy'
-        org:
-          $ref: '#/components/schemas/Org'
-    Product:
+    IDAndName:
       type: object
       properties:
         uuid:
@@ -354,7 +444,255 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Product Name'
+          example: 'Name'
+    BaseNode:
+      allOf:
+        - $ref: '#/components/schemas/IDAndName'
+        - type: object
+          properties:
+            created:
+              type: string
+              description: ISO 8601 date
+              example: 2021-01-01T00:00:00Z
+            updated:
+              type: string
+              description: ISO 8601 date
+              example: 2021-01-31T23:59:59Z
+    Date:
+      type: string
+      description: ISO 8601 date
+      example: 2021-01-01T00:00:00Z
+    StartEndDate:
+      allOf:
+        - properties:
+            startDate:
+              $ref: '#/components/schemas/Date'
+            endDate:
+              $ref: '#/components/schemas/Date'
+    Footprints:
+      type: object
+      properties:
+        CO2e:
+          type: object
+          properties:
+            upstream:
+              type: string
+              example: '123'
+            direct:
+              type: string
+              example: '4.5'
+            downstream:
+              type: string
+              example: '0.0678'
+            A1-A3:
+              type: string
+              example: '1234'
+            A1:
+              type: string
+              example: '1200'
+            A2:
+              type: string
+              example: '30'
+            A3:
+              type: string
+              example: '4'
+            A4:
+              type: string
+              example: '0.5'
+            B1:
+              type: string
+              example: '0.06'
+            B2:
+              type: string
+              example: '0.007'
+            B3:
+              type: string
+              example: '0.0008'
+            B4:
+              type: string
+              example: ''
+            B5:
+              type: string
+              example: ''
+            C1:
+              type: string
+              example: ''
+            C2:
+              type: string
+              example: ''
+            C3:
+              type: string
+              example: ''
+            C4:
+              type: string
+              example: ''
+            D:
+              type: string
+              example: ''
+    Activity:
+      allOf:
+        - $ref: '#/components/schemas/BaseNode'
+        - type: object
+          properties:
+            description:
+              type: string
+            quantity:
+              type: number
+              example: 150
+            unit:
+              type: string
+              example: 'kg'
+            CO2e:
+              type: string
+              example: '1234.5678'
+            UpstreamCO2e:
+              type: string
+              example: '1234.5'
+            DownstreamCO2e:
+              type: string
+              example: '0.0678'
+            product:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Product Name'
+            scope:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Scope 2: Electricity'
+            taxonomy:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Material'
+            org:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Org Unit'
+        - $ref: '#/components/schemas/StartEndDate'
+    Product:
+      allOf:
+        - $ref: '#/components/schemas/BaseNode'
+        - type: object
+          properties:
+            name:
+              type: string
+              example: 'Product Name'
+            productImage:
+              type: string
+              example: 'https://app.variable.global/uploads/image.jpg'
+            description:
+              type: string
+              example: 'A descriptive description'
+            sku:
+              type: string
+              example: 'SKU123'
+            cpcCode:
+              type: string
+              example: 'CPC123'
+            footprints:
+              $ref: '#/components/schemas/Footprints'
+            taxonomy:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Material'
+            qualitySummary:
+              $ref: '#/components/schemas/QualitySummary'
+            qualityRating:
+              $ref: '#/components/schemas/QualityRating'
+            geoLocation:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Pittsburgh, PA'
+            location:
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Pittsburgh Office'
+        - $ref: '#/components/schemas/StartEndDate'
+    Material:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - properties:
+            name:
+              type: string
+              example: 'Material Name'
+    Model:
+      allOf:
+        - $ref: '#/components/schemas/BaseNode'
+        - type: object
+          properties:
+            version:
+              type: number
+              example: 1
+            description:
+              type: string
+              example: 'Model Description'
+            inputs:
+              type: array
+              items:
+                  $ref: '#/components/schemas/Input'
+    Input:
+      allOf:
+        - $ref: '#/components/schemas/BaseNode'
+        - type: object
+          properties:
+            quantity:
+              type: number
+              example: 150
+            unit:
+              type: string
+              example: 'kg'
+            CO2e:
+              type: string
+              example: '1234.5678'
+            order:
+              type: number
+              example: 1
+            product:
+              $ref: '#/components/schemas/Product'
+            material:
+              $ref: '#/components/schemas/Product'
+#            block:
+#              $ref: '#/components/schemas/Block'
+            lifecycleStage:
+              $ref: '#/components/schemas/LifecycleStage'
+    Block:
+      allOf:
+        - $ref: '#/components/schemas/BaseNode'
+        - type: object
+          properties:
+            sources:
+              type: array
+              items:
+                  $ref: '#/components/schemas/Product'
+    LifecycleStage:
+      type: object
+      properties:
+        code:
+          type: string
+          format: A1
+        name:
+          type: string
+          example: 'Materials'
     Scope:
       type: object
       properties:
@@ -382,6 +720,94 @@ components:
         name:
           type: string
           example: 'Org Unit'
+    Location:
+      type: object
+      properties:
+          uuid:
+            type: string
+            format: UUID
+          name:
+            type: string
+            example: 'Pittsburgh'
+          type:
+            type: string
+            example: 'office'
+          geoLocation:
+            $ref: '#/components/schemas/GeoLocation'
+    GeoLocation:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        shortName:
+          type: string
+          example: 'Pittsburgh'
+        googleMapsId:
+          type: string
+          example: 'ChIJA4UGSG_xNIgRNBuiWqEV-Y0'
+        locationType:
+          type: string
+          example: 'APPROXIMATE'
+        formattedAddress:
+          type: string
+          example: 'Pittsburgh, PA, USA'
+        countryCode:
+          type: string
+          example: 'US'
+        latitude:
+          type: number
+          example: 40.44062479
+        longitude:
+          type: number
+          example: -79.9958864
+        bounds:
+          type: object
+          properties:
+            northeast:
+              $ref: '#/components/schemas/LatLon'
+            southwest:
+              $ref: '#/components/schemas/LatLon'
+    LatLon:
+      type: object
+      properties:
+        latitude:
+          type: number
+          example: 40.44062479
+        longitude:
+          type: number
+          example: -79.9958864
+    QualitySummary:
+      type: object
+      properties:
+        documentationYear:
+          type: string
+          example: 2021
+        temporalRepresentativeness:
+          type: number
+          example: 1
+          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
+        dataCompleteness:
+          type: number
+          example: 1
+        dataReliability:
+          type: number
+          example: 1
+        geographicalRepresentativeness:
+          type: number
+          example: 1
+        technologicalRepresentativeness:
+          type: number
+          example: 1
+        specificPercent:
+          type: number
+          example: 40
+        averagePercent:
+          type: number
+          example: 60
+    QualityRating:
+      type: number
+      example: 2.2
 
 security:
   - basicAuth: [ ]

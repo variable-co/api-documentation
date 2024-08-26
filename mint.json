@@ -45,6 +45,20 @@
       ]
     },
     {
+      "group": "Product",
+      "pages": [
+        "api-reference/v1/product/list/get",
+        "api-reference/v1/product/get"
+      ]
+    },
+    {
+      "group": "Material",
+      "pages": [
+        "api-reference/v1/material/list/get",
+        "api-reference/v1/material/get"
+      ]
+    },
+    {
       "group": "Activity",
       "pages": [
         "api-reference/v1/activity/get",
