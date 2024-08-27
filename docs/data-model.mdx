@@ -16,9 +16,29 @@ An `Activity` represents the actual flow of materials through the system.
 erDiagram
     Product ||--o{ Model : "has"
     Model ||--o{ Input : "line item of"
-    Input ||--o{ Material : "sourced by"
     Input ||--o{ Processing : "processed by"
-    Input ||--o{ Transportation : "transported by"
+    Input ||--o{ Transportation : "distributed by"
+    Input ||--o{ Material : "sourced by"
+    Material ||--o{ Transportation : "transported via"
+    Material ||--o| Supplier : "product of"
+    Material ||--|| Taxonomy : "categorized as"
+    Transportation ||--o| Supplier : "product of"
 
-    Activity }o--|| Material : "part of"
+    Product ||--o{ Activity : "distribution"
+    Activity }o--o{ Material : "part of"
+    Activity }o--o{ Transportation : "part of"
+    Activity ||--o{ Taxonomy : "categorized as"
+    Activity ||--|| Org : "in"
+    Activity ||--|| Scope : "in"
+
+    Activity {
+        number quantity
+        Unit unit
+    }
+
+    Input {
+        number quantity
+        Unit unit
+    }
+%%    Material }o--o{ Material : "part of"
 ```
