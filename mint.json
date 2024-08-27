@@ -33,7 +33,7 @@
   },
   "navigation": [
     {
-      "group": "API Documentation",
+      "group": "API Reference",
       "pages": [
         "api-reference/welcome"
       ]
