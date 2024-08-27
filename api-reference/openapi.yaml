@@ -181,7 +181,7 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/Product'
+                - $ref: '#/components/schemas/EditProduct'
       responses:
         '200':
           description: A material
@@ -292,7 +292,7 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/Product'
+                - $ref: '#/components/schemas/EditProduct'
       responses:
         '200':
           description: A product
@@ -321,7 +321,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Input'
+                  $ref: '#/components/schemas/ReturnedInput'
         '401':
           description: ExpiredToken
           content:
@@ -345,7 +345,7 @@ paths:
               content:
                   application/json:
                     schema:
-                      $ref: '#/components/schemas/Input'
+                      $ref: '#/components/schemas/ReturnedInput'
             '401':
               description: ExpiredToken
               content:
@@ -365,14 +365,14 @@ paths:
                   required:
                     - uuid
                   allOf:
-                    - $ref: '#/components/schemas/Input'
+                    - $ref: '#/components/schemas/EditInput'
       responses:
           '200':
             description: An input
             content:
                 application/json:
                   schema:
-                    $ref: '#/components/schemas/Input'
+                    $ref: '#/components/schemas/ReturnedInput'
           '401':
             description: ExpiredToken
             content:
@@ -611,28 +611,32 @@ components:
           type: string
           description: The unit of CO2e. For example "kg"
           example: kg
+    UUID:
+      type: string
+      format: UUID
     IDAndName:
       type: object
       properties:
         uuid:
-          type: string
-          format: UUID
+          $ref: '#/components/schemas/UUID'
         name:
           type: string
           example: 'Name'
+    CreatedUpdated:
+      type: object
+      properties:
+          created:
+            type: string
+            description: ISO 8601 date
+            example: 2021-01-01T00:00:00Z
+          updated:
+            type: string
+            description: ISO 8601 date
+            example: 2021-01-31T23:59:59Z
     BaseNode:
       allOf:
         - $ref: '#/components/schemas/IDAndName'
-        - type: object
-          properties:
-            created:
-              type: string
-              description: ISO 8601 date
-              example: 2021-01-01T00:00:00Z
-            updated:
-              type: string
-              description: ISO 8601 date
-              example: 2021-01-31T23:59:59Z
+        - $ref: '#/components/schemas/CreatedUpdated'
     Date:
       type: string
       description: ISO 8601 date
@@ -727,33 +731,33 @@ components:
               type: string
               example: '0.0678'
             product:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Product Name'
+                properties:
+                  uuid:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                    example: 'Product Name'
             scope:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Scope 2: Electricity'
+                properties:
+                  uuid:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                    example: 'Scope 2: Electricity'
             taxonomy:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Material'
+                properties:
+                  uuid:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                    example: 'Material'
             org:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Org Unit'
+                properties:
+                  uuid:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                    example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
     NewProduct:
       allOf:
@@ -772,31 +776,36 @@ components:
               type: string
               example: 'CPC123'
             taxonomy:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Material'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Material'
             geoLocation:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Pittsburgh, PA'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Pittsburgh, PA'
             location:
-              allOf:
-                - $ref: '#/components/schemas/IDAndName'
-                - properties:
-                    name:
-                      type: string
-                      example: 'Pittsburgh Office'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Pittsburgh Office'
         - $ref: '#/components/schemas/StartEndDate'
+    EditProduct:
+      allOf:
+        - properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
+        - $ref: '#/components/schemas/NewProduct'
     Product:
       allOf:
-        - $ref: '#/components/schemas/IDAndName'
-        - $ref: '#/components/schemas/NewProduct'
+        - $ref: '#/components/schemas/EditProduct'
         - type: object
           properties:
             productImage:
@@ -808,7 +817,7 @@ components:
               $ref: '#/components/schemas/QualitySummary'
             qualityRating:
               $ref: '#/components/schemas/QualityRating'
-        - $ref: '#/components/schemas/StartEndDate'
+        - $ref: '#/components/schemas/CreatedUpdated'
     Material:
       allOf:
         - $ref: '#/components/schemas/Product'
@@ -816,21 +825,6 @@ components:
             name:
               type: string
               example: 'Material Name'
-    Model:
-      allOf:
-        - $ref: '#/components/schemas/BaseNode'
-        - type: object
-          properties:
-            version:
-              type: number
-              example: 1
-            description:
-              type: string
-              example: 'Model Description'
-            inputs:
-              type: array
-              items:
-                  $ref: '#/components/schemas/Input'
     NewInput:
       properties:
         quantity:
@@ -843,18 +837,24 @@ components:
           type: number
           example: 1
         material:
-          allOf:
-            - $ref: '#/components/schemas/IDAndName'
-            - properties:
-                name:
-                  type: string
-                  example: 'Material name'
+          properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
+            name:
+              type: string
+              example: 'Material name'
         lifecycleStage:
           $ref: '#/components/schemas/LifecycleStage'
-    Input:
+    EditInput:
       allOf:
-        - $ref: '#/components/schemas/BaseNode'
+        - properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
         - $ref: '#/components/schemas/NewInput'
+    ReturnedInput:
+      allOf:
+        - $ref: '#/components/schemas/EditInput'
+        - $ref: '#/components/schemas/CreatedUpdated'
         - properties:
             CO2e:
               type: string
