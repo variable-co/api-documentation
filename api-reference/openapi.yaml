@@ -482,7 +482,7 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: The company UUID. You can get this from the [company settings](https://app.variable.co/company) page in the app.
+      description: The company UUID. You can get this from the [company settings](https://app.variable.global/company) page in the app.
       required: true
       schema:
         type: string
