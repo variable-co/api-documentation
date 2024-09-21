@@ -47,6 +47,7 @@ paths:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/scope'
         - $ref: '#/components/parameters/taxonomy'
+        - $ref: '#/components/parameters/list'
       responses:
         '200':
           description: A list of activities
@@ -482,7 +483,7 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: The company UUID. You can get this from the [company settings](https://app.variable.co/company) page in the app.
+      description: The company UUID. You can get this from the [company settings](https://app.variable.global/company) page in the app.
       required: true
       schema:
         type: string
@@ -535,6 +536,16 @@ components:
       schema:
           type: string
           example: aa17223a-471c-4eb7-9ff5-7800fd023960
+    list:
+      name: list
+      in: query
+      description: List of Scope, Org, or Taxonomies used in the result set
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          example: scopes,orgs,taxonomies
     limit:
       name: limit
       in: query
@@ -611,6 +622,21 @@ components:
           type: string
           description: The unit of CO2e. For example "kg"
           example: kg
+        scopes:
+          description: A list of GHG Scopes used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        orgs:
+          description: A list of Orgs used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Org'
+        taxonomies:
+          description: A list of Taxonomies used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Taxonomy'
     UUID:
       type: string
       format: UUID
@@ -894,7 +920,13 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Energy'
+          example: 'Electricity'
+        slug:
+          type: string
+          example: 'electricity'
+        path:
+          type: string
+          example: 'energy/electricity'
     Org:
       type: object
       properties:
