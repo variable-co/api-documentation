@@ -5,7 +5,7 @@
     "dark": "https://app.variable.global/logo/logo-horizontal-ondark.svg",
     "light": "https://app.variable.global/logo/logo-horizontal-onlight.svg"
   },
-  "favicon": "/logo/symbol-yellow.svg",
+  "favicon": "/logo/symbol-white.svg",
   "colors": {
     "primary": "#003540",
     "light": "#E6E3DD",
@@ -50,7 +50,7 @@
         "api-reference/v1/product/list/get",
         "api-reference/v1/product/get",
         "api-reference/v1/product/post",
-        "api-reference/v1/product/put"
+        "api-reference/v1/product/patch"
       ]
     },
     {
@@ -59,7 +59,7 @@
         "api-reference/v1/material/list/get",
         "api-reference/v1/material/get",
         "api-reference/v1/material/post",
-        "api-reference/v1/material/put",
+        "api-reference/v1/material/patch",
         "api-reference/v1/material/delete"
       ]
     },
@@ -68,7 +68,7 @@
       "pages": [
         "api-reference/v1/model/inputs/get",
         "api-reference/v1/model/inputs/post",
-        "api-reference/v1/model/inputs/put",
+        "api-reference/v1/model/inputs/patch",
         "api-reference/v1/model/inputs/delete"
       ]
     },
@@ -95,6 +95,12 @@
       "group": "Taxonomy",
       "pages": [
         "api-reference/v1/taxonomy/get"
+      ]
+    },
+    {
+      "group": "Unit",
+      "pages": [
+        "api-reference/v1/unit/get"
       ]
     }
   ],
