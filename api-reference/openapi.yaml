@@ -902,6 +902,13 @@ components:
             name:
               type: string
               example: 'Material name'
+        block:
+          properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
+            name:
+              type: string
+              example: 'Block name'
         lifecycleStage:
           $ref: '#/components/schemas/LifecycleStage'
     EditInput:
