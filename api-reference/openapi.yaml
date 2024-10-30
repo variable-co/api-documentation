@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Variable API
   description: This is the Variable API
-  version: 1.0.0
+  version: 1.1.0
 
 servers:
   - url: https://app.variable.global/api
@@ -770,15 +770,15 @@ components:
             unit:
               type: string
               example: 'kg'
-            CO2e:
-              type: string
-              example: '1234.5678'
-            UpstreamCO2e:
-              type: string
-              example: '1234.5'
-            DownstreamCO2e:
-              type: string
-              example: '0.0678'
+#            CO2e:
+#              type: string
+#              example: '1234.5678'
+#            UpstreamCO2e:
+#              type: string
+#              example: '1234.5'
+#            DownstreamCO2e:
+#              type: string
+#              example: '0.0678'
             product:
                 properties:
                   uuid:
