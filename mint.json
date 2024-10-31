@@ -64,7 +64,7 @@
       ]
     },
     {
-      "group": "Input",
+      "group": "Model",
       "pages": [
         "api-reference/v1/model/inputs/get",
         "api-reference/v1/model/inputs/post",
