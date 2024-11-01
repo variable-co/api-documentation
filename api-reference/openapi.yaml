@@ -128,6 +128,8 @@ paths:
       summary: Create a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -174,6 +176,8 @@ paths:
       summary: Edit a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -200,6 +204,130 @@ paths:
       summary: Delete a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/supplier:
+    get:
+      summary: Get a list of suppliers
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of suppliers
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+      summary: Create a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              allOf:
+                - $ref: '#/components/schemas/NewSupplier'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/supplier/:uuid:
+    get:
+      summary: Get a supplier by UUID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    patch:
+      summary: Edit a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: '#/components/schemas/NewSupplier'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -245,6 +373,8 @@ paths:
       summary: Create a product
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -291,6 +421,8 @@ paths:
       summary: Edit a product
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -317,6 +449,8 @@ paths:
       summary: Delete a Product
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -361,6 +495,8 @@ paths:
       summary: Create a model input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -386,6 +522,8 @@ paths:
       summary: Edit an input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -412,6 +550,8 @@ paths:
       summary: Delete a model input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -533,7 +673,7 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: __Required__ if you aren't using the company subdomain. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
+      description: __Required__ if you aren't using the company api url. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
       required: false
       schema:
         type: string
@@ -930,6 +1070,20 @@ components:
         name:
           type: string
           example: 'Company Name'
+    NewSupplier:
+      allOf:
+        - $ref: '#/components/schemas/Company'
+        - properties:
+            name:
+              type: string
+              example: 'Supplier Name'
+    Supplier:
+      allOf:
+        - $ref: '#/components/schemas/NewSupplier'
+        - properties:
+            connected:
+              type: boolean
+              example: true
     NewInput:
       properties:
         quantity:

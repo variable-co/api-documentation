@@ -65,6 +65,16 @@
       ]
     },
     {
+      "group": "Supplier",
+      "pages": [
+        "api-reference/v1/supplier/list/get",
+        "api-reference/v1/supplier/get",
+        "api-reference/v1/supplier/post",
+        "api-reference/v1/supplier/patch",
+        "api-reference/v1/supplier/delete"
+      ]
+    },
+    {
       "group": "Model",
       "pages": [
         "api-reference/v1/model/inputs/get",
