@@ -854,26 +854,16 @@ components:
               type: string
               example: 'CPC123'
             taxonomy:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Material'
+              allOf:
+                - $ref: '#/components/schemas/Taxonomy'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Material'
             geoLocation:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Pittsburgh, PA'
+              $ref: '#/components/schemas/GeoLocation'
             location:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Pittsburgh Office'
+              $ref: '#/components/schemas/Location'
         - $ref: '#/components/schemas/StartEndDate'
     EditProduct:
       allOf:
