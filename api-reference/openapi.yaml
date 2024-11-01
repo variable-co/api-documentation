@@ -313,6 +313,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a Product
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input:
     get:
       summary: Get model inputs
@@ -861,9 +878,19 @@ components:
                       type: string
                       example: 'Material'
             geoLocation:
-              $ref: '#/components/schemas/GeoLocation'
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Pittsburgh, PA'
             location:
-              $ref: '#/components/schemas/Location'
+              allOf:
+              - $ref: '#/components/schemas/IDAndName'
+              - properties:
+                  name:
+                      type: string
+                      example: 'Pittsburgh Office'
         - $ref: '#/components/schemas/StartEndDate'
     EditProduct:
       allOf:
@@ -881,10 +908,10 @@ components:
               example: 'https://app.variable.global/uploads/image.jpg'
             footprints:
               $ref: '#/components/schemas/Footprints'
-            qualitySummary:
-              $ref: '#/components/schemas/QualitySummary'
-            qualityRating:
-              $ref: '#/components/schemas/QualityRating'
+            dataQualityRating:
+              $ref: '#/components/schemas/DataQualityRating'
+            dataQualityIndicators:
+              $ref: '#/components/schemas/DataQualityIndicators'
         - $ref: '#/components/schemas/CreatedUpdated'
     Material:
       allOf:
@@ -1064,35 +1091,38 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    QualitySummary:
+    DataQualityIndicators:
       type: object
       properties:
         documentationYear:
           type: string
           example: 2021
-        temporalRepresentativeness:
+        coveragePercent:
           type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
-        dataCompleteness:
-          type: number
-          example: 1
-        dataReliability:
-          type: number
-          example: 1
-        geographicalRepresentativeness:
-          type: number
-          example: 1
-        technologicalRepresentativeness:
-          type: number
-          example: 1
+          example: 80
         specificPercent:
           type: number
           example: 40
         averagePercent:
           type: number
           example: 60
-    QualityRating:
+        technologicalDQR:
+          type: number
+          example: 1
+        temporalDQR:
+          type: number
+          example: 1
+          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
+        geographicalDQR:
+          type: number
+          example: 1
+        completenessDQR:
+          type: number
+          example: 1
+        reliabilityDQR:
+          type: number
+          example: 1
+    DataQualityRating:
       type: number
       example: 2.2
 
