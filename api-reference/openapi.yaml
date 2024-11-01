@@ -661,10 +661,12 @@ components:
           example: 2021-01-31T23:59:59Z
         CO2e:
           type: string
+          format: decimal
           description: The total CO2e of all activities categorized to a GHG Scope, in `CO2eUnit`
           example: '1234.5678'
         uncategorizedCO2e:
           type: string
+          format: decimal
           description: The total CO2e of all activities *not* categorized to a GHG Scope, in `CO2eUnit`
           example: '1.2345678'
         CO2eUnit:
@@ -731,60 +733,79 @@ components:
           properties:
             productCarbonFootprint:
               type: string
+              format: decimal
               example: '1234.5678'
             upstream:
               type: string
+              format: decimal
               example: '123'
             direct:
               type: string
+              format: decimal
               example: '4.5'
             downstream:
               type: string
+              format: decimal
               example: '0.0678'
             A1-A3:
               type: string
+              format: decimal
               example: '1234'
             A1:
               type: string
+              format: decimal
               example: '1200'
             A2:
               type: string
+              format: decimal
               example: '30'
             A3:
               type: string
+              format: decimal
               example: '4'
             A4:
               type: string
+              format: decimal
               example: '0.5'
             B1:
               type: string
+              format: decimal
               example: '0.06'
             B2:
               type: string
+              format: decimal
               example: '0.007'
             B3:
               type: string
+              format: decimal
               example: '0.0008'
             B4:
               type: string
+              format: decimal
               example: ''
             B5:
               type: string
+              format: decimal
               example: ''
             C1:
               type: string
+              format: decimal
               example: ''
             C2:
               type: string
+              format: decimal
               example: ''
             C3:
               type: string
+              format: decimal
               example: ''
             C4:
               type: string
+              format: decimal
               example: ''
             D:
               type: string
+              format: decimal
               example: ''
     Activity:
       allOf:
@@ -801,12 +822,15 @@ components:
               example: 'kg'
 #            CO2e:
 #              type: string
+#              format: decimal
 #              example: '1234.5678'
 #            UpstreamCO2e:
 #              type: string
+#              format: decimal
 #              example: '1234.5'
 #            DownstreamCO2e:
 #              type: string
+#              format: decimal
 #              example: '0.0678'
             product:
                 properties:
@@ -853,6 +877,11 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
+            unit:
+              type: string
+              example: 'kg'
+            weight:
+              $ref: '#/components/schemas/Amount'
             taxonomy:
               properties:
                 uuid:
@@ -891,10 +920,10 @@ components:
               example: 'https://app.variable.global/uploads/image.jpg'
             footprints:
               $ref: '#/components/schemas/Footprints'
-            qualitySummary:
-              $ref: '#/components/schemas/QualitySummary'
-            qualityRating:
-              $ref: '#/components/schemas/QualityRating'
+            dataQualityIndicators:
+              $ref: '#/components/schemas/DataQualityIndicators'
+            dataQualityRating:
+              $ref: '#/components/schemas/DataQualityRating'
         - $ref: '#/components/schemas/CreatedUpdated'
     Material:
       allOf:
@@ -953,6 +982,7 @@ components:
         - properties:
             CO2e:
               type: string
+              format: decimal
               example: '1234.5678'
     Block:
       allOf:
@@ -1008,6 +1038,14 @@ components:
         type:
           type: string
           example: 'weight'
+    Amount:
+      type: object
+      properties:
+        quantity:
+          type: number
+          example: 150
+        unit:
+          $ref: '#/components/schemas/Unit'
     Org:
       type: object
       properties:
@@ -1074,35 +1112,38 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    QualitySummary:
+    DataQualityIndicators:
       type: object
       properties:
         documentationYear:
-          type: string
+          type: number
           example: 2021
-        temporalRepresentativeness:
+        coveragePercent:
           type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
-        dataCompleteness:
-          type: number
-          example: 1
-        dataReliability:
-          type: number
-          example: 1
-        geographicalRepresentativeness:
-          type: number
-          example: 1
-        technologicalRepresentativeness:
-          type: number
-          example: 1
+          example: 80
         specificPercent:
           type: number
           example: 40
         averagePercent:
           type: number
           example: 60
-    QualityRating:
+        technologicalDQR:
+          type: number
+          example: 1
+        temporalDQR:
+          type: number
+          example: 1
+          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
+        geographicalDQR:
+          type: number
+          example: 1
+        completenessDQR:
+          type: number
+          example: 1
+        reliabilityDQR:
+          type: number
+          example: 1
+    DataQualityRating:
       type: number
       example: 2.2
 

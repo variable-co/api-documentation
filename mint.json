@@ -41,7 +41,10 @@
     {
       "group": "Introduction",
       "pages": [
-        "docs/data-model"
+        "docs/data-model",
+        "docs/material",
+        "docs/model",
+        "docs/activity"
       ]
     },
     {
