@@ -101,9 +101,9 @@ paths:
     get:
       summary: Get a list of materials
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of materials
@@ -154,9 +154,9 @@ paths:
     get:
       summary: Get a material by UUID
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A material
@@ -199,27 +199,27 @@ paths:
     delete:
       summary: Delete a material
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       responses:
-          '200':
-            description: Success
-            content:
-                application/json:
-                 schema:
-                    $ref: '#/components/schemas/SuccessResponse'
-          '401':
-            description: ExpiredToken
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ExpiredTokenResponse'
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product:
     get:
       summary: Get a list of products
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of products
@@ -271,9 +271,9 @@ paths:
     get:
       summary: Get a product by UUID
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A product
@@ -317,9 +317,9 @@ paths:
     get:
       summary: Get model inputs
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of model inputs
@@ -341,56 +341,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
-        summary: Create a model input
-        security:
-            - bearerAuth: [ ]
-        requestBody:
-            required: true
-            content:
-              application/json:
-                  schema:
-                    allOf:
-                      - $ref: '#/components/schemas/NewInput'
-        responses:
-            '200':
-              description: An input
-              content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/ReturnedInput'
-            '401':
-              description: ExpiredToken
-              content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/ExpiredTokenResponse'
+      summary: Create a model input
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewInput'
+      responses:
+        '200':
+          description: An input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedInput'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input/:uuid:
     patch:
       summary: Edit an input
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       requestBody:
-          required: true
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: '#/components/schemas/EditInput'
+      responses:
+        '200':
+          description: An input
           content:
             application/json:
-                schema:
-                  required:
-                    - uuid
-                  allOf:
-                    - $ref: '#/components/schemas/EditInput'
-      responses:
-          '200':
-            description: An input
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ReturnedInput'
-          '401':
-            description: ExpiredToken
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ExpiredTokenResponse'
+              schema:
+                $ref: '#/components/schemas/ReturnedInput'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
       summary: Delete a model input
       security:
@@ -551,24 +551,24 @@ components:
       description: The org UUID
       required: false
       schema:
-          type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     scope:
       name: scope
       in: query
       description: The scope UUID
       required: false
       schema:
-          type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     taxonomy:
       name: taxonomy
       in: query
       description: The taxonomy UUID
       required: false
       schema:
-          type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     list:
       name: list
       in: query
@@ -622,9 +622,9 @@ components:
     SuccessResponse:
       type: object
       properties:
-          message:
-            type: string
-            example: 'Success'
+        message:
+          type: string
+          example: 'Success'
     ListResponse:
       type: object
       properties:
@@ -661,12 +661,10 @@ components:
           example: 2021-01-31T23:59:59Z
         CO2e:
           type: string
-          format: decimal
           description: The total CO2e of all activities categorized to a GHG Scope, in `CO2eUnit`
           example: '1234.5678'
         uncategorizedCO2e:
           type: string
-          format: decimal
           description: The total CO2e of all activities *not* categorized to a GHG Scope, in `CO2eUnit`
           example: '1.2345678'
         CO2eUnit:
@@ -702,14 +700,14 @@ components:
     CreatedUpdated:
       type: object
       properties:
-          created:
-            type: string
-            description: ISO 8601 date
-            example: 2021-01-01T00:00:00Z
-          updated:
-            type: string
-            description: ISO 8601 date
-            example: 2021-01-31T23:59:59Z
+        created:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-01T00:00:00Z
+        updated:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-31T23:59:59Z
     BaseNode:
       allOf:
         - $ref: '#/components/schemas/IDAndName'
@@ -733,79 +731,60 @@ components:
           properties:
             productCarbonFootprint:
               type: string
-              format: decimal
               example: '1234.5678'
             upstream:
               type: string
-              format: decimal
               example: '123'
             direct:
               type: string
-              format: decimal
               example: '4.5'
             downstream:
               type: string
-              format: decimal
               example: '0.0678'
             A1-A3:
               type: string
-              format: decimal
               example: '1234'
             A1:
               type: string
-              format: decimal
               example: '1200'
             A2:
               type: string
-              format: decimal
               example: '30'
             A3:
               type: string
-              format: decimal
               example: '4'
             A4:
               type: string
-              format: decimal
               example: '0.5'
             B1:
               type: string
-              format: decimal
               example: '0.06'
             B2:
               type: string
-              format: decimal
               example: '0.007'
             B3:
               type: string
-              format: decimal
               example: '0.0008'
             B4:
               type: string
-              format: decimal
               example: ''
             B5:
               type: string
-              format: decimal
               example: ''
             C1:
               type: string
-              format: decimal
               example: ''
             C2:
               type: string
-              format: decimal
               example: ''
             C3:
               type: string
-              format: decimal
               example: ''
             C4:
               type: string
-              format: decimal
               example: ''
             D:
               type: string
-              format: decimal
               example: ''
     Activity:
       allOf:
@@ -820,46 +799,43 @@ components:
             unit:
               type: string
               example: 'kg'
-#            CO2e:
-#              type: string
-#              format: decimal
-#              example: '1234.5678'
-#            UpstreamCO2e:
-#              type: string
-#              format: decimal
-#              example: '1234.5'
-#            DownstreamCO2e:
-#              type: string
-#              format: decimal
-#              example: '0.0678'
+            CO2e:
+              type: string
+              example: '1234.5678'
+            UpstreamCO2e:
+              type: string
+              example: '1234.5'
+            DownstreamCO2e:
+              type: string
+              example: '0.0678'
             product:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Product Name'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Product Name'
             scope:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Scope 2: Electricity'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Scope 2: Electricity'
             taxonomy:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Material'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Material'
             org:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Org Unit'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
     NewProduct:
       allOf:
@@ -877,11 +853,6 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
-            unit:
-              type: string
-              example: 'kg'
-            weight:
-              $ref: '#/components/schemas/Amount'
             taxonomy:
               properties:
                 uuid:
@@ -920,10 +891,10 @@ components:
               example: 'https://app.variable.global/uploads/image.jpg'
             footprints:
               $ref: '#/components/schemas/Footprints'
-            dataQualityIndicators:
-              $ref: '#/components/schemas/DataQualityIndicators'
-            dataQualityRating:
-              $ref: '#/components/schemas/DataQualityRating'
+            qualitySummary:
+              $ref: '#/components/schemas/QualitySummary'
+            qualityRating:
+              $ref: '#/components/schemas/QualityRating'
         - $ref: '#/components/schemas/CreatedUpdated'
     Material:
       allOf:
@@ -982,7 +953,6 @@ components:
         - properties:
             CO2e:
               type: string
-              format: decimal
               example: '1234.5678'
     Block:
       allOf:
@@ -992,7 +962,7 @@ components:
             sources:
               type: array
               items:
-                  $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/Product'
     LifecycleStage:
       type: object
       properties:
@@ -1038,14 +1008,6 @@ components:
         type:
           type: string
           example: 'weight'
-    Amount:
-      type: object
-      properties:
-        quantity:
-          type: number
-          example: 150
-        unit:
-          $ref: '#/components/schemas/Unit'
     Org:
       type: object
       properties:
@@ -1058,17 +1020,17 @@ components:
     Location:
       type: object
       properties:
-          uuid:
-            type: string
-            format: UUID
-          name:
-            type: string
-            example: 'Pittsburgh'
-          type:
-            type: string
-            example: 'office'
-          geoLocation:
-            $ref: '#/components/schemas/GeoLocation'
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Pittsburgh Office'
+        type:
+          type: string
+          example: 'office'
+        geoLocation:
+          $ref: '#/components/schemas/GeoLocation'
     GeoLocation:
       type: object
       properties:
@@ -1112,38 +1074,35 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    DataQualityIndicators:
+    QualitySummary:
       type: object
       properties:
         documentationYear:
-          type: number
+          type: string
           example: 2021
-        coveragePercent:
+        temporalRepresentativeness:
           type: number
-          example: 80
+          example: 1
+          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
+        dataCompleteness:
+          type: number
+          example: 1
+        dataReliability:
+          type: number
+          example: 1
+        geographicalRepresentativeness:
+          type: number
+          example: 1
+        technologicalRepresentativeness:
+          type: number
+          example: 1
         specificPercent:
           type: number
           example: 40
         averagePercent:
           type: number
           example: 60
-        technologicalDQR:
-          type: number
-          example: 1
-        temporalDQR:
-          type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
-        geographicalDQR:
-          type: number
-          example: 1
-        completenessDQR:
-          type: number
-          example: 1
-        reliabilityDQR:
-          type: number
-          example: 1
-    DataQualityRating:
+    QualityRating:
       type: number
       example: 2.2
 
