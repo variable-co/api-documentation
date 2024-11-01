@@ -47,6 +47,7 @@ paths:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/scope'
         - $ref: '#/components/parameters/taxonomy'
+#        - $ref: '#/components/parameters/list'
       responses:
         '200':
           description: A list of activities
@@ -100,9 +101,9 @@ paths:
     get:
       summary: Get a list of materials
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of materials
@@ -153,9 +154,9 @@ paths:
     get:
       summary: Get a material by UUID
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A material
@@ -198,27 +199,27 @@ paths:
     delete:
       summary: Delete a material
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       responses:
-          '200':
-            description: Success
-            content:
-                application/json:
-                 schema:
-                    $ref: '#/components/schemas/SuccessResponse'
-          '401':
-            description: ExpiredToken
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ExpiredTokenResponse'
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product:
     get:
       summary: Get a list of products
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of products
@@ -270,9 +271,9 @@ paths:
     get:
       summary: Get a product by UUID
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A product
@@ -316,9 +317,9 @@ paths:
     get:
       summary: Get model inputs
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       parameters:
-          - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of model inputs
@@ -340,56 +341,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
-        summary: Create a model input
-        security:
-            - bearerAuth: [ ]
-        requestBody:
-            required: true
-            content:
-              application/json:
-                  schema:
-                    allOf:
-                      - $ref: '#/components/schemas/NewInput'
-        responses:
-            '200':
-              description: An input
-              content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/ReturnedInput'
-            '401':
-              description: ExpiredToken
-              content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/ExpiredTokenResponse'
+      summary: Create a model input
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewInput'
+      responses:
+        '200':
+          description: An input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedInput'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input/:uuid:
     patch:
       summary: Edit an input
       security:
-          - bearerAuth: [ ]
+        - bearerAuth: [ ]
       requestBody:
-          required: true
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: '#/components/schemas/EditInput'
+      responses:
+        '200':
+          description: An input
           content:
             application/json:
-                schema:
-                  required:
-                    - uuid
-                  allOf:
-                    - $ref: '#/components/schemas/EditInput'
-      responses:
-          '200':
-            description: An input
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ReturnedInput'
-          '401':
-            description: ExpiredToken
-            content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/ExpiredTokenResponse'
+              schema:
+                $ref: '#/components/schemas/ReturnedInput'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
       summary: Delete a model input
       security:
@@ -550,24 +551,34 @@ components:
       description: The org UUID
       required: false
       schema:
-          type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     scope:
       name: scope
       in: query
       description: The scope UUID
       required: false
       schema:
-          type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     taxonomy:
       name: taxonomy
       in: query
       description: The taxonomy UUID
       required: false
       schema:
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
+    list:
+      name: list
+      in: query
+      description: List of Scope, Org, or Taxonomies used in the result set
+      required: false
+      schema:
+        type: array
+        items:
           type: string
-          example: aa17223a-471c-4eb7-9ff5-7800fd023960
+          example: scopes,orgs,taxonomies
     limit:
       name: limit
       in: query
@@ -611,9 +622,9 @@ components:
     SuccessResponse:
       type: object
       properties:
-          message:
-            type: string
-            example: 'Success'
+        message:
+          type: string
+          example: 'Success'
     ListResponse:
       type: object
       properties:
@@ -660,6 +671,21 @@ components:
           type: string
           description: The unit of CO2e. For example "kg"
           example: kg
+        scopes:
+          description: A list of GHG Scopes used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        orgs:
+          description: A list of Orgs used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Org'
+        taxonomies:
+          description: A list of Taxonomies used in the result set
+          type: array
+          items:
+            $ref: '#/components/schemas/Taxonomy'
     UUID:
       type: string
       format: UUID
@@ -674,14 +700,14 @@ components:
     CreatedUpdated:
       type: object
       properties:
-          created:
-            type: string
-            description: ISO 8601 date
-            example: 2021-01-01T00:00:00Z
-          updated:
-            type: string
-            description: ISO 8601 date
-            example: 2021-01-31T23:59:59Z
+        created:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-01T00:00:00Z
+        updated:
+          type: string
+          description: ISO 8601 date
+          example: 2021-01-31T23:59:59Z
     BaseNode:
       allOf:
         - $ref: '#/components/schemas/IDAndName'
@@ -773,43 +799,43 @@ components:
             unit:
               type: string
               example: 'kg'
-#            CO2e:
-#              type: string
-#              example: '1234.5678'
-#            UpstreamCO2e:
-#              type: string
-#              example: '1234.5'
-#            DownstreamCO2e:
-#              type: string
-#              example: '0.0678'
+            CO2e:
+              type: string
+              example: '1234.5678'
+            UpstreamCO2e:
+              type: string
+              example: '1234.5'
+            DownstreamCO2e:
+              type: string
+              example: '0.0678'
             product:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Product Name'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Product Name'
             scope:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Scope 2: Electricity'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Scope 2: Electricity'
             taxonomy:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Material'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Material'
             org:
-                properties:
-                  uuid:
-                    $ref: '#/components/schemas/UUID'
-                  name:
-                    type: string
-                    example: 'Org Unit'
+              properties:
+                uuid:
+                  $ref: '#/components/schemas/UUID'
+                name:
+                  type: string
+                  example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
     NewProduct:
       allOf:
@@ -936,7 +962,7 @@ components:
             sources:
               type: array
               items:
-                  $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/Product'
     LifecycleStage:
       type: object
       properties:
@@ -963,7 +989,13 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Energy'
+          example: 'Electricity'
+        slug:
+          type: string
+          example: 'electricity'
+        path:
+          type: string
+          example: 'energy/electricity'
     Unit:
       type: object
       properties:
@@ -988,17 +1020,17 @@ components:
     Location:
       type: object
       properties:
-          uuid:
-            type: string
-            format: UUID
-          name:
-            type: string
-            example: 'Pittsburgh'
-          type:
-            type: string
-            example: 'office'
-          geoLocation:
-            $ref: '#/components/schemas/GeoLocation'
+        uuid:
+          type: string
+          format: UUID
+        name:
+          type: string
+          example: 'Pittsburgh Office'
+        type:
+          type: string
+          example: 'office'
+        geoLocation:
+          $ref: '#/components/schemas/GeoLocation'
     GeoLocation:
       type: object
       properties:
