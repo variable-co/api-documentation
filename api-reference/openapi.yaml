@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Variable API
   description: This is the Variable API
-  version: 1.0.0
+  version: 1.1.0
 
 servers:
   - url: https://app.variable.global/api
@@ -83,15 +83,10 @@ paths:
             application/json:
               schema:
                 allOf:
+                  - $ref: '#/components/schemas/ListResponse'
                   - $ref: '#/components/schemas/ActivityResponse'
                   - type: object
                     properties:
-                      page:
-                        type: integer
-                        example: 1
-                      pageSize:
-                        type: integer
-                        example: 100
                       data:
                         type: array
                         items:
@@ -115,9 +110,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Material'
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Material'
         '401':
           description: ExpiredToken
           content:
@@ -170,7 +170,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
-    put:
+    patch:
       summary: Edit a material
       security:
         - bearerAuth: [ ]
@@ -226,9 +226,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Product'
+
         '401':
           description: ExpiredToken
           content:
@@ -281,7 +287,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
-    put:
+    patch:
       summary: Edit a product
       security:
         - bearerAuth: [ ]
@@ -320,9 +326,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ReturnedInput'
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ReturnedInput'
         '401':
           description: ExpiredToken
           content:
@@ -354,7 +365,7 @@ paths:
                     schema:
                       $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input/:uuid:
-    put:
+    patch:
       summary: Edit an input
       security:
           - bearerAuth: [ ]
@@ -463,6 +474,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/unit:
+    get:
+      summary: Get a list of units
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of units
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unit'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
 
 components:
   securitySchemes:
@@ -483,8 +516,8 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: The company UUID. You can get this from the [company settings](https://app.variable.global/company) page in the app.
-      required: true
+      description: __Required__ if you aren't using the company subdomain. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
+      required: false
       schema:
         type: string
         example: aa17223a-471c-4eb7-9ff5-7800fd023960
@@ -592,6 +625,22 @@ components:
           message:
             type: string
             example: 'Success'
+    ListResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1500
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 100
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IDAndName'
     ActivityResponse:
       type: object
       properties:
@@ -680,6 +729,9 @@ components:
         CO2e:
           type: object
           properties:
+            productCarbonFootprint:
+              type: string
+              example: '1234.5678'
             upstream:
               type: string
               example: '123'
@@ -747,15 +799,15 @@ components:
             unit:
               type: string
               example: 'kg'
-            CO2e:
-              type: string
-              example: '1234.5678'
-            UpstreamCO2e:
-              type: string
-              example: '1234.5'
-            DownstreamCO2e:
-              type: string
-              example: '0.0678'
+#            CO2e:
+#              type: string
+#              example: '1234.5678'
+#            UpstreamCO2e:
+#              type: string
+#              example: '1234.5'
+#            DownstreamCO2e:
+#              type: string
+#              example: '0.0678'
             product:
                 properties:
                   uuid:
@@ -851,6 +903,16 @@ components:
             name:
               type: string
               example: 'Material Name'
+            supplier:
+              $ref: '#/components/schemas/Company'
+    Company:
+      type: object
+      properties:
+        uuid:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          example: 'Company Name'
     NewInput:
       properties:
         quantity:
@@ -869,6 +931,13 @@ components:
             name:
               type: string
               example: 'Material name'
+        block:
+          properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
+            name:
+              type: string
+              example: 'Block name'
         lifecycleStage:
           $ref: '#/components/schemas/LifecycleStage'
     EditInput:
@@ -927,6 +996,18 @@ components:
         path:
           type: string
           example: 'energy/electricity'
+    Unit:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "kg"
+        name:
+          type: string
+          example: 'Kilogram'
+        type:
+          type: string
+          example: 'weight'
     Org:
       type: object
       properties:
