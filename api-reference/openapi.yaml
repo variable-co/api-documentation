@@ -880,69 +880,78 @@ components:
               $ref: '#/components/schemas/Date'
             endDate:
               $ref: '#/components/schemas/Date'
+    FootprintCO2e:
+      type: object
+      properties:
+        A1:
+          type: string
+          example: '1200'
+        A2:
+          type: string
+          example: '30'
+        A3:
+          type: string
+          example: '4'
+        A4:
+          type: string
+          example: '0.5'
+        B1:
+          type: string
+          example: '0.06'
+        B2:
+          type: string
+          example: '0.007'
+        B3:
+          type: string
+          example: '0.0008'
+        B4:
+          type: string
+          example: ''
+        B5:
+          type: string
+          example: ''
+        C1:
+          type: string
+          example: ''
+        C2:
+          type: string
+          example: ''
+        C3:
+          type: string
+          example: ''
+        C4:
+          type: string
+          example: ''
+        D:
+          type: string
+          example: ''
+    FootprintCO2eComputed:
+      properties:
+        upstream:
+          type: string
+          example: '1234.5'
+        direct:
+          type: string
+          example: '4.5'
+        downstream:
+          type: string
+          example: '0.0678'
+        A1-A3:
+          type: string
+          example: '1234'
+    EditFootprint:
+      type: object
+      description: 'Using `type: documented` allows setting certain `footprint.CO2e` values. The values are computed for `type: live`.'
+      properties:
+        CO2e:
+          $ref: '#/components/schemas/FootprintCO2e'
     Footprint:
       type: object
       properties:
-        CO2e:
-          type: object
-          properties:
-            productCarbonFootprint:
-              type: string
-              example: '1234.5678'
-            upstream:
-              type: string
-              example: '123'
-            direct:
-              type: string
-              example: '4.5'
-            downstream:
-              type: string
-              example: '0.0678'
-            A1-A3:
-              type: string
-              example: '1234'
-            A1:
-              type: string
-              example: '1200'
-            A2:
-              type: string
-              example: '30'
-            A3:
-              type: string
-              example: '4'
-            A4:
-              type: string
-              example: '0.5'
-            B1:
-              type: string
-              example: '0.06'
-            B2:
-              type: string
-              example: '0.007'
-            B3:
-              type: string
-              example: '0.0008'
-            B4:
-              type: string
-              example: ''
-            B5:
-              type: string
-              example: ''
-            C1:
-              type: string
-              example: ''
-            C2:
-              type: string
-              example: ''
-            C3:
-              type: string
-              example: ''
-            C4:
-              type: string
-              example: ''
-            D:
-              type: string
-              example: ''
+          CO2e:
+            allOf:
+              - $ref: '#/components/schemas/FootprintCO2eComputed'
+              - $ref: '#/components/schemas/FootprintCO2e'
     Activity:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
@@ -994,10 +1003,17 @@ components:
                   type: string
                   example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
+    ProductType:
+      type: string
+      enum:
+        - live
+        - documented
     NewProduct:
       allOf:
         - type: object
           properties:
+            type:
+              $ref: '#/components/schemas/ProductType'
             name:
               type: string
               example: 'Product Name'
@@ -1037,6 +1053,8 @@ components:
         - properties:
             uuid:
               $ref: '#/components/schemas/UUID'
+            footprint:
+              $ref: '#/components/schemas/EditFootprint'
         - $ref: '#/components/schemas/NewProduct'
     Product:
       allOf:
