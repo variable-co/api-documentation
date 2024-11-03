@@ -880,7 +880,7 @@ components:
               $ref: '#/components/schemas/Date'
             endDate:
               $ref: '#/components/schemas/Date'
-    Footprints:
+    Footprint:
       type: object
       properties:
         CO2e:
@@ -1046,8 +1046,8 @@ components:
             productImage:
               type: string
               example: 'https://app.variable.global/uploads/image.jpg'
-            footprints:
-              $ref: '#/components/schemas/Footprints'
+            footprint:
+              $ref: '#/components/schemas/Footprint'
             dataQualityRating:
               $ref: '#/components/schemas/DataQualityRating'
             dataQualityIndicators:
