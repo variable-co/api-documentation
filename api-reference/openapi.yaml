@@ -929,13 +929,13 @@ components:
       properties:
         upstream:
           type: string
-          example: '1234.5'
+          example: '1234'
         direct:
           type: string
-          example: '4.5'
+          example: '4'
         downstream:
           type: string
-          example: '0.0678'
+          example: '0.5678'
         A1-A3:
           type: string
           example: '1234'
@@ -970,10 +970,10 @@ components:
               example: '1234.5678'
             UpstreamCO2e:
               type: string
-              example: '1234.5'
+              example: '1234'
             DownstreamCO2e:
               type: string
-              example: '0.0678'
+              example: '0.5678'
             product:
               properties:
                 uuid:
