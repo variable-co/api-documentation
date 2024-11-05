@@ -128,6 +128,8 @@ paths:
       summary: Create a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -174,6 +176,8 @@ paths:
       summary: Edit a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -200,6 +204,130 @@ paths:
       summary: Delete a material
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/supplier:
+    get:
+      summary: Get a list of suppliers
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A list of suppliers
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+      summary: Create a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              allOf:
+                - $ref: '#/components/schemas/NewSupplier'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/supplier/:uuid:
+    get:
+      summary: Get a supplier by UUID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    patch:
+      summary: Edit a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: '#/components/schemas/NewSupplier'
+      responses:
+        '200':
+          description: A supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a supplier
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -245,6 +373,8 @@ paths:
       summary: Create a product
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -291,6 +421,8 @@ paths:
       summary: Edit a product
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -307,6 +439,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a Product
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
         '401':
           description: ExpiredToken
           content:
@@ -344,6 +495,8 @@ paths:
       summary: Create a model input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -369,6 +522,8 @@ paths:
       summary: Edit an input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -395,6 +550,8 @@ paths:
       summary: Delete a model input
       security:
         - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -516,7 +673,7 @@ components:
     variable-company:
       name: Variable-Company
       in: header
-      description: __Required__ if you aren't using the company subdomain. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
+      description: __Required__ if you aren't using the company api url. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
       required: false
       schema:
         type: string
@@ -723,69 +880,78 @@ components:
               $ref: '#/components/schemas/Date'
             endDate:
               $ref: '#/components/schemas/Date'
-    Footprints:
+    FootprintCO2e:
       type: object
       properties:
+        A1:
+          type: string
+          example: '1200'
+        A2:
+          type: string
+          example: '30'
+        A3:
+          type: string
+          example: '4'
+        A4:
+          type: string
+          example: '0.5'
+        B1:
+          type: string
+          example: '0.06'
+        B2:
+          type: string
+          example: '0.007'
+        B3:
+          type: string
+          example: '0.0008'
+        B4:
+          type: string
+          example: ''
+        B5:
+          type: string
+          example: ''
+        C1:
+          type: string
+          example: ''
+        C2:
+          type: string
+          example: ''
+        C3:
+          type: string
+          example: ''
+        C4:
+          type: string
+          example: ''
+        D:
+          type: string
+          example: ''
+    FootprintCO2eComputed:
+      properties:
+        upstream:
+          type: string
+          example: '1234'
+        direct:
+          type: string
+          example: '4'
+        downstream:
+          type: string
+          example: '0.5678'
+        A1-A3:
+          type: string
+          example: '1234'
+    EditFootprint:
+      type: object
+      description: 'Using `type: documented` allows setting certain `footprint.CO2e` values. The values are computed for `type: live`.'
+      properties:
         CO2e:
-          type: object
-          properties:
-            productCarbonFootprint:
-              type: string
-              example: '1234.5678'
-            upstream:
-              type: string
-              example: '123'
-            direct:
-              type: string
-              example: '4.5'
-            downstream:
-              type: string
-              example: '0.0678'
-            A1-A3:
-              type: string
-              example: '1234'
-            A1:
-              type: string
-              example: '1200'
-            A2:
-              type: string
-              example: '30'
-            A3:
-              type: string
-              example: '4'
-            A4:
-              type: string
-              example: '0.5'
-            B1:
-              type: string
-              example: '0.06'
-            B2:
-              type: string
-              example: '0.007'
-            B3:
-              type: string
-              example: '0.0008'
-            B4:
-              type: string
-              example: ''
-            B5:
-              type: string
-              example: ''
-            C1:
-              type: string
-              example: ''
-            C2:
-              type: string
-              example: ''
-            C3:
-              type: string
-              example: ''
-            C4:
-              type: string
-              example: ''
-            D:
-              type: string
-              example: ''
+          $ref: '#/components/schemas/FootprintCO2e'
+    Footprint:
+      type: object
+      properties:
+          CO2e:
+            allOf:
+              - $ref: '#/components/schemas/FootprintCO2eComputed'
+              - $ref: '#/components/schemas/FootprintCO2e'
     Activity:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
@@ -804,10 +970,10 @@ components:
               example: '1234.5678'
             UpstreamCO2e:
               type: string
-              example: '1234.5'
+              example: '1234'
             DownstreamCO2e:
               type: string
-              example: '0.0678'
+              example: '0.5678'
             product:
               properties:
                 uuid:
@@ -837,10 +1003,17 @@ components:
                   type: string
                   example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
+    ProductType:
+      type: string
+      enum:
+        - live
+        - documented
     NewProduct:
       allOf:
         - type: object
           properties:
+            type:
+              $ref: '#/components/schemas/ProductType'
             name:
               type: string
               example: 'Product Name'
@@ -854,32 +1027,34 @@ components:
               type: string
               example: 'CPC123'
             taxonomy:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Material'
+              allOf:
+                - $ref: '#/components/schemas/Taxonomy'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Material'
             geoLocation:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Pittsburgh, PA'
+              allOf:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
+                      type: string
+                      example: 'Pittsburgh, PA'
             location:
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Pittsburgh Office'
+              allOf:
+              - $ref: '#/components/schemas/IDAndName'
+              - properties:
+                  name:
+                      type: string
+                      example: 'Pittsburgh Office'
         - $ref: '#/components/schemas/StartEndDate'
     EditProduct:
       allOf:
         - properties:
             uuid:
               $ref: '#/components/schemas/UUID'
+            footprint:
+              $ref: '#/components/schemas/EditFootprint'
         - $ref: '#/components/schemas/NewProduct'
     Product:
       allOf:
@@ -889,12 +1064,12 @@ components:
             productImage:
               type: string
               example: 'https://app.variable.global/uploads/image.jpg'
-            footprints:
-              $ref: '#/components/schemas/Footprints'
-            qualitySummary:
-              $ref: '#/components/schemas/QualitySummary'
-            qualityRating:
-              $ref: '#/components/schemas/QualityRating'
+            footprint:
+              $ref: '#/components/schemas/Footprint'
+            dataQualityRating:
+              $ref: '#/components/schemas/DataQualityRating'
+            dataQualityIndicators:
+              $ref: '#/components/schemas/DataQualityIndicators'
         - $ref: '#/components/schemas/CreatedUpdated'
     Material:
       allOf:
@@ -913,6 +1088,20 @@ components:
         name:
           type: string
           example: 'Company Name'
+    NewSupplier:
+      allOf:
+        - $ref: '#/components/schemas/Company'
+        - properties:
+            name:
+              type: string
+              example: 'Supplier Name'
+    Supplier:
+      allOf:
+        - $ref: '#/components/schemas/NewSupplier'
+        - properties:
+            connected:
+              type: boolean
+              example: true
     NewInput:
       properties:
         quantity:
@@ -1074,35 +1263,38 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    QualitySummary:
+    DataQualityIndicators:
       type: object
       properties:
         documentationYear:
           type: string
           example: 2021
-        temporalRepresentativeness:
+        coveragePercent:
           type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
-        dataCompleteness:
-          type: number
-          example: 1
-        dataReliability:
-          type: number
-          example: 1
-        geographicalRepresentativeness:
-          type: number
-          example: 1
-        technologicalRepresentativeness:
-          type: number
-          example: 1
+          example: 80
         specificPercent:
           type: number
           example: 40
         averagePercent:
           type: number
           example: 60
-    QualityRating:
+        technologicalDQR:
+          type: number
+          example: 1
+        temporalDQR:
+          type: number
+          example: 1
+          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
+        geographicalDQR:
+          type: number
+          example: 1
+        completenessDQR:
+          type: number
+          example: 1
+        reliabilityDQR:
+          type: number
+          example: 1
+    DataQualityRating:
       type: number
       example: 2.2
 
