@@ -1003,17 +1003,19 @@ components:
                   type: string
                   example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
-    ProductType:
+    ProductDataSource:
       type: string
+      example: 'model'
       enum:
-        - live
-        - documented
+        - model
+        - external
+        - database
     NewProduct:
       allOf:
         - type: object
           properties:
-            type:
-              $ref: '#/components/schemas/ProductType'
+            dataSource:
+              $ref: '#/components/schemas/ProductDataSource'
             name:
               type: string
               example: 'Product Name'
@@ -1270,7 +1272,7 @@ components:
       properties:
         documentationYear:
           type: number
-          example: 2021
+          example: 2019
         coveragePercent:
           type: number
           example: 80
@@ -1299,7 +1301,7 @@ components:
               example: 60
             temporalDQR:
               type: number
-              example: 1
+              example: 3
               description: |
                 This is calculated based on the `documentationYear` \
                 1 = this year (2024) \
@@ -1307,7 +1309,7 @@ components:
                 3 = 5+ years old (2019 and older)
     DataQualityRating:
       type: number
-      example: 2.2
+      example: 1.4
 
 security:
   - basicAuth: [ ]
