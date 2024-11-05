@@ -941,7 +941,7 @@ components:
           example: '1234'
     EditFootprint:
       type: object
-      description: 'Using `type: documented` allows setting certain `footprint.CO2e` values. The values are computed for `type: live`.'
+      description: 'Using `dataSource: external` allows setting certain `footprint.CO2e` values. The values are computed all other `dataSource`s.'
       properties:
         CO2e:
           $ref: '#/components/schemas/FootprintCO2e'
@@ -1028,6 +1028,8 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
+            footprint:
+              $ref: '#/components/schemas/EditFootprint'
             dataQualityIndicators:
               $ref: '#/components/schemas/DataQualityIndicatorsEdit'
             taxonomy:
@@ -1057,8 +1059,6 @@ components:
         - properties:
             uuid:
               $ref: '#/components/schemas/UUID'
-            footprint:
-              $ref: '#/components/schemas/EditFootprint'
         - $ref: '#/components/schemas/NewProduct'
     Product:
       allOf:
