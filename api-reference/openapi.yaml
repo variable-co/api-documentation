@@ -1026,6 +1026,8 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
+            dataQualityIndicators:
+              $ref: '#/components/schemas/DataQualityIndicatorsEdit'
             taxonomy:
               allOf:
                 - $ref: '#/components/schemas/Taxonomy'
@@ -1263,11 +1265,11 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    DataQualityIndicators:
+    DataQualityIndicatorsEdit:
       type: object
       properties:
         documentationYear:
-          type: string
+          type: number
           example: 2021
         coveragePercent:
           type: number
@@ -1275,16 +1277,9 @@ components:
         specificPercent:
           type: number
           example: 40
-        averagePercent:
-          type: number
-          example: 60
         technologicalDQR:
           type: number
           example: 1
-        temporalDQR:
-          type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
         geographicalDQR:
           type: number
           example: 1
@@ -1294,6 +1289,22 @@ components:
         reliabilityDQR:
           type: number
           example: 1
+    DataQualityIndicators:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataQualityIndicatorsEdit'
+        - properties:
+            averagePercent:
+              type: number
+              example: 60
+            temporalDQR:
+              type: number
+              example: 1
+              description: |
+                This is calculated based on the `documentationYear` \
+                1 = this year (2024) \
+                2 = previous 4 years (2020 - 2023) \
+                3 = 5+ years old (2019 and older)
     DataQualityRating:
       type: number
       example: 2.2
