@@ -31,9 +31,25 @@
       "mode": "simple"
     }
   },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "navigation": [
     {
-      "group": "API Reference",
+      "group": "",
+      "pages": [
+        "docs/introduction",
+        "docs/data-model",
+        "docs/material",
+        "docs/model",
+        "docs/activity"
+      ]
+    },
+    {
+      "group": "",
       "pages": [
         "api-reference/welcome"
       ]

@@ -1,0 +1,35 @@
+---
+title: 'Data Model'
+---
+
+### Products & Materials
+At a very high level, A `Product` / `Material` has a `Model` that has many `Input`s.
+
+### Models & Input
+An `Input` is an amount of `Material`, `Processing` activity, `Transportation`, or `Use Stage` calculation with a resulting CO<sub>2</sub>e value.
+
+### Activity
+An `Activity` represents the actual flow of materials through the system. Activities are a quantity of `Product`, `Material`, or `Transportation` with a resulting CO<sub>2</sub>e value.
+
+### Diagram
+```mermaid
+erDiagram
+    Product ||--o{ Model : "has"
+    Model ||--o{ Input : "has"
+    Input ||--o{ Processing : "processed by"
+    Input ||--o{ Transportation : "distributed by"
+    Input ||--o{ "Use Stage" : "has"
+    Input ||--o{ Material : "using source"
+    Material ||--o{ Transportation : "transported via"
+    Material ||--o| Supplier : "product of"
+    Product ||--|| Taxonomy : "categorized in"
+    Material ||--|| Taxonomy : "categorized in"
+    Transportation ||--o| Supplier : "product of"
+
+    Product ||--o{ Activity : "distribution"
+    Activity }o--o{ Material : "part of"
+    Activity }o--o{ Transportation : "part of"
+    Activity ||--o{ Taxonomy : "categorized in"
+    Activity ||--|| Org : "in"
+    Activity ||--|| Scope : "in"
+```

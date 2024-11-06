@@ -47,7 +47,7 @@ paths:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/scope'
         - $ref: '#/components/parameters/taxonomy'
-#        - $ref: '#/components/parameters/list'
+        - $ref: '#/components/parameters/list'
       responses:
         '200':
           description: A list of activities
@@ -936,7 +936,7 @@ components:
         downstream:
           type: string
           example: '0.5678'
-        A1-A3:
+        A1_A3:
           type: string
           example: '1234'
     EditFootprint:
