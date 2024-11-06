@@ -941,7 +941,7 @@ components:
           example: '1234'
     EditFootprint:
       type: object
-      description: 'Using `type: documented` allows setting certain `footprint.CO2e` values. The values are computed for `type: live`.'
+      description: 'Using `dataSource: external` allows setting certain `footprint.CO2e` values. The values are computed all other `dataSource`s.'
       properties:
         CO2e:
           $ref: '#/components/schemas/FootprintCO2e'
@@ -1003,17 +1003,19 @@ components:
                   type: string
                   example: 'Org Unit'
         - $ref: '#/components/schemas/StartEndDate'
-    ProductType:
+    ProductDataSource:
       type: string
+      example: 'model'
       enum:
-        - live
-        - documented
+        - model
+        - external
+        - database
     NewProduct:
       allOf:
         - type: object
           properties:
-            type:
-              $ref: '#/components/schemas/ProductType'
+            dataSource:
+              $ref: '#/components/schemas/ProductDataSource'
             name:
               type: string
               example: 'Product Name'
@@ -1026,6 +1028,10 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
+            footprint:
+              $ref: '#/components/schemas/EditFootprint'
+            dataQualityIndicators:
+              $ref: '#/components/schemas/DataQualityIndicatorsEdit'
             taxonomy:
               allOf:
                 - $ref: '#/components/schemas/Taxonomy'
@@ -1053,8 +1059,6 @@ components:
         - properties:
             uuid:
               $ref: '#/components/schemas/UUID'
-            footprint:
-              $ref: '#/components/schemas/EditFootprint'
         - $ref: '#/components/schemas/NewProduct'
     Product:
       allOf:
@@ -1263,28 +1267,21 @@ components:
         longitude:
           type: number
           example: -79.9958864
-    DataQualityIndicators:
+    DataQualityIndicatorsEdit:
       type: object
       properties:
         documentationYear:
-          type: string
-          example: 2021
+          type: number
+          example: 2019
         coveragePercent:
           type: number
           example: 80
         specificPercent:
           type: number
           example: 40
-        averagePercent:
-          type: number
-          example: 60
         technologicalDQR:
           type: number
           example: 1
-        temporalDQR:
-          type: number
-          example: 1
-          description: This is calculated based on the documentationYear (1 = this year, 2 = last 4 years, 3 = 5+ years)
         geographicalDQR:
           type: number
           example: 1
@@ -1294,9 +1291,25 @@ components:
         reliabilityDQR:
           type: number
           example: 1
+    DataQualityIndicators:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataQualityIndicatorsEdit'
+        - properties:
+            averagePercent:
+              type: number
+              example: 60
+            temporalDQR:
+              type: number
+              example: 3
+              description: |
+                This is calculated based on the `documentationYear` \
+                1 = this year (2024) \
+                2 = previous 4 years (2020 - 2023) \
+                3 = 5+ years old (2019 and older)
     DataQualityRating:
       type: number
-      example: 2.2
+      example: 1.4
 
 security:
   - basicAuth: [ ]
