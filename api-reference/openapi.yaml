@@ -935,7 +935,7 @@ components:
           example: '1234.0'
         upstream:
           type: string
-          example: '123.0'
+          example: '1230.0'
         direct:
           type: string
           example: '4.0'
