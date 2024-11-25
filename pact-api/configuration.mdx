@@ -1,0 +1,54 @@
+---
+title: 'Configuration'
+---
+
+Enable your PACT API in Variable in the "Variable Subdomain" section in [company settings](https://app.variable.global/company).
+
+<Note>
+  If you don't see the Variable Subdomain section, [email us](email:hello@variable.co), and we'll enable it for your account.
+</Note>
+
+### Requirements
+
+There are two parts to setting up your PACT API:
+1. Getting your PACT API URL
+2. Sharing your Product Carbon Footprints (PCFs) with the API
+
+### Your PACT API URL
+
+Your PACT API URL is based on your Variable subdomain. For example, if your subdomain is `furniture-co`,
+your PACT API URL is:
+
+https://furniture-co.variable.global/api/pact/2/footprints
+
+<img src="/images/variable-subdomain-settings.png" alt="Variable subdomain settings"
+     style={{width: '600px', maxWidth: '100%', height: 'auto'}} className='shadow-lg'/>
+
+### API Users
+
+By default, users must authenticate to access your PACT API. You can add API users in the same section in
+your [company settings](https://app.variable.global/company). Be sure to give them the `pact:read` permission.
+
+<img src="/images/pact-read.png" alt="Permission: pact:read"
+     style={{width: '200px', maxWidth: '100%', height: 'auto'}} className='shadow-lg'/>
+
+### Visibility
+
+You can also make your PACT API public to the internet by setting "Visibility" to "Public".
+<img src="/images/visibility-public.png" alt="Variable subdomain settings: visibility"
+     style={{width: '200px', maxWidth: '100%', height: 'auto'}} className='shadow-lg'/>
+
+### Sharing Footprints
+
+Products that have a sharing setting of "API", and are conformant with
+the [PACT standard](https://wbcsd.github.io/tr/2024/data-exchange-protocol-20241024/) are shown in the PACT API.
+
+To change the sharing setting for a Product, go to the Product's Passport tab, click on the "Share" button, and select "API".
+
+<img src="/images/passport-sharing.png" alt="Footprint share API"
+     style={{width: '300px', maxWidth: '100%', height: 'auto'}} className='shadow-lg'/>
+
+#### PACT requirements
+Details on the PACT standard and required fields can
+be found [in the PACT documentation](https://wbcsd.github.io/tr/2024/data-exchange-protocol-20241024/).
+

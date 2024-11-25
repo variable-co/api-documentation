@@ -1,0 +1,33 @@
+---
+title: 'PACT Footprints'
+---
+
+<Info>
+**GET** https://**your_subdomain**.variable.global/api/pact/2/footprints
+</Info>
+
+<Note>
+    **Only footprints that are valid according to the PACT standard will show in the API, regardless of the sharing
+    setting.**
+
+    This generally means footprints that have all of the required fields filled out.
+    Details on the PACT standard and required fields can be found [in the PACT
+    documentation](https://wbcsd.github.io/tr/2024/data-exchange-protocol-20241024/).
+</Note>
+
+<RequestExample>
+```shell
+curl --request GET \
+  --url "https://your_subdomain.variable.global/api/pact/2/footprints" \
+  --header "Authorization: Bearer <access_token>"
+  --header "Content-Type: application/json"
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "data": [ <PactFootprint> ]
+}
+```
+</ResponseExample>

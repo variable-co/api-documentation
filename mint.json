@@ -35,6 +35,10 @@
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "PACT API",
+      "url": "pact-api"
     }
   ],
   "navigation": [
@@ -128,6 +132,21 @@
       "group": "Unit",
       "pages": [
         "api-reference/v1/unit/get"
+      ]
+    },
+    {
+      "group": "",
+      "pages": [
+        "pact-api/welcome",
+        "pact-api/configuration"
+      ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        "pact-api/authentication",
+        "pact-api/footprints",
+        "pact-api/footprint"
       ]
     }
   ],
