@@ -1356,21 +1356,36 @@ components:
       example: 1.4
     KgCO2e:
       type: string
-      example: "1234.5678"
+#      required: true
+      example: 1234.5678
     UTC_ISO_8601:
       type: string
+#      required: true
       format: date-time
-#      example: '2018-05-17T17:37:00Z'
     ISO_3166_CC:
       type: string
-      example: 'NO'
+      example: NO
     ISO_3166_2_Subdivision_Code:
       type: string
-      example: "US-PA"
+      example: US-PA
     DataQualityRatingValue:
       type: number
       example: 2
       description: number from 1 - 3
+    ProductOrSectorSpecificRule:
+      type: array
+      properties:
+        operator:
+          type: string
+        ruleNames:
+          type: array
+    SecondaryEmissionFactorSources:
+      type: array
+      properties:
+        name:
+          type: string
+        version:
+          type: string
     PactDataQualityIndicators:
       properties:
         coveragePercent:
@@ -1391,41 +1406,52 @@ components:
       properties:
         id:
           type: string
-          example: '123'
+#          required: true
+          example: 123
         specVersion:
           type: string
-          example: '2.1.0'
-        precedingPfIds?:
+#          required: true
+          example: 2.1.0
+        precedingPfIds:
           type: array
+#          required: true
         version:
           type: string
+#          required: true
           example: 1
-        status?:
+        status:
           type: string
-          example: 'Active'
-        statusComment?:
+          example: Active
+        statusComment:
           type: string
-        validityPeriodStart?:
+        validityPeriodStart:
           $ref: '#/components/schemas/UTC_ISO_8601'
-        validityPeriodEnd?:
+        validityPeriodEnd:
           $ref: '#/components/schemas/UTC_ISO_8601'
         companyName:
           type: string
+#          required: true
         companyIds:
           type: array
+#          required: true
         productIds:
           type: array
+#          required: true
         productCategoryCpc:
           type: string
+#          required: true
         productNameCompany:
           type: string
+#          required: true
         productDescription:
           type: string
+#          required: true
         comment:
           type: string
+#          required: true
         pcf:
           $ref: '#/components/schemas/PactProductCarbonFootprint'
-        extensions?:
+        extensions:
           type: array
         created:
           $ref: '#/components/schemas/UTC_ISO_8601'
@@ -1433,70 +1459,101 @@ components:
           $ref: '#/components/schemas/UTC_ISO_8601'
     PactProductCarbonFootprint:
       type: object
+#      required: true
       properties:
         declaredUnit:
           type: string
+#          required: true
           example: 'kilogram'
         unitaryProductAmount:
-          $ref: '#/components/schemas/KgCO2e'
+          allOf:
+            - $ref: '#/components/schemas/KgCO2e'
+#            - required: true
         pCfExcludingBiogenic:
-          $ref: '#/components/schemas/KgCO2e'
-        pCfIncludingBiogenic?:
+          allOf:
+            - $ref: '#/components/schemas/KgCO2e'
+#            - required: true
+        pCfIncludingBiogenic:
           $ref: '#/components/schemas/KgCO2e'
         fossilGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          allOf:
+            - $ref: '#/components/schemas/KgCO2e'
+#            - required: true
         fossilCarbonContent:
-          $ref: '#/components/schemas/KgCO2e'
+          allOf:
+            - $ref: '#/components/schemas/KgCO2e'
+#            - required: true
         biogenicCarbonContent:
+          allOf:
+            - $ref: '#/components/schemas/KgCO2e'
+#            - required: true
+        dLucGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        dLucGhgEmissions?:
+        landManagementGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        landManagementGhgEmissions?:
+        otherBiogenicGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        otherBiogenicGhgEmissions?:
+        iLucGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        iLucGhgEmissions?:
+        biogenicCarbonWithdrawal:
           $ref: '#/components/schemas/KgCO2e'
-        biogenicCarbonWithdrawal?:
+        aircraftGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        aircraftGhgEmissions?:
-          $ref: '#/components/schemas/KgCO2e'
-#        characterizationFactors: PactCharacterizationFactor
-#        ipccCharacterizationFactorsSources: PactCharacterizationFactor[]
-#        crossSectoralStandardsUsed: PactCrossSectoralStandard[]
-#        productOrSectorSpecificRules?: ProductOrSectorSpecificRule[]
-#        biogenicAccountingMethodology?: PactBiogenicAccountingMethodology
-        boundaryProcessesDescription?:
+        characterizationFactors:
+          type: string
+#          required: true
+          example: AR6
+        ipccCharacterizationFactorsSources:
+          type: array
+#          required: true
+          example: [ 'AR6' ]
+        crossSectoralStandardsUsed:
+          type: array
+#          required: true
+          example: [ 'GHG Protocol Product standard' ]
+        productOrSectorSpecificRules:
+          $ref: '#/components/schemas/ProductOrSectorSpecificRule'
+        biogenicAccountingMethodology:
+          type: string
+          example: 'GHGP'
+        boundaryProcessesDescription:
           type: string
         referencePeriodStart:
           $ref: '#/components/schemas/UTC_ISO_8601'
         referencePeriodEnd:
           $ref: '#/components/schemas/UTC_ISO_8601'
-        geographyCountrySubdivision?:
+        geographyCountrySubdivision:
           $ref: '#/components/schemas/ISO_3166_2_Subdivision_Code'
-        geographyCountry?:
+        geographyCountry:
           $ref: '#/components/schemas/ISO_3166_CC'
-#        geographyRegionOrSubregion?: GeographyRegionOrSubregion
-#        secondaryEmissionFactorSources?: EmissionFactorDataSource[]
+        geographyRegionOrSubregion:
+          type: string
+          example: "Europe"
+        secondaryEmissionFactorSources:
+          $ref: '#/components/schemas/SecondaryEmissionFactorSources'
         exemptedEmissionsPercent:
           type: number
+#          required: true
           example: 2
         exemptedEmissionsDescription:
           type: string
+#          required: true
         packagingEmissionsIncluded:
           type: boolean
-        packagingGhgEmissions?:
+#          required: true
+        packagingGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
-        allocationRulesDescription?:
+        allocationRulesDescription:
           type: string
-        uncertaintyAssessmentDescription?:
+        uncertaintyAssessmentDescription:
           type: string
-        primaryDataShare?:
+        primaryDataShare:
           type: number
           example: 82
-        dqi?:
+        dqi:
           $ref: '#/components/schemas/PactDataQualityIndicators'
-#        assurance?: string
+        # assurance:
+        #   type: array
     PactListResponse:
       type: object
       properties:
