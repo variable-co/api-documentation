@@ -1,36 +1,16 @@
 ---
 title: 'PACT Authentication'
+openapi: 'POST /auth/token'
+description: 'Get an access token to authenticate your requests.'
 ---
 
-<Info>
-**POST** https://**your_subdomain**.variable.global/api/pact/2/auth/token
-</Info>
+<Note>
+  The path is relative to your company specific url:
 
-Unless you have a public API, you will need to authenticate your requests to the PACT API.
-This is done using the OAuth 2.0 protocol.
+  https://**your_subdomain**.variable.global/api
+</Note>
 
-### Get a token
-```shell
-curl --request POST \
-  --url https://your_subdomain.variable.global/api/pact/2/auth/token \
-  --header 'Authorization: Basic <base64_encoded_credentials>' \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data grant_type=client_credentials
-```
-
-The response will look like this:
-```json
-{
-  "access_token": "<access_token>",
-  "token_type": "bearer",
-  "scope": "pact:read"
-}
-```
-
-### Call PACT API endpoints with the token
-```shell
-curl --request GET \
-  --url "https://your_subdomain.variable.global/api/pact/2/footprints" \
-  --header 'Authorization: Bearer <access_token>'
-  --header "Content-Type: application/json"
-```
+<Tip>
+  Unless you have a public API, you will need to authenticate your requests to the PACT API.
+  This is done using the OAuth 2.0 protocol.
+</Tip>

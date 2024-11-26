@@ -635,6 +635,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+  /pact/2/footprint/:id:
+    get:
+
+      summary: Get a Product Carbon Footprint
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A Product Carbon Footprint
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PactProductCarbonFootprint'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /pact/2/footprints:
+    get:
+      summary: Get a list of database footprints
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A list of Product Carbon Footprints
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PactListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PactProductCarbonFootprint'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
 
 components:
   securitySchemes:
@@ -1314,6 +1361,156 @@ components:
     DataQualityRating:
       type: number
       example: 1.4
+    KgCO2e:
+      type: string
+      example: "1234.5678"
+    UTC_ISO_8601:
+      type: string
+      format: date-time
+#      example: '2018-05-17T17:37:00Z'
+    ISO_3166_CC:
+      type: string
+      example: 'NO'
+    ISO_3166_2_Subdivision_Code:
+      type: string
+      example: "US-PA"
+    DataQualityRatingValue:
+      type: number
+      example: 2
+      description: number from 1 - 3
+    PactDataQualityIndicators:
+      properties:
+        coveragePercent:
+          type: number
+          example: 80
+        technologicalDQR:
+          $ref: '#/components/schemas/DataQualityRatingValue'
+        temporalDQR:
+          $ref: '#/components/schemas/DataQualityRatingValue'
+        geographicalDQR:
+          $ref: '#/components/schemas/DataQualityRatingValue'
+        completenessDQR:
+          $ref: '#/components/schemas/DataQualityRatingValue'
+        reliabilityDQR:
+          $ref: '#/components/schemas/DataQualityRatingValue'
+    PactProductFootprint:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '123'
+        specVersion:
+          type: string
+          example: '2.1.0'
+        precedingPfIds?:
+          type: array
+        version:
+          type: string
+          example: 1
+        status?:
+          type: string
+          example: 'Active'
+        statusComment?:
+          type: string
+        validityPeriodStart?:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+        validityPeriodEnd?:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+        companyName:
+          type: string
+        companyIds:
+          type: array
+        productIds:
+          type: array
+        productCategoryCpc:
+          type: string
+        productNameCompany:
+          type: string
+        productDescription:
+          type: string
+        comment:
+          type: string
+        pcf:
+          $ref: '#/components/schemas/PactProductCarbonFootprint'
+        extensions?:
+          type: array
+        created:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+        updated:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+    PactProductCarbonFootprint:
+      type: object
+      properties:
+        declaredUnit:
+          type: string
+          example: 'kilogram'
+        unitaryProductAmount:
+          $ref: '#/components/schemas/KgCO2e'
+        pCfExcludingBiogenic:
+          $ref: '#/components/schemas/KgCO2e'
+        pCfIncludingBiogenic?:
+          $ref: '#/components/schemas/KgCO2e'
+        fossilGhgEmissions:
+          $ref: '#/components/schemas/KgCO2e'
+        fossilCarbonContent:
+          $ref: '#/components/schemas/KgCO2e'
+        biogenicCarbonContent:
+          $ref: '#/components/schemas/KgCO2e'
+        dLucGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+        landManagementGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+        otherBiogenicGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+        iLucGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+        biogenicCarbonWithdrawal?:
+          $ref: '#/components/schemas/KgCO2e'
+        aircraftGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+#        characterizationFactors: PactCharacterizationFactor
+#        ipccCharacterizationFactorsSources: PactCharacterizationFactor[]
+#        crossSectoralStandardsUsed: PactCrossSectoralStandard[]
+#        productOrSectorSpecificRules?: ProductOrSectorSpecificRule[]
+#        biogenicAccountingMethodology?: PactBiogenicAccountingMethodology
+        boundaryProcessesDescription?:
+          type: string
+        referencePeriodStart:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+        referencePeriodEnd:
+          $ref: '#/components/schemas/UTC_ISO_8601'
+        geographyCountrySubdivision?:
+          $ref: '#/components/schemas/ISO_3166_2_Subdivision_Code'
+        geographyCountry?:
+          $ref: '#/components/schemas/ISO_3166_CC'
+#        geographyRegionOrSubregion?: GeographyRegionOrSubregion
+#        secondaryEmissionFactorSources?: EmissionFactorDataSource[]
+        exemptedEmissionsPercent:
+          type: number
+          example: 2
+        exemptedEmissionsDescription:
+          type: string
+        packagingEmissionsIncluded:
+          type: boolean
+        packagingGhgEmissions?:
+          $ref: '#/components/schemas/KgCO2e'
+        allocationRulesDescription?:
+          type: string
+        uncertaintyAssessmentDescription?:
+          type: string
+        primaryDataShare?:
+          type: number
+          example: 82
+        dqi?:
+          $ref: '#/components/schemas/PactDataQualityIndicators'
+#        assurance?: string
+    PactListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PactProductFootprint'
 
 security:
   - basicAuth: [ ]
