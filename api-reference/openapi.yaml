@@ -668,14 +668,7 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/PactListResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/PactProductCarbonFootprint'
+                $ref: '#/components/schemas/PactListResponse'
         '401':
           description: ExpiredToken
           content:
