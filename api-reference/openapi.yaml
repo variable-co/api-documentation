@@ -97,6 +97,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/search:
+    get:
+      summary: Get a list of database footprints
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: '#/components/parameters/variable-company'
+        - $ref: '#/components/parameters/searchTerm'
+        - $ref: '#/components/parameters/unitType'
+        - $ref: '#/components/parameters/taxonomy'
+        - $ref: '#/components/parameters/source'
+      responses:
+        '200':
+          description: A list of database footprints
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ListResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Material'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/material:
     get:
       summary: Get a list of materials
@@ -702,6 +733,30 @@ components:
       schema:
         type: string
         example: '2021-01-31'
+    searchTerm:
+      name: q
+      in: query
+      description: The search term
+      required: false
+      schema:
+        type: string
+        example: 'plastic'
+    unitType:
+      name: unitType
+      in: query
+      description: The unit type
+      required: false
+      schema:
+        type: string
+        example: 'volume'
+    source:
+      name: source
+      in: query
+      description: The UUID of the supplier, database, etc.
+      required: false
+      schema:
+        type: string
+        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     org:
       name: org
       in: query

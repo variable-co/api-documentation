@@ -65,6 +65,12 @@
       ]
     },
     {
+      "group": "Database",
+      "pages": [
+        "api-reference/v1/search/list"
+      ]
+    },
+    {
       "group": "Product",
       "pages": [
         "api-reference/v1/product/list/get",

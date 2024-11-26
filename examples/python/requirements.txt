@@ -1,0 +1,5 @@
+fastapi
+searoute
+uvicorn
+requests
+python-dotenv
