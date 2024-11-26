@@ -40,7 +40,6 @@ paths:
       security:
         - bearerAuth: [ ]
       parameters:
-        - $ref: '#/components/parameters/variable-company'
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
@@ -67,7 +66,6 @@ paths:
       security:
         - bearerAuth: [ ]
       parameters:
-        - $ref: '#/components/parameters/variable-company'
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
@@ -103,7 +101,6 @@ paths:
       security:
         - bearerAuth: [ ]
       parameters:
-        - $ref: '#/components/parameters/variable-company'
         - $ref: '#/components/parameters/searchTerm'
         - $ref: '#/components/parameters/unitType'
         - $ref: '#/components/parameters/taxonomy'
@@ -133,8 +130,6 @@ paths:
       summary: Get a list of materials
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of materials
@@ -159,8 +154,6 @@ paths:
       summary: Create a material
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -188,8 +181,6 @@ paths:
       summary: Get a material by UUID
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A material
@@ -207,8 +198,6 @@ paths:
       summary: Edit a material
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -235,8 +224,6 @@ paths:
       summary: Delete a material
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -255,8 +242,6 @@ paths:
       summary: Get a list of suppliers
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of suppliers
@@ -281,8 +266,6 @@ paths:
       summary: Create a supplier
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -310,8 +293,6 @@ paths:
       summary: Get a supplier by UUID
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A supplier
@@ -329,8 +310,6 @@ paths:
       summary: Edit a supplier
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -357,8 +336,6 @@ paths:
       summary: Delete a supplier
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -377,8 +354,6 @@ paths:
       summary: Get a list of products
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of products
@@ -404,8 +379,6 @@ paths:
       summary: Create a product
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -433,8 +406,6 @@ paths:
       summary: Get a product by UUID
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A product
@@ -452,8 +423,6 @@ paths:
       summary: Edit a product
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -480,8 +449,6 @@ paths:
       summary: Delete a Product
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -500,8 +467,6 @@ paths:
       summary: Get model inputs
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of model inputs
@@ -526,8 +491,6 @@ paths:
       summary: Create a model input
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -553,8 +516,6 @@ paths:
       summary: Edit an input
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       requestBody:
         required: true
         content:
@@ -581,8 +542,6 @@ paths:
       summary: Delete a model input
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: Success
@@ -601,8 +560,6 @@ paths:
       summary: Get a list of scopes
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of scopes
@@ -623,8 +580,6 @@ paths:
       summary: Get a list of taxonomies
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of taxonomies
@@ -645,8 +600,6 @@ paths:
       summary: Get a list of orgs
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of orgs
@@ -667,8 +620,6 @@ paths:
       summary: Get a list of units
       security:
         - bearerAuth: [ ]
-      parameters:
-        - $ref: '#/components/parameters/variable-company'
       responses:
         '200':
           description: A list of units
@@ -701,14 +652,6 @@ components:
           tokenUrl: /auth/token
           scopes: { }
   parameters:
-    variable-company:
-      name: Variable-Company
-      in: header
-      description: __Required__ if you aren't using the company api url. You can get the UUID and company api url from the [company settings](https://app.variable.global/company) page in the app.
-      required: false
-      schema:
-        type: string
-        example: aa17223a-471c-4eb7-9ff5-7800fd023960
     date:
       name: date
       in: query
