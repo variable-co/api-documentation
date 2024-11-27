@@ -886,6 +886,7 @@ components:
       format: UUID
     SyncId:
       type: string
+      description: An identifier to use when syncing data with other systems
       example: 'sync123'
     IDAndName:
       type: object
