@@ -39,6 +39,10 @@
     {
       "name": "PACT API",
       "url": "pact-api"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "navigation": [
@@ -153,6 +157,12 @@
         "pact-api/authentication",
         "pact-api/footprints",
         "pact-api/footprint"
+      ]
+    },
+    {
+      "group": "",
+      "pages": [
+        "changelog/index"
       ]
     }
   ],

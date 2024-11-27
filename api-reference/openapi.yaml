@@ -884,6 +884,10 @@ components:
     UUID:
       type: string
       format: UUID
+    SyncId:
+      type: string
+      description: An identifier to use when syncing data with other systems
+      example: 'sync123'
     IDAndName:
       type: object
       properties:
@@ -1069,6 +1073,8 @@ components:
             sku:
               type: string
               example: 'SKU123'
+            syncId:
+              $ref: '#/components/schemas/SyncId'
             cpcCode:
               type: string
               example: 'CPC123'
@@ -1133,6 +1139,8 @@ components:
       properties:
         uuid:
           $ref: '#/components/schemas/UUID'
+        syncId:
+          $ref: '#/components/schemas/SyncId'
         name:
           type: string
           example: 'Company Name'
@@ -1143,6 +1151,8 @@ components:
             name:
               type: string
               example: 'Supplier Name'
+            syncId:
+              $ref: '#/components/schemas/SyncId'
     Supplier:
       allOf:
         - $ref: '#/components/schemas/NewSupplier'
@@ -1152,6 +1162,8 @@ components:
               example: true
     NewInput:
       properties:
+        syncId:
+          $ref: '#/components/schemas/SyncId'
         quantity:
           type: number
           example: 150
