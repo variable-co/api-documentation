@@ -59,6 +59,12 @@
     {
       "group": "",
       "pages": [
+        "docs/security"
+      ]
+    },
+    {
+      "group": "",
+      "pages": [
         "api-reference/welcome"
       ]
     },
