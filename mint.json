@@ -101,6 +101,27 @@
       ]
     },
     {
+      "group": "Model",
+      "pages": [
+        "api-reference/v1/model/inputs/get",
+        "api-reference/v1/model/inputs/post",
+        "api-reference/v1/model/inputs/patch",
+        "api-reference/v1/model/inputs/delete"
+      ]
+    },
+    {
+      "group": "Switch",
+      "pages": [
+        "api-reference/v1/switch/list",
+        "api-reference/v1/switch/get",
+        "api-reference/v1/switch/post",
+        "api-reference/v1/switch/patch",
+        "api-reference/v1/switch/delete",
+        "api-reference/v1/switch/add-source",
+        "api-reference/v1/switch/remove-source"
+      ]
+    },
+    {
       "group": "Supplier",
       "pages": [
         "api-reference/v1/supplier/list/get",
@@ -108,15 +129,6 @@
         "api-reference/v1/supplier/post",
         "api-reference/v1/supplier/patch",
         "api-reference/v1/supplier/delete"
-      ]
-    },
-    {
-      "group": "Model",
-      "pages": [
-        "api-reference/v1/model/inputs/get",
-        "api-reference/v1/model/inputs/post",
-        "api-reference/v1/model/inputs/patch",
-        "api-reference/v1/model/inputs/delete"
       ]
     },
     {
