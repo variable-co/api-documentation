@@ -662,41 +662,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
-#  /v1/switch/:uuid/source/:uuid:
-#    post:
-#      summary: Add a source to a Switch
-#      security:
-#        - bearerAuth: [ ]
-#      responses:
-#        '200':
-#          description: Success
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/SuccessResponse'
-#        '401':
-#          description: ExpiredToken
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/ExpiredTokenResponse'
-#    delete:
-#      summary: Remove a source from a Switch
-#      security:
-#        - bearerAuth: [ ]
-#      responses:
-#        '200':
-#          description: Success
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/SuccessResponse'
-#        '401':
-#          description: ExpiredToken
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/switch/:uuid/source/:uuid:
+    post:
+      summary: Add a source to a Switch
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Remove a source from a Switch
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/scope:
     get:
       summary: Get a list of scopes
@@ -1361,18 +1361,17 @@ components:
         - properties:
             sources:
               type: array
-              properties:
-                uuid:
-                  $ref: '#/components/schemas/UUID'
-                name:
-                  type: string
-                  example: 'Source Name'
+              items:
+                $ref: '#/components/schemas/IDAndName'
             footprint:
               # $ref: '#/components/schemas/Footprint'
               properties:
                 CO2e:
                   properties:
-                    totalCarbonFootprint:
+                    productCarbonFootprint:
+                      type: string
+                      example: '1234.5678'
+                    A1_A3:
                       type: string
                       example: '1234.5678'
         - $ref: '#/components/schemas/CreatedUpdated'
