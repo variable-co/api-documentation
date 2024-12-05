@@ -555,6 +555,148 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/switch:
+    get:
+      summary: Get a list of Switches
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A list of Switches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Switch'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    post:
+      summary: Create a Switch
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              allOf:
+                - $ref: '#/components/schemas/NewSwitch'
+      responses:
+        '200':
+          description: A Switch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Switch'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/switch/:uuid:
+    get:
+      summary: Get a Switch by UUID
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A Switch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Switch'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    patch:
+      summary: Edit a Switch
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: '#/components/schemas/NewSwitch'
+      responses:
+        '200':
+          description: A Switch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Switch'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Delete a Switch
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+  /v1/switch/:uuid/source/:uuid:
+    post:
+      summary: Add a source to a Switch
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
+    delete:
+      summary: Remove a source from a Switch
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/scope:
     get:
       summary: Get a list of scopes
@@ -996,10 +1138,10 @@ components:
     Footprint:
       type: object
       properties:
-          CO2e:
-            allOf:
-              - $ref: '#/components/schemas/FootprintCO2eComputed'
-              - $ref: '#/components/schemas/FootprintCO2e'
+        CO2e:
+          allOf:
+            - $ref: '#/components/schemas/FootprintCO2eComputed'
+            - $ref: '#/components/schemas/FootprintCO2e'
     Activity:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
@@ -1011,8 +1153,7 @@ components:
               type: number
               example: 150
             unit:
-              type: string
-              example: 'kg'
+              $ref: '#/components/schemas/UnitString'
             CO2e:
               type: string
               example: '1234.5678'
@@ -1098,9 +1239,9 @@ components:
                       example: 'Pittsburgh, PA'
             location:
               allOf:
-              - $ref: '#/components/schemas/IDAndName'
-              - properties:
-                  name:
+                - $ref: '#/components/schemas/IDAndName'
+                - properties:
+                    name:
                       type: string
                       example: 'Pittsburgh Office'
         - $ref: '#/components/schemas/StartEndDate'
@@ -1168,8 +1309,7 @@ components:
           type: number
           example: 150
         unit:
-          type: string
-          example: 'kg'
+          $ref: '#/components/schemas/UnitString'
         order:
           type: number
           example: 1
@@ -1203,15 +1343,38 @@ components:
             CO2e:
               type: string
               example: '1234.5678'
-    Block:
+    NewSwitch:
+      properties:
+        syncId:
+          $ref: '#/components/schemas/SyncId'
+        name:
+          type: string
+          example: 'Switch Name'
+        unit:
+          $ref: '#/components/schemas/UnitString'
+    Switch:
       allOf:
-        - $ref: '#/components/schemas/BaseNode'
-        - type: object
-          properties:
+        - properties:
+            uuid:
+              $ref: '#/components/schemas/UUID'
+        - $ref: '#/components/schemas/NewSwitch'
+        - properties:
             sources:
               type: array
               items:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/IDAndName'
+            footprint:
+              # $ref: '#/components/schemas/Footprint'
+              properties:
+                CO2e:
+                  properties:
+                    productCarbonFootprint:
+                      type: string
+                      example: '1234.5678'
+                    A1_A3:
+                      type: string
+                      example: '1234.5678'
+        - $ref: '#/components/schemas/CreatedUpdated'
     LifecycleStage:
       type: object
       properties:
@@ -1245,6 +1408,9 @@ components:
         path:
           type: string
           example: 'energy/electricity'
+    UnitString:
+      type: string
+      example: 'kg'
     Unit:
       type: object
       properties:
@@ -1368,11 +1534,11 @@ components:
       example: 1.4
     KgCO2e:
       type: string
-#      required: true
+      # required: true
       example: 1234.5678
     UTC_ISO_8601:
       type: string
-#      required: true
+      # required: true
       format: date-time
     ISO_3166_CC:
       type: string
@@ -1418,18 +1584,18 @@ components:
       properties:
         id:
           type: string
-#          required: true
+          # required: true
           example: 123
         specVersion:
           type: string
-#          required: true
+          # required: true
           example: 2.1.0
         precedingPfIds:
           type: array
-#          required: true
+          # required: true
         version:
           type: string
-#          required: true
+          # required: true
           example: 1
         status:
           type: string
@@ -1442,25 +1608,25 @@ components:
           $ref: '#/components/schemas/UTC_ISO_8601'
         companyName:
           type: string
-#          required: true
+          # required: true
         companyIds:
           type: array
-#          required: true
+          # required: true
         productIds:
           type: array
-#          required: true
+          # required: true
         productCategoryCpc:
           type: string
-#          required: true
+          # required: true
         productNameCompany:
           type: string
-#          required: true
+          # required: true
         productDescription:
           type: string
-#          required: true
+          # required: true
         comment:
           type: string
-#          required: true
+          # required: true
         pcf:
           $ref: '#/components/schemas/PactProductCarbonFootprint'
         extensions:
@@ -1471,34 +1637,34 @@ components:
           $ref: '#/components/schemas/UTC_ISO_8601'
     PactProductCarbonFootprint:
       type: object
-#      required: true
+      # required: true
       properties:
         declaredUnit:
           type: string
-#          required: true
+          # required: true
           example: 'kilogram'
         unitaryProductAmount:
           allOf:
             - $ref: '#/components/schemas/KgCO2e'
-#            - required: true
+            # - required: true
         pCfExcludingBiogenic:
           allOf:
             - $ref: '#/components/schemas/KgCO2e'
-#            - required: true
+            # - required: true
         pCfIncludingBiogenic:
           $ref: '#/components/schemas/KgCO2e'
         fossilGhgEmissions:
           allOf:
             - $ref: '#/components/schemas/KgCO2e'
-#            - required: true
+            # - required: true
         fossilCarbonContent:
           allOf:
             - $ref: '#/components/schemas/KgCO2e'
-#            - required: true
+            # - required: true
         biogenicCarbonContent:
           allOf:
             - $ref: '#/components/schemas/KgCO2e'
-#            - required: true
+            # - required: true
         dLucGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
         landManagementGhgEmissions:
@@ -1513,15 +1679,15 @@ components:
           $ref: '#/components/schemas/KgCO2e'
         characterizationFactors:
           type: string
-#          required: true
+          # required: true
           example: AR6
         ipccCharacterizationFactorsSources:
           type: array
-#          required: true
+          # required: true
           example: [ 'AR6' ]
         crossSectoralStandardsUsed:
           type: array
-#          required: true
+          # required: true
           example: [ 'GHG Protocol Product standard' ]
         productOrSectorSpecificRules:
           $ref: '#/components/schemas/ProductOrSectorSpecificRule'
@@ -1545,14 +1711,14 @@ components:
           $ref: '#/components/schemas/SecondaryEmissionFactorSources'
         exemptedEmissionsPercent:
           type: number
-#          required: true
+          # required: true
           example: 2
         exemptedEmissionsDescription:
           type: string
-#          required: true
+          # required: true
         packagingEmissionsIncluded:
           type: boolean
-#          required: true
+          # required: true
         packagingGhgEmissions:
           $ref: '#/components/schemas/KgCO2e'
         allocationRulesDescription:
