@@ -8,6 +8,10 @@ title: 'Models & Inputs'
 3. a `Transportation` activity
 4. a `Use Stage` calculation
 
+<Info>
+  [Model API documentation <Icon icon="square-arrow-up-right" iconType="light" />](/api-reference/v1/model)
+</Info>
+
 ### Attributes
 | Attribute      | Type         | Description                                | Example                              |
 |:---------------|:-------------|:-------------------------------------------|:-------------------------------------|
@@ -29,10 +33,10 @@ title: 'Models & Inputs'
 erDiagram
     Product ||--o{ Model : "has"
     Model ||--o{ Input : "has"
-    Input ||--o{ Processing : "processed by"
-    Input ||--o{ Transportation : "distributed by"
-    Input ||--o{ Material : "using source"
-    Input ||--o{ "Use Stage" : "has"
+    Input ||--o| Processing : "processed by"
+    Input ||--o| Transportation : "distributed by"
+    Input ||--o| Material : "using source"
+    Input ||--o| "Use Stage" : "has"
 
     Input {
         quantity number
