@@ -99,6 +99,7 @@
         "api-reference/v1/material/get",
         "api-reference/v1/material/post",
         "api-reference/v1/material/patch",
+        "api-reference/v1/material/image",
         "api-reference/v1/material/delete"
       ]
     },
@@ -118,6 +119,7 @@
         "api-reference/v1/switch/get",
         "api-reference/v1/switch/post",
         "api-reference/v1/switch/patch",
+        "api-reference/v1/switch/image",
         "api-reference/v1/switch/delete",
         "api-reference/v1/switch/add-source",
         "api-reference/v1/switch/remove-source"
@@ -130,6 +132,7 @@
         "api-reference/v1/supplier/get",
         "api-reference/v1/supplier/post",
         "api-reference/v1/supplier/patch",
+        "api-reference/v1/supplier/image",
         "api-reference/v1/supplier/delete"
       ]
     },
