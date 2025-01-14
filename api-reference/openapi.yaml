@@ -21,7 +21,6 @@ paths:
               type: object
               required:
                 - grant_type
-              default: client_credentials
               properties:
                 grant_type:
                   type: string
