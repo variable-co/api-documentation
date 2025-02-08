@@ -1330,6 +1330,8 @@ components:
             cpcCode:
               type: string
               example: 'CPC123'
+            unit:
+              $ref: '#/components/schemas/UnitString'
             footprint:
               $ref: '#/components/schemas/EditFootprint'
             dataQualityIndicators:
@@ -1528,6 +1530,7 @@ components:
     UnitString:
       type: string
       example: 'kg'
+      description: The unit code (e.g. kg, lbs, etc.). All unit codes can be found in the [List Units](/api-reference/v1/unit/get) endpoint.
     Unit:
       type: object
       properties:
