@@ -72,6 +72,7 @@
     {
       "group": "Auth Token",
       "pages": [
+        "api-reference/auth/token/api-key",
         "api-reference/auth/token/post"
       ]
     },
@@ -139,8 +140,11 @@
     {
       "group": "Activity",
       "pages": [
+        "api-reference/v1/activity/list",
         "api-reference/v1/activity/get",
-        "api-reference/v1/activity/data/get"
+        "api-reference/v1/activity/post",
+        "api-reference/v1/activity/patch",
+        "api-reference/v1/activity/delete"
       ]
     },
     {
