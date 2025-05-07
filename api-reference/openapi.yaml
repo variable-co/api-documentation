@@ -1343,6 +1343,8 @@ components:
         - $ref: '#/components/schemas/BaseNode'
         - type: object
           properties:
+            syncId:
+              $ref: '#/components/schemas/SyncId'
             description:
               type: string
             quantity:
