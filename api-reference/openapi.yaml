@@ -71,7 +71,7 @@ paths:
               $ref: '#/components/schemas/NewActivity'
       responses:
         '200':
-          description: A list of activities
+          description: Activity data
           content:
             application/json:
               schema:
@@ -89,11 +89,11 @@ paths:
         - bearerAuth: [ ]
       responses:
         '200':
-          description: A list of activities
+          description: Activity data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ActivityResponse'
+                $ref: '#/components/schemas/Activity'
         '401':
           description: ExpiredToken
           content:
@@ -112,7 +112,7 @@ paths:
               $ref: '#/components/schemas/NewActivity'
       responses:
         '200':
-          description: A list of activities
+          description: Activity data
           content:
             application/json:
               schema:
@@ -1200,6 +1200,10 @@ components:
           type: string
           description: The unit of CO2e. For example "kg"
           example: kg
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
         scopes:
           description: A list of GHG Scopes used in the result set
           type: array
