@@ -1346,15 +1346,14 @@ components:
               example: 150
             unit:
               $ref: '#/components/schemas/UnitString'
-            CO2e:
-              type: string
-              example: '1234.5678'
             UpstreamCO2e:
               type: string
               example: '1234'
+              description: if passed, the value will be used instead of the computed value
             DownstreamCO2e:
               type: string
               example: '0.5678'
+              description: if passed, the value will be used instead of the computed value
             product:
               properties:
                 uuid:
@@ -1388,6 +1387,11 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseNode'
         - $ref: '#/components/schemas/NewActivity'
+        - type: object
+          properties:
+            CO2e:
+              type: string
+              example: '1234.5678'
     ProductDataSource:
       type: string
       example: 'model'

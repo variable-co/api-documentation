@@ -4,9 +4,10 @@ openapi: 'GET /v1/activity'
 description: 'Get a list of activities'
 ---
 
-import Permission from '/snippets/permission.mdx';
-
-<Permission permission={'activity:read'} />
+<Info>
+  Requires permission **activity:report** to get high level data.<br />
+  Requires permission **activity:read** to get detailed data.
+</Info>
 
 <Note>
   Read more about the [Activity](/docs/activity) data models.
