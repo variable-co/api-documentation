@@ -1,0 +1,12 @@
+---
+title: Sync ID
+---
+
+Products, Materials, Inputs and Activities have a `syncId` property that is used as an external identifier for the
+object in Variable. This is useful for linking objects in Variable to objects in other systems, such as an ERP system.
+
+The `syncId` is a string that can be set to any value, and it must be unique. If you have a Product or Material with a `syncId` of `123`,
+you cannot create another Product or Material with the same `syncId`.
+If you try to create a Product or Material with a `syncId` that already exists, you will get a `400 BadRequest` error.
+
+The `syncId` is not used for any calculations or logic in Variable; its only purpose is to link objects in different systems together.

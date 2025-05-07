@@ -1224,7 +1224,7 @@ components:
       format: UUID
     SyncId:
       type: string
-      description: An identifier to use when syncing data with other systems
+      description: An identifier to use when syncing data with other systems. [Read more](/docs/syncId)
       example: 'sync123'
     IDAndName:
       type: object
