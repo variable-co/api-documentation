@@ -60,16 +60,19 @@ before being moved to a "read" bucket.
 
 ```mermaid
 flowchart TD
-    A[Variable UI] <-->|API Calls| B[API Server]
-    B <-->|Database Queries| C[Neo4j Database]
-    B -->|Upload| D[PUBLIC_BUCKET_UPLOAD]
-    B -->|Upload| E[PRIVATE_BUCKET_UPLOAD]
-    F[PUBLIC_BUCKET_READ] -->|Read| B
-    G[PRIVATE_BUCKET_READ] -->|Read| B
-    D -->|Malware Scan| H[Malware Scanning Service]
-    E -->|Malware Scan| H
-    H -->|Scan Result OK| F
-    H -->|Scan Result OK| G
+    UI[Variable UI] <-->|API Calls| API[API Server]
+    API <-->|Database Queries| DB[Neo4j Server]
+    DB <--> DBD[Neo4j Data]
+    DB --> DBL[Neo4j Logs]
+    DBI[Neo4j Import] --> DB
+    API -->|Upload| PBU[PUBLIC_BUCKET_UPLOAD]
+    API -->|Upload| PRU[PRIVATE_BUCKET_UPLOAD]
+    PUR[PUBLIC_BUCKET_READ] -->|Read| UI
+    PRR[PRIVATE_BUCKET_READ] -->|Read| API
+    PBU -->|Malware Scan| MSS[Malware Scanning Service]
+    PRU -->|Malware Scan| MSS
+    MSS -->|Scan Result OK| PUR
+    MSS -->|Scan Result OK| PRR
 ```
 
 ## Recommended Infrastructure
