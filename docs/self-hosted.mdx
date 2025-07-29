@@ -39,6 +39,12 @@ These are the environment variables that need to be set:
 - **PRIVATE_BUCKET_UPLOAD**: The bucket name for private file uploads.
 - **PRIVATE_BUCKET_READ**: The bucket name for private file reads.
 
+## Database Configuration
+If hosting the database as a Docker container, you will need to have the following volumes mounted:
+- **/data**: This is where the Neo4j database files will be stored.
+- **/logs**: This is where the Neo4j logs will be stored.
+- **/import**: This is where you can place any initial data files to be imported into the database.
+
 ## URL Mapping
 
 The UI makes API calls at `<APP_URL>/api`, so the API server must be accessible at this URL.
