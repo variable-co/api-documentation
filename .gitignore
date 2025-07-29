@@ -1,3 +1,4 @@
 .env
 vapi/
 venv/
+.vscode/

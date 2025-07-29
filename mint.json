@@ -6,6 +6,9 @@
     "light": "https://app.variable.global/logo/logo-horizontal-onlight.svg"
   },
   "favicon": "/logo/symbol-white.svg",
+  "appearance": {
+    "default": "system"
+  },
   "colors": {
     "primary": "#003540",
     "light": "#E6E3DD",
