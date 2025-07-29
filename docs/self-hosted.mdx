@@ -1,12 +1,9 @@
 ---
 title: Self-Hosted Deployment
-description: How to deploy Variable in a self-hosted environment.
+description: How to deploy Variable in a self-hosted environment
 ---
 
-# Overview
-
-Variable distributes Docker images that can be run on your own infrastructure.
-This allows you to run Variable in a self-hosted environment, giving you full control over your data and deployment.
+<Note>**Enterpise feature:** [contact us](mailto:hello@variable.co) if you're interested in self-hosting Variable</Note>
 
 # Components
 
@@ -60,16 +57,16 @@ before being moved to a "read" bucket.
 
 ```mermaid
 flowchart TD
-    UI[Variable UI] <-->|API Calls| API[API Server]
-    API <-->|Database Queries| DB[Neo4j Server]
+    UI(Variable UI) <-->|API Calls| API(API Server)
+    API <-->|Database Queries| DB[(Neo4j Server)]
     DB <--> DBD[Neo4j Data]
     DB --> DBL[Neo4j Logs]
     DBI[Neo4j Import] --> DB
-    API -->|Upload| PBU[PUBLIC_BUCKET_UPLOAD]
-    API -->|Upload| PRU[PRIVATE_BUCKET_UPLOAD]
-    PUR[PUBLIC_BUCKET_READ] -->|Read| UI
-    PRR[PRIVATE_BUCKET_READ] -->|Read| API
-    PBU -->|Malware Scan| MSS[Malware Scanning Service]
+    API -->|Upload| PBU@{ shape: docs, label: "PUBLIC_BUCKET_UPLOAD" }
+    API -->|Upload| PRU@{ shape: docs, label: "PRIVATE_BUCKET_UPLOAD" }
+    PUR@{ shape: docs, label: "PUBLIC_BUCKET_READ" } -->|Read| UI
+    PRR@{ shape: docs, label: "PRIVATE_BUCKET_READ" } -->|Read| API
+    PBU -->|Malware Scan| MSS(Malware Scanner)
     PRU -->|Malware Scan| MSS
     MSS -->|Scan Result OK| PUR
     MSS -->|Scan Result OK| PRR
