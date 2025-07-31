@@ -1,0 +1,214 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Variable API",
+  "colors": {
+    "primary": "#003540",
+    "light": "#E6E3DD",
+    "dark": "#003540"
+  },
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "favicon": "/logo/symbol-white.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "docs/introduction",
+              "docs/data-model",
+              "docs/material",
+              "docs/model",
+              "docs/switch",
+              "docs/activity",
+              "docs/syncId"
+            ]
+          },
+          {
+            "group": "Security",
+            "pages": [
+              "docs/security"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "api-reference/welcome"
+            ]
+          },
+          {
+            "group": "Auth Token",
+            "pages": [
+              "api-reference/auth/token/api-key",
+              "api-reference/auth/token/post"
+            ]
+          },
+          {
+            "group": "Database",
+            "pages": [
+              "api-reference/v1/search/list"
+            ]
+          },
+          {
+            "group": "Product",
+            "pages": [
+              "api-reference/v1/product/list/get",
+              "api-reference/v1/product/get",
+              "api-reference/v1/product/post",
+              "api-reference/v1/product/patch",
+              "api-reference/v1/product/image",
+              "api-reference/v1/product/delete"
+            ]
+          },
+          {
+            "group": "Material",
+            "pages": [
+              "api-reference/v1/material/list/get",
+              "api-reference/v1/material/get",
+              "api-reference/v1/material/post",
+              "api-reference/v1/material/patch",
+              "api-reference/v1/material/image",
+              "api-reference/v1/material/delete"
+            ]
+          },
+          {
+            "group": "Model",
+            "pages": [
+              "api-reference/v1/model/inputs/get",
+              "api-reference/v1/model/inputs/post",
+              "api-reference/v1/model/inputs/patch",
+              "api-reference/v1/model/inputs/delete"
+            ]
+          },
+          {
+            "group": "Switch",
+            "pages": [
+              "api-reference/v1/switch/list",
+              "api-reference/v1/switch/get",
+              "api-reference/v1/switch/post",
+              "api-reference/v1/switch/patch",
+              "api-reference/v1/switch/image",
+              "api-reference/v1/switch/delete",
+              "api-reference/v1/switch/add-source",
+              "api-reference/v1/switch/remove-source"
+            ]
+          },
+          {
+            "group": "Supplier",
+            "pages": [
+              "api-reference/v1/supplier/list/get",
+              "api-reference/v1/supplier/get",
+              "api-reference/v1/supplier/post",
+              "api-reference/v1/supplier/patch",
+              "api-reference/v1/supplier/image",
+              "api-reference/v1/supplier/delete"
+            ]
+          },
+          {
+            "group": "Activity",
+            "pages": [
+              "api-reference/v1/activity/list",
+              "api-reference/v1/activity/get",
+              "api-reference/v1/activity/post",
+              "api-reference/v1/activity/patch",
+              "api-reference/v1/activity/delete"
+            ]
+          },
+          {
+            "group": "Org",
+            "pages": [
+              "api-reference/v1/org/get"
+            ]
+          },
+          {
+            "group": "Scope",
+            "pages": [
+              "api-reference/v1/scope/get"
+            ]
+          },
+          {
+            "group": "Taxonomy",
+            "pages": [
+              "api-reference/v1/taxonomy/get"
+            ]
+          },
+          {
+            "group": "Unit",
+            "pages": [
+              "api-reference/v1/unit/get"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "PACT API",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "pact-api/welcome",
+              "pact-api/configuration"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "pact-api/authentication",
+              "pact-api/footprints",
+              "pact-api/footprint"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog/index"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "https://app.variable.global/logo/logo-horizontal-onlight.svg",
+    "dark": "https://app.variable.global/logo/logo-horizontal-ondark.svg"
+  },
+  "api": {
+    "playground": {
+      "display": "simple"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@variable.co"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "App",
+      "href": "https://app.variable.global"
+    }
+  },
+  "footer": {
+    "socials": {
+      "discord": "https://discord.gg/TrGYZW7zPG",
+      "linkedin": "https://www.linkedin.com/company/variable-co",
+      "x": "https://x.com/variableHQ"
+    }
+  }
+}
