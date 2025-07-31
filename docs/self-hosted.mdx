@@ -4,7 +4,7 @@ description: How to deploy Variable in a self-hosted environment
 ---
 
 <Note>
-  **Enterpise feature:** [contact us](mailto:hello@variable.co) if you're
+  **Enterprise feature:** [contact us](mailto:hello@variable.co) if you're
   interested in self-hosting Variable
 </Note>
 
@@ -264,8 +264,7 @@ resource "google_storage_bucket" "private_uploads_write" {
 ```terraform api.tf lines expandable
 resource "google_cloud_run_service" "variable_api" {
   name     = "variable-api"
-  lo
-  tion = var.region
+  location = var.region
 
   autogenerate_revision_name = true
 
@@ -367,7 +366,7 @@ resource "google_compute_instance" "neo4j_vm" {
   shielded_instance_config {
     enable_secure_boot = true
   }
-  allow_stopping_for_update = False
+  allow_stopping_for_update = false
 
   scheduling {
     provisioning_model = "STANDARD"
