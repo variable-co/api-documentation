@@ -205,7 +205,7 @@ resource "google_compute_target_https_proxy" "variable" {
 #### UI
 ```terraform ui.tf lines expandable
 resource "google_storage_bucket" "variable_ui" {
-  name     = "gcs-variable-ui"
+  name     = "variable-ui"
   location = var.europe
 
   versioning { enabled = true }
