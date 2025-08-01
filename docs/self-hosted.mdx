@@ -8,6 +8,13 @@ description: How to deploy Variable in a self-hosted environment
   interested in self-hosting Variable
 </Note>
 
+# Overview
+
+The Variable application is comprised of 4 main components: a static UI, a stateless API server,
+a Neo4j database, and file storage for uploaded files. The UI and API are delivered as a Docker container,
+while the database can be run as a Docker container or as a managed service. The file storage
+can be any object storage service, such as AWS S3, Google Cloud Storage, or a self-hosted solution.
+
 # Components
 
 1. **Variable UI**: This is a static React app that can be served from any web server or CDN.
@@ -109,7 +116,7 @@ flowchart TD
 
 ## Terraform examples
 
-This is not a complete Terraform configuration, but it provides a starting point to see how the architecture pieces above can be set up in terraform.
+This is not a complete Terraform configuration, but it provides a starting point to see how the architecture pieces above can be set up in Terraform.
 
 ### Load Balancer and URL Mapping
 
@@ -203,6 +210,7 @@ resource "google_compute_target_https_proxy" "variable" {
 ### Storage
 
 #### UI
+
 ```terraform ui.tf lines expandable
 resource "google_storage_bucket" "variable_ui" {
   name     = "variable-ui"
@@ -218,6 +226,7 @@ resource "google_storage_bucket" "variable_ui" {
 ```
 
 #### Uploads
+
 ```terraform uploads.tf lines expandable
 resource "google_storage_bucket" "public_uploads_read" {
   name     = "public-uploads-read"
@@ -261,6 +270,7 @@ resource "google_storage_bucket" "private_uploads_write" {
 ```
 
 ### API Server
+
 ```terraform api.tf lines expandable
 resource "google_cloud_run_service" "variable_api" {
   name     = "variable-api"
