@@ -23,6 +23,12 @@ can be any object storage service, such as AWS S3, Google Cloud Storage, or a se
 4. **File Storage**: For any files uploaded to Variable, such as images or documents. This can be any object storage service, such as AWS S3, Google Cloud Storage, or a self-hosted solution.
 5. **Malware Scanning**: An optional component that scans uploaded files for malware before they are stored. This can be integrated with services like [ClamAV](https://www.clamav.net) or other malware scanning solutions.
 
+# Authentication
+
+User authentication is done via SSO. Currently supported providers are:
+* Azure AD
+* Google Workspace
+
 # Deployment
 
 The UI, API server and Database can be deployed using any Docker environment, either locally or in the cloud (e.g. Google Compute Engine/Cloud Run).
