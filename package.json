@@ -1,0 +1,11 @@
+{
+  "name": "api-documentation",
+  "packageManager": "yarn@4.6.0",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.22.0"
+  },
+  "scripts": {
+    "generate-js-sdk": "openapi-generator-cli generate -i ./api-reference/openapi.yaml -g typescript-axios -o ./sdk/variable-js-sdk",
+    "generate-python-sdk": "openapi-generator-cli generate -i ./api-reference/openapi.yaml -g python -o ./sdk/variable-python-sdk"
+  }
+}
