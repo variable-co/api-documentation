@@ -1767,18 +1767,24 @@ components:
       description: number from 1 - 3
     ProductOrSectorSpecificRule:
       type: array
-      properties:
-        operator:
-          type: string
-        ruleNames:
-          type: array
+      items:
+        type: object
+        properties:
+          operator:
+            type: string
+          ruleNames:
+            type: array
+            items:
+              type: string
     SecondaryEmissionFactorSources:
       type: array
-      properties:
-        name:
-          type: string
-        version:
-          type: string
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          version:
+            type: string
     PactDataQualityIndicators:
       properties:
         coveragePercent:
@@ -1799,18 +1805,16 @@ components:
       properties:
         id:
           type: string
-          # required: true
           example: 123
         specVersion:
           type: string
-          # required: true
           example: 2.1.0
         precedingPfIds:
           type: array
-          # required: true
+          items:
+            type: string
         version:
           type: string
-          # required: true
           example: 1
         status:
           type: string
@@ -1823,29 +1827,28 @@ components:
           $ref: '#/components/schemas/UTC_ISO_8601'
         companyName:
           type: string
-          # required: true
         companyIds:
           type: array
-          # required: true
+          items:
+            type: string
         productIds:
           type: array
-          # required: true
+          items:
+            type: string
         productCategoryCpc:
           type: string
-          # required: true
         productNameCompany:
           type: string
-          # required: true
         productDescription:
           type: string
-          # required: true
         comment:
           type: string
-          # required: true
         pcf:
           $ref: '#/components/schemas/PactProductCarbonFootprint'
         extensions:
           type: array
+          items:
+            type: object
         created:
           $ref: '#/components/schemas/UTC_ISO_8601'
         updated:
@@ -1898,11 +1901,13 @@ components:
           example: AR6
         ipccCharacterizationFactorsSources:
           type: array
-          # required: true
+          items:
+            type: string
           example: [ 'AR6' ]
         crossSectoralStandardsUsed:
           type: array
-          # required: true
+          items:
+            type: string
           example: [ 'GHG Protocol Product standard' ]
         productOrSectorSpecificRules:
           $ref: '#/components/schemas/ProductOrSectorSpecificRule'
