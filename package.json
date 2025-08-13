@@ -1,0 +1,11 @@
+{
+  "name": "api-documentation",
+  "packageManager": "yarn@4.6.0",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.22.0"
+  },
+  "scripts": {
+    "generate-node-sdk": "openapi-generator-cli generate -i ./api-reference/openapi.yaml -g typescript-node -o ./sdk/variable-node-sdk --additional-properties=paramNaming=original,modelPropertyNaming=original,enumPropertyNaming=original",
+    "generate-python-sdk": "openapi-generator-cli generate -i ./api-reference/openapi.yaml -g python -o ./sdk/variable-python-sdk --additional-properties=paramNaming=original,modelPropertyNaming=original,enumPropertyNaming=original"
+  }
+}
