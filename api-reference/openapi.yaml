@@ -10,6 +10,7 @@ servers:
 paths:
   /auth/token:
     post:
+      operationId: postAuthToken
       summary: Get a token
       security:
         - basicAuth: [ ]
@@ -35,6 +36,7 @@ paths:
                 $ref: '#/components/schemas/Authorization'
   /v1/activity:
     get:
+      operationId: getActivity
       summary: Get high level activity data
       security:
         - bearerAuth: [ ]
@@ -60,6 +62,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postActivity
       summary: Create an activity
       security:
         - bearerAuth: [ ]
@@ -84,6 +87,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/activity/:uuid:
     get:
+      operationId: getActivityByUuid
       summary: Get an activity by UUID
       security:
         - bearerAuth: [ ]
@@ -101,6 +105,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     patch:
+      operationId: patchActivityByUuid
       summary: Update an activity
       security:
         - bearerAuth: [ ]
@@ -124,6 +129,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteActivityByUuid
       summary: Delete an activity
       security:
         - bearerAuth: [ ]
@@ -142,6 +148,7 @@ paths:
                   $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/activity/data:
     get:
+      operationId: getActivityData
       summary: Get high level activity data with a list of activities
       security:
         - bearerAuth: [ ]
@@ -177,6 +184,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/search:
     get:
+      operationId: getSearch
       summary: Get a list of database footprints
       security:
         - bearerAuth: [ ]
@@ -207,6 +215,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/material:
     get:
+      operationId: getMaterial
       summary: Get a list of materials
       security:
         - bearerAuth: [ ]
@@ -231,6 +240,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postMaterial
       summary: Create a material
       security:
         - bearerAuth: [ ]
@@ -258,6 +268,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/material/:uuid:
     get:
+      operationId: getMaterialByUuid
       summary: Get a material by UUID
       security:
         - bearerAuth: [ ]
@@ -275,6 +286,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     patch:
+      operationId: patchMaterialByUuid
       summary: Edit a material
       security:
         - bearerAuth: [ ]
@@ -301,6 +313,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteMaterialByUuid
       summary: Delete a material
       security:
         - bearerAuth: [ ]
@@ -319,6 +332,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/material/:uuid/image:
     patch:
+      operationId: patchMaterialImage
       summary: Upload a material image
       security:
         - bearerAuth: [ ]
@@ -347,6 +361,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/supplier:
     get:
+      operationId: getSupplier
       summary: Get a list of suppliers
       security:
         - bearerAuth: [ ]
@@ -371,6 +386,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postSupplier
       summary: Create a supplier
       security:
         - bearerAuth: [ ]
@@ -398,6 +414,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/supplier/:uuid:
     get:
+      operationId: getSupplierByUuid
       summary: Get a supplier by UUID
       security:
         - bearerAuth: [ ]
@@ -415,6 +432,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     patch:
+      operationId: patchSupplierByUuid
       summary: Edit a supplier
       security:
         - bearerAuth: [ ]
@@ -441,6 +459,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteSupplierByUuid
       summary: Delete a supplier
       security:
         - bearerAuth: [ ]
@@ -459,6 +478,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/supplier/:uuid/image:
     patch:
+      operationId: patchSupplierImage
       summary: Upload a supplier image
       security:
         - bearerAuth: [ ]
@@ -487,6 +507,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product:
     get:
+      operationId: getProduct
       summary: Get a list of products
       security:
         - bearerAuth: [ ]
@@ -512,6 +533,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postProduct
       summary: Create a product
       security:
         - bearerAuth: [ ]
@@ -539,6 +561,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product/:uuid:
     get:
+      operationId: getProductByUuid
       summary: Get a product by UUID
       security:
         - bearerAuth: [ ]
@@ -556,6 +579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     patch:
+      operationId: patchProductByUuid
       summary: Edit a product
       security:
         - bearerAuth: [ ]
@@ -582,6 +606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteProductByUuid
       summary: Delete a Product
       security:
         - bearerAuth: [ ]
@@ -600,6 +625,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/product/:uuid/image:
     patch:
+      operationId: patchProductImage
       summary: Upload a product image
       security:
         - bearerAuth: [ ]
@@ -628,6 +654,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input:
     get:
+      operationId: getModelInput
       summary: Get model inputs
       security:
         - bearerAuth: [ ]
@@ -652,6 +679,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postModelInput
       summary: Create a model input
       security:
         - bearerAuth: [ ]
@@ -677,6 +705,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/model/:uuid/input/:uuid:
     patch:
+      operationId: patchModelInputByUuid
       summary: Edit an input
       security:
         - bearerAuth: [ ]
@@ -703,6 +732,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteModelInputByUuid
       summary: Delete a model input
       security:
         - bearerAuth: [ ]
@@ -721,6 +751,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/switch:
     get:
+      operationId: getSwitch
       summary: Get a list of Switches
       security:
         - bearerAuth: [ ]
@@ -740,6 +771,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     post:
+      operationId: postSwitch
       summary: Create a Switch
       security:
         - bearerAuth: [ ]
@@ -767,6 +799,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/switch/:uuid:
     get:
+      operationId: getSwitchByUuid
       summary: Get a Switch by UUID
       security:
         - bearerAuth: [ ]
@@ -784,6 +817,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     patch:
+      operationId: patchSwitchByUuid
       summary: Edit a Switch
       security:
         - bearerAuth: [ ]
@@ -810,6 +844,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteSwitchByUuid
       summary: Delete a Switch
       security:
         - bearerAuth: [ ]
@@ -828,6 +863,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/switch/:uuid/image:
     patch:
+      operationId: patchSwitchImage
       summary: Upload a switch image
       security:
         - bearerAuth: [ ]
@@ -856,6 +892,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/switch/:uuid/source/:uuid:
     post:
+      operationId: postSwitchSource
       summary: Add a source to a Switch
       security:
         - bearerAuth: [ ]
@@ -873,6 +910,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
     delete:
+      operationId: deleteSwitchSource
       summary: Remove a source from a Switch
       security:
         - bearerAuth: [ ]
@@ -891,6 +929,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/scope:
     get:
+      operationId: getScope
       summary: Get a list of scopes
       security:
         - bearerAuth: [ ]
@@ -911,6 +950,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/taxonomy:
     get:
+      operationId: getTaxonomy
       summary: Get a list of taxonomies
       security:
         - bearerAuth: [ ]
@@ -931,6 +971,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/org:
     get:
+      operationId: getOrg
       summary: Get a list of orgs
       security:
         - bearerAuth: [ ]
@@ -951,6 +992,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /v1/unit:
     get:
+      operationId: getUnit
       summary: Get a list of units
       security:
         - bearerAuth: [ ]
@@ -971,7 +1013,7 @@ paths:
                 $ref: '#/components/schemas/ExpiredTokenResponse'
   /pact/2/footprint/:id:
     get:
-
+      operationId: getPactFootprintById
       summary: Get a Product Carbon Footprint
       security:
         - bearerAuth: [ ]
