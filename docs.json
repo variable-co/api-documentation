@@ -10,6 +10,9 @@
   "styling": {
     "codeblocks": "dark"
   },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
   "favicon": "/logo/symbol-white.svg",
   "navigation": {
     "tabs": [
