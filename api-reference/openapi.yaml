@@ -1588,6 +1588,137 @@ components:
                       type: string
                       example: "1234.5678"
         - $ref: "#/components/schemas/CreatedUpdated"
+    ProductSheetValue:
+      type: object
+      properties:
+        key:
+          type: string
+          example: "productDescription"
+        name:
+          type: string
+          example: "Proudct Description"
+        type:
+          type: string
+          example: "string | number | boolean | amount"
+        unit:
+          type: string
+          example: "kg"
+        unitType:
+          type: string
+          example: "weight"
+        enum:
+          type: array
+          items:
+            type: string
+            example: [option1, option2, option3]
+        mask:
+          type: string
+          example: "^[A-Za-z0-9 ]+$"
+        example:
+          type: string
+          example: "This is a product"
+        functionalUnitValue:
+          type: string
+          example: "1.0"
+          description: The PCR value of the functional unit for this property
+    FunctionalGroup:
+      type: object
+      properties:
+        value:
+          type: string
+          example: "structure"
+        name:
+          type: string
+          example: "Structure"
+        description:
+          type: string
+          example: "The structure around the unit"
+    SystemBoundary:
+      type: object
+      properties:
+        lcaCode:
+          type: string
+          example: "A1"
+        required:
+          type: boolean
+          example: true
+          description: Whether this lifecycle stage is required by the PCR
+        description:
+          type: string
+          example: "The materials included in this stage..."
+          description: A description of what is included in this lifecycle stage
+    EPD:
+      type: object
+      properties:
+        uuid:
+          $ref: "#/components/schemas/UUID"
+        name:
+          type: string
+          example: "EPD Name"
+    PCR:
+      type: object
+      properties:
+        uuid:
+          $ref: "#/components/schemas/UUID"
+        name:
+          type: string
+          example: "PCR Name"
+        functionalUnit:
+          type: string
+          example: "Luminesence of 1,000 lumens for 35,000 hours"
+        functionalUnitEquation:
+          type: string
+          example: "{referenceFlow.lumens} / {productSheet.lumens} * {referenceFlow.referenceServiceLife} / {productSheet.referenceServiceLife}"
+          description: The equation used to calculate the functional unit
+        sysmteBoundaries:
+          type: array
+          items:
+            $ref: "#/components/schemas/SystemBoundary"
+        functionalGroups:
+          type: array
+          items:
+            $ref: "#/components/schemas/FunctionalGroup"
+        requiredAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductSheetValue"
+        extrapolationRules:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                example: "structure"
+                description: The functional group key
+              name:
+                type: string
+                example: "Structure weight"
+              type:
+                type: string
+                example: "string | number | boolean | amount"
+              unitType:
+                type: string
+                example: "weight"
+    NewEpdVariant:
+      allOf:
+        - properties:
+            epd:
+              $ref: "#/components/schemas/EPD"
+    EPDVariant:
+      allOf:
+        - $ref: "#/components/schemas/NewEpdVariant"
+        - properties:
+            uuid:
+              $ref: "#/components/schemas/UUID"
+        - properties:
+            productSheet:
+              type: array
+              items:
+                $ref: "#/components/schemas/ProductSheetValue"
+            footprint:
+              $ref: "#/components/schemas/Footprint"
+        - $ref: "#/components/schemas/CreatedUpdated"
     LifecycleStage:
       type: object
       properties:
