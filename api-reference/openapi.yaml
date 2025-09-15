@@ -12,7 +12,7 @@ paths:
     post:
       summary: Get a token
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       requestBody:
         required: true
         content:
@@ -27,213 +27,213 @@ paths:
                   description: client_credentials
                   example: client_credentials
       responses:
-        '200':
+        "200":
           description: A token
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Authorization'
+                $ref: "#/components/schemas/Authorization"
   /v1/activity:
     get:
       summary: Get high level activity data
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       parameters:
-        - $ref: '#/components/parameters/date'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/scope'
-        - $ref: '#/components/parameters/taxonomy'
-        - $ref: '#/components/parameters/list'
+        - $ref: "#/components/parameters/date"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/scope"
+        - $ref: "#/components/parameters/taxonomy"
+        - $ref: "#/components/parameters/list"
       responses:
-        '200':
+        "200":
           description: A list of activities
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ActivityResponse'
-        '401':
+                $ref: "#/components/schemas/ActivityResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create an activity
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewActivity'
+              $ref: "#/components/schemas/NewActivity"
       responses:
-        '200':
+        "200":
           description: Activity data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
-        '401':
+                $ref: "#/components/schemas/Activity"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/activity/:uuid:
     get:
       summary: Get an activity by UUID
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Activity data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
-        '401':
+                $ref: "#/components/schemas/Activity"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     patch:
       summary: Update an activity
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewActivity'
+              $ref: "#/components/schemas/NewActivity"
       responses:
-        '200':
+        "200":
           description: Activity data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
-        '401':
+                $ref: "#/components/schemas/Activity"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete an activity
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/activity/data:
     get:
       summary: Get high level activity data with a list of activities
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       parameters:
-        - $ref: '#/components/parameters/date'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/scope'
-        - $ref: '#/components/parameters/taxonomy'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/page'
+        - $ref: "#/components/parameters/date"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/scope"
+        - $ref: "#/components/parameters/taxonomy"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/page"
       responses:
-        '200':
+        "200":
           description: A list of activities
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
-                  - $ref: '#/components/schemas/ActivityResponse'
+                  - $ref: "#/components/schemas/ListResponse"
+                  - $ref: "#/components/schemas/ActivityResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Activity'
-        '401':
+                          $ref: "#/components/schemas/Activity"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/search:
     get:
       summary: Get a list of database footprints
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       parameters:
-        - $ref: '#/components/parameters/searchTerm'
-        - $ref: '#/components/parameters/unitType'
-        - $ref: '#/components/parameters/taxonomy'
-        - $ref: '#/components/parameters/source'
+        - $ref: "#/components/parameters/searchTerm"
+        - $ref: "#/components/parameters/unitType"
+        - $ref: "#/components/parameters/taxonomy"
+        - $ref: "#/components/parameters/source"
       responses:
-        '200':
+        "200":
           description: A list of database footprints
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
+                  - $ref: "#/components/schemas/ListResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Material'
-        '401':
+                          $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/material:
     get:
       summary: Get a list of materials
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of materials
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
+                  - $ref: "#/components/schemas/ListResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Material'
-        '401':
+                          $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create a material
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -242,42 +242,42 @@ paths:
               required:
                 - name
               allOf:
-                - $ref: '#/components/schemas/NewProduct'
+                - $ref: "#/components/schemas/NewProduct"
       responses:
-        '200':
+        "200":
           description: A material
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Material'
-        '401':
+                $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/material/:uuid:
     get:
       summary: Get a material by UUID
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A material
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Material'
-        '401':
+                $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     patch:
       summary: Edit a material
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -286,42 +286,42 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/EditProduct'
+                - $ref: "#/components/schemas/EditProduct"
       responses:
-        '200':
+        "200":
           description: A material
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Material'
-        '401':
+                $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete a material
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/material/:uuid/image:
     patch:
       summary: Upload a material image
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -333,47 +333,47 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/supplier:
     get:
       summary: Get a list of suppliers
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of suppliers
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
+                  - $ref: "#/components/schemas/ListResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Supplier'
-        '401':
+                          $ref: "#/components/schemas/Supplier"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create a supplier
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -382,42 +382,42 @@ paths:
               required:
                 - name
               allOf:
-                - $ref: '#/components/schemas/NewSupplier'
+                - $ref: "#/components/schemas/NewSupplier"
       responses:
-        '200':
+        "200":
           description: A supplier
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
-        '401':
+                $ref: "#/components/schemas/Supplier"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/supplier/:uuid:
     get:
       summary: Get a supplier by UUID
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A supplier
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
-        '401':
+                $ref: "#/components/schemas/Supplier"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     patch:
       summary: Edit a supplier
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -426,42 +426,42 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/NewSupplier'
+                - $ref: "#/components/schemas/NewSupplier"
       responses:
-        '200':
+        "200":
           description: A supplier
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
-        '401':
+                $ref: "#/components/schemas/Supplier"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete a supplier
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/supplier/:uuid/image:
     patch:
       summary: Upload a supplier image
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -473,48 +473,48 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/product:
     get:
       summary: Get a list of products
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of products
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
+                  - $ref: "#/components/schemas/ListResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Product'
+                          $ref: "#/components/schemas/Product"
 
-        '401':
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create a product
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -523,42 +523,42 @@ paths:
               required:
                 - name
               allOf:
-                - $ref: '#/components/schemas/NewProduct'
+                - $ref: "#/components/schemas/NewProduct"
       responses:
-        '200':
+        "200":
           description: A product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Material'
-        '401':
+                $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/product/:uuid:
     get:
       summary: Get a product by UUID
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
-        '401':
+                $ref: "#/components/schemas/Product"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     patch:
       summary: Edit a product
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -567,42 +567,42 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/EditProduct'
+                - $ref: "#/components/schemas/EditProduct"
       responses:
-        '200':
+        "200":
           description: A product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Material'
-        '401':
+                $ref: "#/components/schemas/Material"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete a Product
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/product/:uuid/image:
     patch:
       summary: Upload a product image
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -614,72 +614,72 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/model/:uuid/input:
     get:
       summary: Get model inputs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of model inputs
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ListResponse'
+                  - $ref: "#/components/schemas/ListResponse"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/ReturnedInput'
-        '401':
+                          $ref: "#/components/schemas/ReturnedInput"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create a model input
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/NewInput'
+                - $ref: "#/components/schemas/NewInput"
       responses:
-        '200':
+        "200":
           description: An input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReturnedInput'
-        '401':
+                $ref: "#/components/schemas/ReturnedInput"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/model/:uuid/input/:uuid:
     patch:
       summary: Edit an input
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -688,61 +688,61 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/EditInput'
+                - $ref: "#/components/schemas/EditInput"
       responses:
-        '200':
+        "200":
           description: An input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReturnedInput'
-        '401':
+                $ref: "#/components/schemas/ReturnedInput"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete a model input
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/switch:
     get:
       summary: Get a list of Switches
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of Switches
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Switch'
-        '401':
+                  $ref: "#/components/schemas/Switch"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     post:
       summary: Create a Switch
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -751,42 +751,42 @@ paths:
               required:
                 - name
               allOf:
-                - $ref: '#/components/schemas/NewSwitch'
+                - $ref: "#/components/schemas/NewSwitch"
       responses:
-        '200':
+        "200":
           description: A Switch
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Switch'
-        '401':
+                $ref: "#/components/schemas/Switch"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/switch/:uuid:
     get:
       summary: Get a Switch by UUID
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A Switch
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Switch'
-        '401':
+                $ref: "#/components/schemas/Switch"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     patch:
       summary: Edit a Switch
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -795,42 +795,42 @@ paths:
               required:
                 - uuid
               allOf:
-                - $ref: '#/components/schemas/NewSwitch'
+                - $ref: "#/components/schemas/NewSwitch"
       responses:
-        '200':
+        "200":
           description: A Switch
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Switch'
-        '401':
+                $ref: "#/components/schemas/Switch"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Delete a Switch
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/switch/:uuid/image:
     patch:
       summary: Upload a switch image
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -842,141 +842,140 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/switch/:uuid/source/:uuid:
     post:
       summary: Add a source to a Switch
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
     delete:
       summary: Remove a source from a Switch
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-        '401':
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/scope:
     get:
       summary: Get a list of scopes
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of scopes
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Scope'
-        '401':
+                  $ref: "#/components/schemas/Scope"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/taxonomy:
     get:
       summary: Get a list of taxonomies
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of taxonomies
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Taxonomy'
-        '401':
+                  $ref: "#/components/schemas/Taxonomy"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/org:
     get:
       summary: Get a list of orgs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of orgs
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Org'
-        '401':
+                  $ref: "#/components/schemas/Org"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/unit:
     get:
       summary: Get a list of units
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of units
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Unit'
-        '401':
+                  $ref: "#/components/schemas/Unit"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /pact/2/footprint/:id:
     get:
-
       summary: Get a Product Carbon Footprint
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A Product Carbon Footprint
           content:
             application/json:
@@ -984,31 +983,31 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/PactProductFootprint'
-        '401':
+                    $ref: "#/components/schemas/PactProductFootprint"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /pact/2/footprints:
     get:
       summary: Get a list of database footprints
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: A list of Product Carbon Footprints
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PactListResponse'
-        '401':
+                $ref: "#/components/schemas/PactListResponse"
+        "401":
           description: ExpiredToken
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpiredTokenResponse'
+                $ref: "#/components/schemas/ExpiredTokenResponse"
 
 components:
   securitySchemes:
@@ -1024,12 +1023,12 @@ components:
       flows:
         clientCredentials:
           tokenUrl: /auth/token
-          scopes: { }
+          scopes: {}
   parameters:
     date:
       name: date
       in: query
-      description: 'Date to query (e.g. 2021-01-01, 2021-12, 2021)'
+      description: "Date to query (e.g. 2021-01-01, 2021-12, 2021)"
       required: false
       schema:
         type: string
@@ -1041,7 +1040,7 @@ components:
       required: false
       schema:
         type: string
-        example: '2021-01-01'
+        example: "2021-01-01"
     endDate:
       name: ed
       in: query
@@ -1049,7 +1048,7 @@ components:
       required: false
       schema:
         type: string
-        example: '2021-01-31'
+        example: "2021-01-31"
     searchTerm:
       name: q
       in: query
@@ -1057,7 +1056,7 @@ components:
       required: false
       schema:
         type: string
-        example: 'plastic'
+        example: "plastic"
     unitType:
       name: unitType
       in: query
@@ -1065,7 +1064,7 @@ components:
       required: false
       schema:
         type: string
-        example: 'volume'
+        example: "volume"
     source:
       name: source
       in: query
@@ -1141,19 +1140,19 @@ components:
       properties:
         message:
           type: string
-          example: 'Unauthorized'
+          example: "Unauthorized"
     ExpiredTokenResponse:
       type: object
       properties:
         message:
           type: string
-          example: 'token expired'
+          example: "token expired"
     SuccessResponse:
       type: object
       properties:
         message:
           type: string
-          example: 'Success'
+          example: "Success"
     ListResponse:
       type: object
       properties:
@@ -1169,7 +1168,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/IDAndName'
+            $ref: "#/components/schemas/IDAndName"
     ActivityResponse:
       type: object
       properties:
@@ -1191,11 +1190,11 @@ components:
         CO2e:
           type: string
           description: The total CO2e of all activities categorized to a GHG Scope, in `CO2eUnit`
-          example: '1234.5678'
+          example: "1234.5678"
         uncategorizedCO2e:
           type: string
           description: The total CO2e of all activities *not* categorized to a GHG Scope, in `CO2eUnit`
-          example: '1.2345678'
+          example: "1.2345678"
         CO2eUnit:
           type: string
           description: The unit of CO2e. For example "kg"
@@ -1203,37 +1202,37 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Activity'
+            $ref: "#/components/schemas/Activity"
         scopes:
           description: A list of GHG Scopes used in the result set
           type: array
           items:
-            $ref: '#/components/schemas/Scope'
+            $ref: "#/components/schemas/Scope"
         orgs:
           description: A list of Orgs used in the result set
           type: array
           items:
-            $ref: '#/components/schemas/Org'
+            $ref: "#/components/schemas/Org"
         taxonomies:
           description: A list of Taxonomies used in the result set
           type: array
           items:
-            $ref: '#/components/schemas/Taxonomy'
+            $ref: "#/components/schemas/Taxonomy"
     UUID:
       type: string
       format: UUID
     SyncId:
       type: string
       description: An identifier to use when syncing data with other systems. [Read more](/docs/syncId)
-      example: 'sync123'
+      example: "sync123"
     IDAndName:
       type: object
       properties:
         uuid:
-          $ref: '#/components/schemas/UUID'
+          $ref: "#/components/schemas/UUID"
         name:
           type: string
-          example: 'Name'
+          example: "Name"
     CreatedUpdated:
       type: object
       properties:
@@ -1247,8 +1246,8 @@ components:
           example: 2021-01-31T23:59:59Z
     BaseNode:
       allOf:
-        - $ref: '#/components/schemas/IDAndName'
-        - $ref: '#/components/schemas/CreatedUpdated'
+        - $ref: "#/components/schemas/IDAndName"
+        - $ref: "#/components/schemas/CreatedUpdated"
     Date:
       type: string
       description: ISO 8601 date
@@ -1257,150 +1256,150 @@ components:
       allOf:
         - properties:
             startDate:
-              $ref: '#/components/schemas/Date'
+              $ref: "#/components/schemas/Date"
             endDate:
-              $ref: '#/components/schemas/Date'
+              $ref: "#/components/schemas/Date"
     FootprintCO2e:
       type: object
       properties:
         A1:
           type: string
-          example: '1200.0'
+          example: "1200.0"
         A2:
           type: string
-          example: '30.0'
+          example: "30.0"
         A3:
           type: string
-          example: '4.0'
+          example: "4.0"
         A4:
           type: string
-          example: '0.5'
+          example: "0.5"
         B1:
           type: string
-          example: '0.06'
+          example: "0.06"
         B2:
           type: string
-          example: '0.007'
+          example: "0.007"
         B3:
           type: string
-          example: '0.0008'
+          example: "0.0008"
         B4:
           type: string
-          example: ''
+          example: ""
         B5:
           type: string
-          example: ''
+          example: ""
         C1:
           type: string
-          example: ''
+          example: ""
         C2:
           type: string
-          example: ''
+          example: ""
         C3:
           type: string
-          example: ''
+          example: ""
         C4:
           type: string
-          example: ''
+          example: ""
         D:
           type: string
-          example: ''
+          example: ""
     FootprintCO2eComputed:
       properties:
         totalCarbonFootprint:
           type: string
-          example: '1234.5678'
+          example: "1234.5678"
         productCarbonFootprint:
           type: string
-          example: '1234.0'
+          example: "1234.0"
         upstream:
           type: string
-          example: '1230.0'
+          example: "1230.0"
         direct:
           type: string
-          example: '4.0'
+          example: "4.0"
         downstream:
           type: string
-          example: '0.5678'
+          example: "0.5678"
         A1_A3:
           type: string
-          example: '1234.0'
+          example: "1234.0"
     EditFootprint:
       type: object
-      description: 'Using `dataSource: external` allows setting certain `footprint.CO2e` values. The values are computed all other `dataSource`s.'
+      description: "Using `dataSource: external` allows setting certain `footprint.CO2e` values. The values are computed all other `dataSource`s."
       properties:
         CO2e:
-          $ref: '#/components/schemas/FootprintCO2e'
+          $ref: "#/components/schemas/FootprintCO2e"
     Footprint:
       type: object
       properties:
         CO2e:
           allOf:
-            - $ref: '#/components/schemas/FootprintCO2eComputed'
-            - $ref: '#/components/schemas/FootprintCO2e'
+            - $ref: "#/components/schemas/FootprintCO2eComputed"
+            - $ref: "#/components/schemas/FootprintCO2e"
     NewActivity:
       allOf:
-        - $ref: '#/components/schemas/BaseNode'
+        - $ref: "#/components/schemas/BaseNode"
         - type: object
           properties:
             syncId:
-              $ref: '#/components/schemas/SyncId'
+              $ref: "#/components/schemas/SyncId"
             description:
               type: string
             quantity:
               type: number
               example: 150
             unit:
-              $ref: '#/components/schemas/UnitString'
+              $ref: "#/components/schemas/UnitString"
             UpstreamCO2e:
               type: string
-              example: '1234'
+              example: "1234"
               description: if passed, the value will be used instead of the computed value
             DownstreamCO2e:
               type: string
-              example: '0.5678'
+              example: "0.5678"
               description: if passed, the value will be used instead of the computed value
             product:
               properties:
                 uuid:
-                  $ref: '#/components/schemas/UUID'
+                  $ref: "#/components/schemas/UUID"
                 name:
                   type: string
-                  example: 'Product Name'
+                  example: "Product Name"
             scope:
               properties:
                 uuid:
-                  $ref: '#/components/schemas/UUID'
+                  $ref: "#/components/schemas/UUID"
                 name:
                   type: string
-                  example: 'Scope 2: Electricity'
+                  example: "Scope 2: Electricity"
             taxonomy:
               properties:
                 uuid:
-                  $ref: '#/components/schemas/UUID'
+                  $ref: "#/components/schemas/UUID"
                 name:
                   type: string
-                  example: 'Material'
+                  example: "Material"
             org:
               properties:
                 uuid:
-                  $ref: '#/components/schemas/UUID'
+                  $ref: "#/components/schemas/UUID"
                 name:
                   type: string
-                  example: 'Org Unit'
-        - $ref: '#/components/schemas/StartEndDate'
+                  example: "Org Unit"
+        - $ref: "#/components/schemas/StartEndDate"
     Activity:
       allOf:
-        - $ref: '#/components/schemas/BaseNode'
-        - $ref: '#/components/schemas/NewActivity'
+        - $ref: "#/components/schemas/BaseNode"
+        - $ref: "#/components/schemas/NewActivity"
         - type: object
           properties:
             CO2e:
               type: string
-              example: '1234.5678'
+              example: "1234.5678"
     ProductDataSource:
       type: string
-      example: 'model'
+      example: "model"
       enum:
         - model
         - external
@@ -1410,173 +1409,173 @@ components:
         - type: object
           properties:
             dataSource:
-              $ref: '#/components/schemas/ProductDataSource'
+              $ref: "#/components/schemas/ProductDataSource"
             name:
               type: string
-              example: 'Product Name'
+              example: "Product Name"
             description:
               type: string
-              example: 'A descriptive description'
+              example: "A descriptive description"
             sku:
               type: string
-              example: 'SKU123'
+              example: "SKU123"
             syncId:
-              $ref: '#/components/schemas/SyncId'
+              $ref: "#/components/schemas/SyncId"
             cpcCode:
               type: string
-              example: 'CPC123'
+              example: "CPC123"
             unit:
-              $ref: '#/components/schemas/UnitString'
+              $ref: "#/components/schemas/UnitString"
             footprint:
-              $ref: '#/components/schemas/EditFootprint'
+              $ref: "#/components/schemas/EditFootprint"
             dataQualityIndicators:
-              $ref: '#/components/schemas/DataQualityIndicatorsEdit'
+              $ref: "#/components/schemas/DataQualityIndicatorsEdit"
             taxonomy:
               allOf:
-                - $ref: '#/components/schemas/Taxonomy'
+                - $ref: "#/components/schemas/Taxonomy"
                 - properties:
                     name:
                       type: string
-                      example: 'Material'
+                      example: "Material"
             geoLocation:
               allOf:
-                - $ref: '#/components/schemas/IDAndName'
+                - $ref: "#/components/schemas/IDAndName"
                 - properties:
                     name:
                       type: string
-                      example: 'Pittsburgh, PA'
+                      example: "Pittsburgh, PA"
             location:
               allOf:
-                - $ref: '#/components/schemas/IDAndName'
+                - $ref: "#/components/schemas/IDAndName"
                 - properties:
                     name:
                       type: string
-                      example: 'Pittsburgh Office'
-        - $ref: '#/components/schemas/StartEndDate'
+                      example: "Pittsburgh Office"
+        - $ref: "#/components/schemas/StartEndDate"
     EditProduct:
       allOf:
         - properties:
             uuid:
-              $ref: '#/components/schemas/UUID'
-        - $ref: '#/components/schemas/NewProduct'
+              $ref: "#/components/schemas/UUID"
+        - $ref: "#/components/schemas/NewProduct"
     Product:
       allOf:
-        - $ref: '#/components/schemas/EditProduct'
+        - $ref: "#/components/schemas/EditProduct"
         - type: object
           properties:
             image:
               type: string
-              example: 'https://app.variable.global/uploads/image.jpg'
+              example: "https://app.variable.global/uploads/image.jpg"
             footprint:
-              $ref: '#/components/schemas/Footprint'
+              $ref: "#/components/schemas/Footprint"
             dataQualityRating:
-              $ref: '#/components/schemas/DataQualityRating'
+              $ref: "#/components/schemas/DataQualityRating"
             dataQualityIndicators:
-              $ref: '#/components/schemas/DataQualityIndicators'
-        - $ref: '#/components/schemas/CreatedUpdated'
+              $ref: "#/components/schemas/DataQualityIndicators"
+        - $ref: "#/components/schemas/CreatedUpdated"
     Material:
       allOf:
-        - $ref: '#/components/schemas/Product'
+        - $ref: "#/components/schemas/Product"
         - properties:
             name:
               type: string
-              example: 'Material Name'
+              example: "Material Name"
             supplier:
-              $ref: '#/components/schemas/Company'
+              $ref: "#/components/schemas/Company"
     Company:
       type: object
       properties:
         uuid:
-          $ref: '#/components/schemas/UUID'
+          $ref: "#/components/schemas/UUID"
         syncId:
-          $ref: '#/components/schemas/SyncId'
+          $ref: "#/components/schemas/SyncId"
         name:
           type: string
-          example: 'Company Name'
+          example: "Company Name"
     NewSupplier:
       allOf:
-        - $ref: '#/components/schemas/Company'
+        - $ref: "#/components/schemas/Company"
         - properties:
             name:
               type: string
-              example: 'Supplier Name'
+              example: "Supplier Name"
             syncId:
-              $ref: '#/components/schemas/SyncId'
+              $ref: "#/components/schemas/SyncId"
     Supplier:
       allOf:
-        - $ref: '#/components/schemas/NewSupplier'
+        - $ref: "#/components/schemas/NewSupplier"
         - properties:
             connected:
               type: boolean
               example: true
             image:
               type: string
-              example: 'https://app.variable.global/uploads/image.jpg'
+              example: "https://app.variable.global/uploads/image.jpg"
     NewInput:
       properties:
         syncId:
-          $ref: '#/components/schemas/SyncId'
+          $ref: "#/components/schemas/SyncId"
         quantity:
           type: number
           example: 150
         unit:
-          $ref: '#/components/schemas/UnitString'
+          $ref: "#/components/schemas/UnitString"
         order:
           type: number
           example: 1
         material:
           properties:
             uuid:
-              $ref: '#/components/schemas/UUID'
+              $ref: "#/components/schemas/UUID"
             name:
               type: string
-              example: 'Material name'
+              example: "Material name"
         block:
           properties:
             uuid:
-              $ref: '#/components/schemas/UUID'
+              $ref: "#/components/schemas/UUID"
             name:
               type: string
-              example: 'Block name'
+              example: "Block name"
         lifecycleStage:
-          $ref: '#/components/schemas/LifecycleStage'
+          $ref: "#/components/schemas/LifecycleStage"
     EditInput:
       allOf:
         - properties:
             uuid:
-              $ref: '#/components/schemas/UUID'
-        - $ref: '#/components/schemas/NewInput'
+              $ref: "#/components/schemas/UUID"
+        - $ref: "#/components/schemas/NewInput"
     ReturnedInput:
       allOf:
-        - $ref: '#/components/schemas/EditInput'
-        - $ref: '#/components/schemas/CreatedUpdated'
+        - $ref: "#/components/schemas/EditInput"
+        - $ref: "#/components/schemas/CreatedUpdated"
         - properties:
             CO2e:
               type: string
-              example: '1234.5678'
+              example: "1234.5678"
     NewSwitch:
       properties:
         syncId:
-          $ref: '#/components/schemas/SyncId'
+          $ref: "#/components/schemas/SyncId"
         name:
           type: string
-          example: 'Switch Name'
+          example: "Switch Name"
         unit:
-          $ref: '#/components/schemas/UnitString'
+          $ref: "#/components/schemas/UnitString"
     Switch:
       allOf:
         - properties:
             uuid:
-              $ref: '#/components/schemas/UUID'
-        - $ref: '#/components/schemas/NewSwitch'
+              $ref: "#/components/schemas/UUID"
+        - $ref: "#/components/schemas/NewSwitch"
         - properties:
             image:
               type: string
-              example: 'https://app.variable.global/uploads/image.jpg'
+              example: "https://app.variable.global/uploads/image.jpg"
             sources:
               type: array
               items:
-                $ref: '#/components/schemas/IDAndName'
+                $ref: "#/components/schemas/IDAndName"
             footprint:
               # $ref: '#/components/schemas/Footprint'
               properties:
@@ -1584,11 +1583,11 @@ components:
                   properties:
                     productCarbonFootprint:
                       type: string
-                      example: '1234.5678'
+                      example: "1234.5678"
                     A1_A3:
                       type: string
-                      example: '1234.5678'
-        - $ref: '#/components/schemas/CreatedUpdated'
+                      example: "1234.5678"
+        - $ref: "#/components/schemas/CreatedUpdated"
     LifecycleStage:
       type: object
       properties:
@@ -1597,7 +1596,7 @@ components:
           example: A1
         name:
           type: string
-          example: 'Materials'
+          example: "Materials"
     Scope:
       type: object
       properties:
@@ -1606,7 +1605,7 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Scope 2: Electricity'
+          example: "Scope 2: Electricity"
     Taxonomy:
       type: object
       properties:
@@ -1615,16 +1614,16 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Electricity'
+          example: "Electricity"
         slug:
           type: string
-          example: 'electricity'
+          example: "electricity"
         path:
           type: string
-          example: 'energy/electricity'
+          example: "energy/electricity"
     UnitString:
       type: string
-      example: 'kg'
+      example: "kg"
       description: The unit code (e.g. kg, lbs, etc.). All unit codes can be found in the [List Units](/api-reference/v1/unit/get) endpoint.
     Unit:
       type: object
@@ -1634,10 +1633,10 @@ components:
           example: "kg"
         name:
           type: string
-          example: 'Kilogram'
+          example: "Kilogram"
         type:
           type: string
-          example: 'weight'
+          example: "weight"
     Org:
       type: object
       properties:
@@ -1646,7 +1645,7 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Org Unit'
+          example: "Org Unit"
     Location:
       type: object
       properties:
@@ -1655,12 +1654,12 @@ components:
           format: UUID
         name:
           type: string
-          example: 'Pittsburgh Office'
+          example: "Pittsburgh Office"
         type:
           type: string
-          example: 'office'
+          example: "office"
         geoLocation:
-          $ref: '#/components/schemas/GeoLocation'
+          $ref: "#/components/schemas/GeoLocation"
     GeoLocation:
       type: object
       properties:
@@ -1669,19 +1668,19 @@ components:
           format: UUID
         shortName:
           type: string
-          example: 'Pittsburgh'
+          example: "Pittsburgh"
         googleMapsId:
           type: string
-          example: 'ChIJA4UGSG_xNIgRNBuiWqEV-Y0'
+          example: "ChIJA4UGSG_xNIgRNBuiWqEV-Y0"
         locationType:
           type: string
-          example: 'APPROXIMATE'
+          example: "APPROXIMATE"
         formattedAddress:
           type: string
-          example: 'Pittsburgh, PA, USA'
+          example: "Pittsburgh, PA, USA"
         countryCode:
           type: string
-          example: 'US'
+          example: "US"
         latitude:
           type: number
           example: 40.44062479
@@ -1692,9 +1691,9 @@ components:
           type: object
           properties:
             northeast:
-              $ref: '#/components/schemas/LatLon'
+              $ref: "#/components/schemas/LatLon"
             southwest:
-              $ref: '#/components/schemas/LatLon'
+              $ref: "#/components/schemas/LatLon"
     LatLon:
       type: object
       properties:
@@ -1731,7 +1730,7 @@ components:
     DataQualityIndicators:
       type: object
       allOf:
-        - $ref: '#/components/schemas/DataQualityIndicatorsEdit'
+        - $ref: "#/components/schemas/DataQualityIndicatorsEdit"
         - properties:
             averagePercent:
               type: number
@@ -1785,15 +1784,15 @@ components:
           type: number
           example: 80
         technologicalDQR:
-          $ref: '#/components/schemas/DataQualityRatingValue'
+          $ref: "#/components/schemas/DataQualityRatingValue"
         temporalDQR:
-          $ref: '#/components/schemas/DataQualityRatingValue'
+          $ref: "#/components/schemas/DataQualityRatingValue"
         geographicalDQR:
-          $ref: '#/components/schemas/DataQualityRatingValue'
+          $ref: "#/components/schemas/DataQualityRatingValue"
         completenessDQR:
-          $ref: '#/components/schemas/DataQualityRatingValue'
+          $ref: "#/components/schemas/DataQualityRatingValue"
         reliabilityDQR:
-          $ref: '#/components/schemas/DataQualityRatingValue'
+          $ref: "#/components/schemas/DataQualityRatingValue"
     PactProductFootprint:
       type: object
       properties:
@@ -1818,9 +1817,9 @@ components:
         statusComment:
           type: string
         validityPeriodStart:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
         validityPeriodEnd:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
         companyName:
           type: string
           # required: true
@@ -1843,13 +1842,13 @@ components:
           type: string
           # required: true
         pcf:
-          $ref: '#/components/schemas/PactProductCarbonFootprint'
+          $ref: "#/components/schemas/PactProductCarbonFootprint"
         extensions:
           type: array
         created:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
         updated:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
     PactProductCarbonFootprint:
       type: object
       # required: true
@@ -1857,41 +1856,41 @@ components:
         declaredUnit:
           type: string
           # required: true
-          example: 'kilogram'
+          example: "kilogram"
         unitaryProductAmount:
           allOf:
-            - $ref: '#/components/schemas/KgCO2e'
+            - $ref: "#/components/schemas/KgCO2e"
             # - required: true
         pCfExcludingBiogenic:
           allOf:
-            - $ref: '#/components/schemas/KgCO2e'
+            - $ref: "#/components/schemas/KgCO2e"
             # - required: true
         pCfIncludingBiogenic:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         fossilGhgEmissions:
           allOf:
-            - $ref: '#/components/schemas/KgCO2e'
+            - $ref: "#/components/schemas/KgCO2e"
             # - required: true
         fossilCarbonContent:
           allOf:
-            - $ref: '#/components/schemas/KgCO2e'
+            - $ref: "#/components/schemas/KgCO2e"
             # - required: true
         biogenicCarbonContent:
           allOf:
-            - $ref: '#/components/schemas/KgCO2e'
+            - $ref: "#/components/schemas/KgCO2e"
             # - required: true
         dLucGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         landManagementGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         otherBiogenicGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         iLucGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         biogenicCarbonWithdrawal:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         aircraftGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         characterizationFactors:
           type: string
           # required: true
@@ -1899,31 +1898,31 @@ components:
         ipccCharacterizationFactorsSources:
           type: array
           # required: true
-          example: [ 'AR6' ]
+          example: ["AR6"]
         crossSectoralStandardsUsed:
           type: array
           # required: true
-          example: [ 'GHG Protocol Product standard' ]
+          example: ["GHG Protocol Product standard"]
         productOrSectorSpecificRules:
-          $ref: '#/components/schemas/ProductOrSectorSpecificRule'
+          $ref: "#/components/schemas/ProductOrSectorSpecificRule"
         biogenicAccountingMethodology:
           type: string
-          example: 'GHGP'
+          example: "GHGP"
         boundaryProcessesDescription:
           type: string
         referencePeriodStart:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
         referencePeriodEnd:
-          $ref: '#/components/schemas/UTC_ISO_8601'
+          $ref: "#/components/schemas/UTC_ISO_8601"
         geographyCountrySubdivision:
-          $ref: '#/components/schemas/ISO_3166_2_Subdivision_Code'
+          $ref: "#/components/schemas/ISO_3166_2_Subdivision_Code"
         geographyCountry:
-          $ref: '#/components/schemas/ISO_3166_CC'
+          $ref: "#/components/schemas/ISO_3166_CC"
         geographyRegionOrSubregion:
           type: string
           example: "Europe"
         secondaryEmissionFactorSources:
-          $ref: '#/components/schemas/SecondaryEmissionFactorSources'
+          $ref: "#/components/schemas/SecondaryEmissionFactorSources"
         exemptedEmissionsPercent:
           type: number
           # required: true
@@ -1935,7 +1934,7 @@ components:
           type: boolean
           # required: true
         packagingGhgEmissions:
-          $ref: '#/components/schemas/KgCO2e'
+          $ref: "#/components/schemas/KgCO2e"
         allocationRulesDescription:
           type: string
         uncertaintyAssessmentDescription:
@@ -1944,7 +1943,7 @@ components:
           type: number
           example: 82
         dqi:
-          $ref: '#/components/schemas/PactDataQualityIndicators'
+          $ref: "#/components/schemas/PactDataQualityIndicators"
         # assurance:
         #   type: array
     PactListResponse:
@@ -1953,9 +1952,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/PactProductFootprint'
+            $ref: "#/components/schemas/PactProductFootprint"
 
 security:
-  - basicAuth: [ ]
-  - bearerAuth: [ ]
-  - oAuthNoScopes: [ ]
+  - basicAuth: []
+  - bearerAuth: []
+  - oAuthNoScopes: []
