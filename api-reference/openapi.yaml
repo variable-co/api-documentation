@@ -891,24 +891,25 @@ paths:
                 $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/epd/variant:
     put:
-      summary: Create or edit an EPD Variant
+      summary: Create an EPD Variant
       security:
         - bearerAuth: []
       requestBody:
         required: true
-        application/json:
-          schema:
-            required:
-              - uuid
-            allOf:
-              - $ref: "#/components/schemas/NewEpdVariant"
+        content:
+          application/json:
+            schema:
+              required:
+                - uuid
+              allOf:
+                - $ref: "#/components/schemas/NewEpdVariant"
       responses:
         "200":
-          description: An EPD Variant
+          description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EPDVariant"
+                $ref: "#/components/schemas/SuccessResponse"
         "401":
           description: ExpiredToken
           content:
@@ -1762,10 +1763,9 @@ components:
                 type: string
                 example: "weight"
     NewEpdVariant:
-      allOf:
-        - properties:
-            epd:
-              $ref: "#/components/schemas/EPD"
+      properties:
+        epd:
+          $ref: "#/components/schemas/EPD"
     EPDVariant:
       allOf:
         - $ref: "#/components/schemas/NewEpdVariant"
