@@ -889,6 +889,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExpiredTokenResponse"
+  /v1/epd/variant:
+    put:
+      summary: Create or edit an EPD Variant
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        application/json:
+          schema:
+            required:
+              - uuid
+            allOf:
+              - $ref: "#/components/schemas/NewEpdVariant"
+      responses:
+        "200":
+          description: An EPD Variant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EPDVariant"
+        "401":
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpiredTokenResponse"
+  /v1/epd/variant/:uuid:
+    get:
+      summary: Get an EPD Variant by UUID
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An EPD Variant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EPDVariant"
+        "401":
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpiredTokenResponse"
+    delete:
+      summary: Delete an EPD Variant
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/scope:
     get:
       summary: Get a list of scopes
@@ -1008,93 +1069,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExpiredTokenResponse"
-  # /v1/epd/variant:
-  #   put:
-  #     summary: Create or edit an EPD Variant
-  #     security:
-  #       - bearerAuth: []
-  #     requestBody:
-  #       required: true
-  #       application/json:
-  #         schema:
-  #           required:
-  #             - uuid
-  #           allOf:
-  #             - $ref: "#/components/schemas/NewEpdVariant"
-  #     responses:
-  #       "200":
-  #         description: An EPD Variant
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/EPDVariant"
-  #       "401":
-  #         description: ExpiredToken
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ExpiredTokenResponse"
-  # /v1/epd/variant/:uuid:
-  #   get:
-  #     summary: Get an EPD Variant by UUID
-  #     security:
-  #       - bearerAuth: []
-  #     responses:
-  #       "200":
-  #         description: An EPD Variant
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/EPDVariant"
-  #       "401":
-  #         description: ExpiredToken
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ExpiredTokenResponse"
-  #   put:
-  #     summary: Create or Edit an EPD Variant
-  #     security:
-  #       - bearerAuth: []
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             required:
-  #               - uuid
-  #             allOf:
-  #               - $ref: "#/components/schemas/EPDVariant"
-  #     responses:
-  #       "200":
-  #         description: An EPD Variant
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/EPDVariant"
-  #       "401":
-  #         description: ExpiredToken
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ExpiredTokenResponse"
-  #   delete:
-  #     summary: Delete an EPD Variant
-  #     security:
-  #       - bearerAuth: []
-  #     responses:
-  #       "200":
-  #         description: Success
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/SuccessResponse"
-  #       "401":
-  #         description: ExpiredToken
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ExpiredTokenResponse"
 
 components:
   securitySchemes:
