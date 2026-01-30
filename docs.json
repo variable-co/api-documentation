@@ -123,7 +123,8 @@
               "api-reference/v1/activity/get",
               "api-reference/v1/activity/post",
               "api-reference/v1/activity/patch",
-              "api-reference/v1/activity/delete"
+              "api-reference/v1/activity/delete",
+              "api-reference/v1/activity/bulk"
             ]
           },
           {

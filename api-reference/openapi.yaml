@@ -33,6 +33,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Authorization"
+  /v1/activity/bulk:
+    post:
+      summary: Create activities in bulk
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/NewActivity"
+      responses:
+        "202":
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobCreatedResponse"
+        "401":
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/activity:
     get:
       summary: Get high level activity data
@@ -1953,6 +1979,62 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PactProductFootprint"
+    JobCreatedResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: "job_123456"
+        status:
+          type: string
+          example: "processing"
+        totalOperations:
+          type: integer
+          example: 100
+        message:
+          type: string
+          example: "Bulk operation job created. Use GET /v1/job/<job_id> to check status."
+    JobStatusResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: "job_123456"
+        status:
+          type: string
+          example: "completed"
+        operationType:
+          type: string
+          example: "create"
+        resourceType:
+          type: string
+          example: "activity"
+        progress:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 100
+            completed:
+              type: integer
+              example: 50
+            failed:
+              type: integer
+              example: 5
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              index:
+                type: integer
+                example: 0
+              data:
+                type: object
+                description: "Partial resource data (uuid)"
 
 security:
   - basicAuth: []

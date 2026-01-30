@@ -1,0 +1,18 @@
+---
+title: 'Bulk Activity Creation'
+openapi: 'POST /v1/activity/bulk'
+description: 'Create multiple new activities'
+---
+
+import Permission from '/snippets/permission.mdx';
+
+<Permission permission={'activity:create'} />
+<Permission permission={'activity:update'} />
+
+<Note>
+  Read more about the [Activity](/docs/activity) data models.
+</Note>
+
+<Note>
+  Bulk operations take a maximum of 1,000 items per request.
+</Note>
