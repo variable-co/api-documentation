@@ -17,8 +17,8 @@ can be any object storage service, such as AWS S3, Google Cloud Storage, or a se
 
 # Components
 
-1. **Variable UI**: This is a static React app that can be served from any web server or CDN.
-2. **API Server**: A stateless API server that handles direct requests and serves the UI. It can be scaled horizontally by running multiple instances behind a load balancer.
+1. **UI**: A small nginx container that serves the static files for the Variable UI.
+2. **Server**: A stateless server that handles direct requests and serves the UI. It can be scaled horizontally by running multiple instances behind a load balancer.
 3. **Database**: A Neo4j database that stores all the data for Variable. It can be run as a standalone service or as part of a managed database solution.
 4. **File Storage**: For any files uploaded to Variable, such as images or documents. This can be any object storage service, such as AWS S3, Google Cloud Storage, or a self-hosted solution.
 5. **Malware Scanning**: An optional component that scans uploaded files for malware before they are stored. This can be integrated with services like [ClamAV](https://www.clamav.net) or other malware scanning solutions.
@@ -31,7 +31,7 @@ User authentication is done via SSO. Currently supported providers are:
 
 # Deployment
 
-The UI, API server and Database can be deployed using any Docker environment, either locally or in the cloud (e.g. Google Compute Engine/Cloud Run).
+The UI, Server and Database can be deployed using any Docker environment, either locally or in the cloud (e.g. Google Compute Engine/Cloud Run).
 File storage can be configured to use any object storage service, or a self-hosted solution.
 
 # Configuration
@@ -42,15 +42,29 @@ Each component will require configuration to connect to the other components.
 
 These are the environment variables that need to be set:
 
-- **APP_URL**: The base URL of the Variable application, which is used to generate links and handle redirects.
-- **DB_URL**: The URL of the Neo4j database.
-- **DB_AUTH**: The username/password for the Neo4j database.
+- **VARIABLE_APP_URL**: The base URL of the Variable application, which is used to generate links and handle redirects.
+- **ADMIN_EMAIL**: The email address of the initial admin user.
+- **NEO4J_AUTH**: The username/password for the Neo4j database.
 - **JWT_SECRET**: A secret used to sign JSON Web Tokens.
-- **COOKIE_DOMAIN**: The domain for the cookies used by the API.
-- **PUBLIC_BUCKET_UPLOAD**: The bucket name for public file uploads.
-- **PUBLIC_BUCKET_READ**: The bucket name for public file reads.
-- **PRIVATE_BUCKET_UPLOAD**: The bucket name for private file uploads.
-- **PRIVATE_BUCKET_READ**: The bucket name for private file reads.
+- **STORAGE_PROVIDER**: The storage provider to use (e.g. "gcs" for Google Cloud Storage, "azure" for Azure Blob Storage).
+- **VARIABLE_PUBLIC_BUCKET_UPLOAD**: The bucket name for public file uploads.
+- **VARIABLE_PUBLIC_BUCKET_READ**: The bucket name for public file reads.
+- **VARIABLE_PRIVATE_BUCKET_UPLOAD**: The bucket name for private file uploads.
+- **VARIABLE_PRIVATE_BUCKET_READ**: The bucket name for private file reads.
+
+## Auth Configuration
+
+Set these environment variables to configure authentication:
+
+- **ENABLE_PASSWORD_AUTH**: Set to "false" to disable password authentication.
+- **OAUTH_ONLY**: Set to "true" to only allow OAuth authentication.
+- **SESSION_SECRET**: A secret used to sign session cookies.
+- **GOOGLE_CLIENT_ID**: The client ID for Google OAuth.
+- **GOOGLE_CLIENT_SECRET**: The client secret for Google OAuth.
+- **AZURE_CLIENT_ID**: The client ID for Azure AD OAuth.
+- **AZURE_CLIENT_SECRET**: The client secret for Azure AD OAuth.
+- **AZURE_TENANT_ID**: The tenant ID for Azure AD OAuth.
+
 
 ## Database Configuration
 
@@ -82,8 +96,9 @@ flowchart TD
     LB(Load Balancer)
 
     subgraph Serverless
+    UI(Variable UI)
     API(API Server)
-    MSS(Malware Scanner)
+    MSS(Malware Scanner Optional)
     end
 
     subgraph Compute
@@ -91,10 +106,6 @@ flowchart TD
     DBL[Neo4j Logs]
     DBD[Neo4j Data]
     DBI[Neo4j Import]
-    end
-
-    subgraph CDN
-    UI(Variable UI)
     end
 
     subgraph File Storage

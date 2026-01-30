@@ -1,2 +1,2 @@
 dev:
-	mint dev --port 3001
+	mint dev --port 3002
