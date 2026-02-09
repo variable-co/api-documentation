@@ -59,6 +59,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExpiredTokenResponse"
+    delete:
+      summary: Delete activities in bulk
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ids
+              properties:
+                ids:
+                  type: array
+                  description: List of activity `uuid`s or `syncId`s to delete
+      responses:
+        "202":
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobCreatedResponse"
+        "401":
+          description: ExpiredToken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpiredTokenResponse"
   /v1/activity:
     get:
       summary: Get high level activity data
@@ -1991,6 +2020,9 @@ components:
         totalOperations:
           type: integer
           example: 100
+        jobUrl:
+          type: string
+          example: "https://app.variable.global/api/v1/job/job_123456"
         message:
           type: string
           example: "Bulk operation job created. Use GET /v1/job/<job_id> to check status."
