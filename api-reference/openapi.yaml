@@ -59,7 +59,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExpiredTokenResponse"
-    delete:
+  /v1/activity/bulk/delete:
+    post:
       summary: Delete activities in bulk
       security:
         - bearerAuth: []
